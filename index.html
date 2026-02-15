@@ -432,6 +432,7 @@
       border-radius: 14px;
       padding: 1rem;
       box-shadow: var(--shadow);
+      min-width: 0;
     }
 
     .alpha-card h3 {
@@ -460,6 +461,7 @@
       color: var(--muted);
       font-size: 0.95rem;
       line-height: 1.5;
+      min-width: 0;
     }
 
     .alpha-steps li::before {
@@ -474,6 +476,8 @@
       color: #f3e4d7;
       text-decoration: none;
       border-bottom: 1px dashed rgba(243, 228, 215, 0.35);
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .alpha-link:hover {
