@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Die Laughing — Open Alpha &amp; Beta</title>
+  <meta name="description" content="Join the open alpha on Android or open beta on iOS. Roguelite wave survival with dark humor and tight mobile-first gameplay." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0d1112;
+      --bg-soft: #161d1f;
+      --ink: #f1ece2;
+      --muted: #b7b0a5;
+      --line: #2e3a3c;
+      --card: #182123;
+      --accent: #df6b39;
+      --accent-2: #a2b86f;
+      --accent-3: #6b8f9f;
+      --shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      color: var(--ink);
+      min-height: 100vh;
+      line-height: 1.55;
+      background:
+        radial-gradient(1100px 600px at 85% -10%, rgba(223, 107, 57, 0.2), transparent 58%),
+        radial-gradient(900px 500px at 0% 20%, rgba(162, 184, 111, 0.12), transparent 50%),
+        linear-gradient(180deg, #0d1112 0%, #101618 45%, #0d1214 100%);
+      overflow-x: hidden;
+    }
+
+    .texture {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.08;
+      background-image:
+        radial-gradient(circle at 2px 2px, #ffffff 1px, transparent 0),
+        radial-gradient(circle at 1px 1px, #ffffff 1px, transparent 0);
+      background-size: 4px 4px, 3px 3px;
+      mix-blend-mode: soft-light;
+      z-index: -1;
+    }
+
+    .container {
+      width: min(1100px, 92vw);
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: color-mix(in oklab, var(--bg) 84%, transparent);
+      backdrop-filter: blur(9px);
+    }
+
+    .nav {
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      text-decoration: none;
+      color: var(--ink);
+      font-family: "Bebas Neue", sans-serif;
+      letter-spacing: 1px;
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    .header-cta {
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.82rem;
+      color: #fdf8f2;
+      background: linear-gradient(135deg, #bf5428, #df6b39);
+      border: 1px solid #e27343;
+      border-radius: 8px;
+      padding: 0.5rem 0.85rem;
+      white-space: nowrap;
+      transition: transform 0.2s ease;
+    }
+
+    .header-cta:hover {
+      transform: translateY(-1px);
+    }
+
+    main {
+      padding: 2rem 0 3rem;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 1.5rem 0 2rem;
+    }
+
+    .kicker {
+      display: inline-flex;
+      border: 1px solid color-mix(in oklab, var(--accent) 55%, var(--line));
+      background: rgba(223, 107, 57, 0.13);
+      color: #ffd6c3;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 0.3rem 0.65rem;
+      margin-bottom: 0.85rem;
+      letter-spacing: 0.2px;
+    }
+
+    h1 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(2.6rem, 9vw, 5.5rem);
+      line-height: 0.95;
+      letter-spacing: 1px;
+      margin-bottom: 0.7rem;
+      text-wrap: balance;
+    }
+
+    .hero-sub {
+      color: var(--muted);
+      max-width: 56ch;
+      margin: 0 auto 1.5rem;
+      font-size: 1.05rem;
+    }
+
+    .cta-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1rem;
+      border-radius: 12px;
+      padding: 0.85rem 1.6rem;
+      width: 100%;
+      max-width: 340px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .cta-btn.android {
+      color: #fdf8f2;
+      background: linear-gradient(135deg, #bf5428, #df6b39);
+      border: 1px solid #e27343;
+      box-shadow: 0 9px 22px rgba(223, 107, 57, 0.28);
+    }
+
+    .cta-btn.android:hover {
+      box-shadow: 0 12px 28px rgba(223, 107, 57, 0.35);
+    }
+
+    .cta-btn.ios {
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--line);
+    }
+
+    .cta-btn.ios:hover {
+      border-color: var(--accent-2);
+      box-shadow: 0 9px 22px rgba(162, 184, 111, 0.15);
+    }
+
+    .cta-btn svg {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+
+    .cta-label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--muted);
+      margin-top: 0.15rem;
+      text-align: center;
+    }
+
+    .hero-screenshot {
+      width: 100%;
+      max-width: 380px;
+      margin: 0 auto;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+    }
+
+    .hero-screenshot img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
+      object-position: center 30%;
+    }
+
+    section {
+      margin-top: 2.2rem;
+    }
+
+    .section-title {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(1.7rem, 5vw, 2.5rem);
+      letter-spacing: 0.7px;
+      margin-bottom: 0.4rem;
+      text-align: center;
+    }
+
+    .section-copy {
+      color: var(--muted);
+      max-width: 64ch;
+      margin: 0 auto 1rem;
+      text-align: center;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .feature {
+      background: color-mix(in oklab, var(--card) 92%, black);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1rem;
+      box-shadow: var(--shadow);
+    }
+
+    .feature h3 {
+      color: #f4c5ad;
+      margin-bottom: 0.3rem;
+      font-size: 0.95rem;
+    }
+
+    .feature p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .screenshots-scroll {
+      display: flex;
+      gap: 0.75rem;
+      overflow-x: auto;
+      padding: 0.5rem 0 1rem;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .screenshots-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .screenshots-scroll figure {
+      flex: 0 0 200px;
+      scroll-snap-align: center;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--card);
+    }
+
+    .screenshots-scroll img {
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
+      display: block;
+    }
+
+    .screenshots-scroll figcaption {
+      padding: 0.4rem 0.6rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .info-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .info-card {
+      background: color-mix(in oklab, var(--card) 92%, black);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1rem;
+      box-shadow: var(--shadow);
+    }
+
+    .info-card h3 {
+      color: #f4c5ad;
+      margin-bottom: 0.35rem;
+      font-size: 0.95rem;
+    }
+
+    .info-card p,
+    .info-card li {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .info-card ul {
+      padding-left: 1.1rem;
+      margin-top: 0.3rem;
+    }
+
+    .info-card li {
+      margin-bottom: 0.25rem;
+    }
+
+    .final-cta {
+      text-align: center;
+      padding: 1.5rem 0;
+    }
+
+    .final-cta h2 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(1.8rem, 5.5vw, 2.8rem);
+      letter-spacing: 0.7px;
+      margin-bottom: 0.5rem;
+    }
+
+    .final-cta p {
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+    }
+
+    footer {
+      margin-top: 2rem;
+      padding: 1.2rem 0 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--muted);
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    footer a {
+      color: #f7c0a3;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: rise 0.7s ease forwards;
+    }
+
+    .reveal.d2 { animation-delay: 0.1s; }
+    .reveal.d3 { animation-delay: 0.2s; }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (min-width: 640px) {
+      .cta-group {
+        flex-direction: row;
+        justify-content: center;
+      }
+
+      .cta-btn {
+        width: auto;
+        max-width: none;
+      }
+
+      .features {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .info-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .screenshots-scroll figure {
+        flex: 0 0 240px;
+      }
+    }
+
+    @media (min-width: 960px) {
+      main {
+        padding-top: 2.5rem;
+      }
+
+      .hero {
+        padding: 2rem 0 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="texture" aria-hidden="true"></div>
+
+  <header>
+    <div class="container nav">
+      <a href="https://mladenstojanovic.art" class="brand">MLADEN STOJANOVIĆ</a>
+      <a href="#join" class="header-cta">Join Now</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <span class="kicker reveal">Open Alpha &amp; Beta — Free to Play</span>
+      <h1 class="reveal d2">DIE LAUGHING</h1>
+      <p class="hero-sub reveal d3">
+        A roguelite wave survival game built for mobile. Dark humor, escalating chaos, and 10–15 minute runs that keep you coming back.
+      </p>
+
+      <div id="join" class="cta-group reveal d3">
+        <div>
+          <a class="cta-btn android" href="https://play.google.com/store/apps/details?id=com.MladenStojanovic.dielaughing" target="_blank" rel="noreferrer">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893 2.302 2.302-10.937 6.333 8.635-8.635zm3.187-1.286 2.582 1.493a1 1 0 0 1 0 1.727l-2.582 1.493-2.428-2.428 2.428-2.285zM14.501 12l-8.637-8.637 10.937 6.333-2.3 2.304z"/></svg>
+            <span>
+              Play Store — Open Alpha
+              <span class="cta-label">Android devices</span>
+            </span>
+          </a>
+        </div>
+        <div>
+          <a class="cta-btn ios" href="https://testflight.apple.com/join/6wzgr1UE" target="_blank" rel="noreferrer">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            <span>
+              TestFlight — Open Beta
+              <span class="cta-label">iOS devices</span>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-screenshot reveal d3">
+        <img src="./assets/screenshots/die_laughing1.png" alt="Die Laughing gameplay screenshot" loading="eager" />
+      </div>
+    </section>
+
+    <section id="features">
+      <h2 class="section-title">WHAT TO EXPECT</h2>
+      <p class="section-copy">
+        Fast runs. Real stakes. Sarcastic tone. Built for the way you actually play on mobile.
+      </p>
+      <div class="features">
+        <article class="feature">
+          <h3>Roguelite Wave Survival</h3>
+          <p>Escalating enemy waves, XP-driven leveling, and build choices that change every run.</p>
+        </article>
+        <article class="feature">
+          <h3>10–15 Minute Sessions</h3>
+          <p>Designed for real mobile habits: quick to start, intense to play, easy to jump back in.</p>
+        </article>
+        <article class="feature">
+          <h3>Dark Humor &amp; Atmosphere</h3>
+          <p>A world that doesn't take itself too seriously, with sarcastic personality woven into the experience.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="screenshots">
+      <h2 class="section-title">SCREENSHOTS</h2>
+      <p class="section-copy">
+        Swipe to see more from the current build.
+      </p>
+      <div class="screenshots-scroll">
+        <figure>
+          <img src="./assets/screenshots/die_laughing1.png" alt="Die Laughing gameplay screenshot 1" loading="lazy" />
+          <figcaption>Wave pressure moment</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="info">
+      <h2 class="section-title">BEFORE YOU JOIN</h2>
+      <p class="section-copy">
+        A few things to know about the open alpha and beta.
+      </p>
+      <div class="info-cards">
+        <article class="info-card">
+          <h3>It's a Work in Progress</h3>
+          <p>This is an early build. Expect bugs, balance changes, and incomplete features. Your feedback directly shapes what comes next.</p>
+        </article>
+        <article class="info-card">
+          <h3>What We Need From You</h3>
+          <ul>
+            <li>Play through runs and note what feels off</li>
+            <li>Report crashes or game-breaking bugs</li>
+            <li>Share what's fun and what isn't</li>
+            <li>Tell us if difficulty feels fair</li>
+          </ul>
+        </article>
+        <article class="info-card">
+          <h3>How to Join</h3>
+          <ul>
+            <li><strong>Android:</strong> Click the Play Store button above, join the open alpha, then install from Google Play.</li>
+            <li><strong>iOS:</strong> Click the TestFlight button, accept the invite, and install through the TestFlight app.</li>
+          </ul>
+        </article>
+        <article class="info-card">
+          <h3>Privacy &amp; Data</h3>
+          <p>We respect your privacy. Read our <a href="./die-laughing-privacy-policy.html" style="color: #f7c0a3;">Privacy Policy</a> for details on what data may be collected and how it's used.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <h2>READY TO PLAY?</h2>
+      <p>Grab your platform, jump in, and let us know what you think.</p>
+      <div class="cta-group">
+        <div>
+          <a class="cta-btn android" href="https://play.google.com/store/apps/details?id=com.MladenStojanovic.dielaughing" target="_blank" rel="noreferrer">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893 2.302 2.302-10.937 6.333 8.635-8.635zm3.187-1.286 2.582 1.493a1 1 0 0 1 0 1.727l-2.582 1.493-2.428-2.428 2.428-2.285zM14.501 12l-8.637-8.637 10.937 6.333-2.3 2.304z"/></svg>
+            <span>
+              Play Store — Open Alpha
+              <span class="cta-label">Android devices</span>
+            </span>
+          </a>
+        </div>
+        <div>
+          <a class="cta-btn ios" href="https://testflight.apple.com/join/6wzgr1UE" target="_blank" rel="noreferrer">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            <span>
+              TestFlight — Open Beta
+              <span class="cta-label">iOS devices</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; <span id="year"></span> Mladen Stojanović. All rights reserved.</p>
+      <p style="margin-top: 0.4rem;">
+        <a href="./die-laughing-privacy-policy.html">Privacy Policy</a> &middot;
+        <a href="./die-laughing-account-deletion.html">Account Deletion</a> &middot;
+        <a href="./die-laughing-age-suitability.html">Age Suitability</a> &middot;
+        <a href="./index.html">Main Site</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
