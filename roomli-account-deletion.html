@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Roomli Account Deletion</title>
+  <meta name="description" content="Delete your Roomli account and associated data using your app credentials." />
+  <style>
+    :root {
+      --bg: #0d1112;
+      --bg-soft: #161d1f;
+      --ink: #f1ece2;
+      --muted: #b7b0a5;
+      --line: #2e3a3c;
+      --accent: #7fd1b9;
+      --danger: #ff8f8f;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Plus Jakarta Sans", "Segoe UI", sans-serif;
+      color: var(--ink);
+      line-height: 1.6;
+      background: linear-gradient(180deg, #0d1112 0%, #101618 45%, #0d1214 100%);
+      padding: 2rem 1rem 3rem;
+    }
+    .wrap {
+      width: min(900px, 100%);
+      margin: 0 auto;
+      background: color-mix(in oklab, var(--bg-soft) 92%, black);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.2rem;
+    }
+    h1, h2 { line-height: 1.2; margin-bottom: 0.65rem; }
+    h1 { font-size: clamp(1.7rem, 4.5vw, 2.4rem); margin-bottom: 0.9rem; }
+    h2 { margin-top: 1.2rem; font-size: 1.2rem; color: #c8ffe8; }
+    p, li { color: var(--muted); margin-bottom: 0.6rem; }
+    ul { padding-left: 1.2rem; margin-bottom: 0.6rem; }
+    strong { color: var(--ink); }
+    a { color: #f7c0a3; }
+
+    form {
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    label {
+      display: block;
+      margin-top: 0.75rem;
+      margin-bottom: 0.25rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #0f1517;
+      color: var(--ink);
+      padding: 0.65rem 0.75rem;
+      font-size: 1rem;
+    }
+    .inline-confirm {
+      margin-top: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .inline-confirm input {
+      width: auto;
+    }
+    button {
+      margin-top: 1rem;
+      border: 1px solid color-mix(in oklab, var(--danger) 60%, black);
+      border-radius: 8px;
+      padding: 0.6rem 0.85rem;
+      background: color-mix(in oklab, #521f1f 80%, black);
+      color: #ffdada;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    button:disabled {
+      opacity: 0.7;
+      cursor: wait;
+    }
+    .status {
+      margin-top: 0.9rem;
+      padding: 0.6rem 0.7rem;
+      border-radius: 8px;
+      display: none;
+    }
+    .status.ok {
+      display: block;
+      border: 1px solid color-mix(in oklab, var(--accent) 65%, black);
+      color: #d5fff2;
+      background: color-mix(in oklab, #173b33 75%, black);
+    }
+    .status.err {
+      display: block;
+      border: 1px solid color-mix(in oklab, var(--danger) 65%, black);
+      color: #ffd6d6;
+      background: color-mix(in oklab, #3d1c1c 75%, black);
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 1.2rem;
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.45rem 0.7rem;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.03);
+    }
+    code {
+      background: rgba(255, 255, 255, 0.06);
+      padding: 0.1rem 0.35rem;
+      border-radius: 5px;
+      color: #fff3dd;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>Roomli Account &amp; Data Deletion</h1>
+    <p><strong>Last Updated:</strong> April 14, 2026</p>
+    <p>Use this page to permanently delete your <strong>Roomli</strong> account and associated household data, using the same credentials created in the app.</p>
+
+    <h2>Delete Your Account</h2>
+    <form id="delete-form">
+      <label for="email">Username (email)</label>
+      <input id="email" name="email" type="email" autocomplete="username" required />
+
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required />
+
+      <label for="confirm-text">Type <code>DELETE</code> to confirm</label>
+      <input id="confirm-text" name="confirm-text" type="text" required />
+
+      <div class="inline-confirm">
+        <input id="confirm-checkbox" name="confirm-checkbox" type="checkbox" required />
+        <label for="confirm-checkbox">I understand this action is permanent.</label>
+      </div>
+
+      <button id="submit-btn" type="submit">Delete My Account</button>
+      <div id="status" class="status"></div>
+    </form>
+
+    <h2>What Gets Deleted</h2>
+    <ul>
+      <li>Your Roomli account identity.</li>
+      <li>Household memberships owned by your account.</li>
+      <li>Household-linked data managed by Roomli backend (tasks, shopping, bills, expenses, invites), according to backend delete rules.</li>
+    </ul>
+
+    <h2>What May Be Retained</h2>
+    <ul>
+      <li>Minimal logs retained for legal/security obligations where required.</li>
+      <li>App store billing records managed by Google/Apple (not controlled by Roomli backend).</li>
+    </ul>
+
+    <a class="back-link" href="./index.html">Back to main site</a>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = "https://jydfysszezzderjabivx.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp5ZGZ5c3N6ZXp6ZGVyamFiaXZ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0MjUwMjgsImV4cCI6MjA5MTAwMTAyOH0.oLFvwfYQAMLsIOBIEocsVhzOjPZaGXv0YNGYy6BG0J0";
+    const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const form = document.getElementById("delete-form");
+    const statusBox = document.getElementById("status");
+    const submitBtn = document.getElementById("submit-btn");
+
+    function showStatus(type, message) {
+      statusBox.className = `status ${type}`;
+      statusBox.textContent = message;
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      statusBox.className = "status";
+      statusBox.textContent = "";
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      const confirmText = document.getElementById("confirm-text").value.trim();
+      const confirmed = document.getElementById("confirm-checkbox").checked;
+
+      if (!email || !password) {
+        showStatus("err", "Please enter username (email) and password.");
+        return;
+      }
+      if (confirmText !== "DELETE" || !confirmed) {
+        showStatus("err", "Please type DELETE and confirm the checkbox.");
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Deleting...";
+      try {
+        const { error: signInError } = await client.auth.signInWithPassword({
+          email,
+          password,
+        });
+        if (signInError) {
+          showStatus("err", `Sign-in failed: ${signInError.message}`);
+          return;
+        }
+
+        const { error: rpcError } = await client.rpc("delete_my_account");
+        if (rpcError) {
+          showStatus("err", `Deletion failed: ${rpcError.message}`);
+          return;
+        }
+
+        await client.auth.signOut();
+        form.reset();
+        showStatus("ok", "Your account deletion request completed successfully.");
+      } catch (error) {
+        showStatus("err", `Unexpected error: ${error.message || String(error)}`);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Delete My Account";
+      }
+    });
+  </script>
+</body>
+</html>
