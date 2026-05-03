@@ -640,9 +640,49 @@
     footer {
       margin-top: 2.6rem;
       padding: 1.4rem 0 2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
       color: var(--muted);
       font-size: 0.92rem;
+    }
+
+    .footer-shell {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: color-mix(in oklab, var(--bg-soft) 88%, black);
+      border-radius: 14px;
+      padding: 1rem;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25);
+    }
+
+    .footer-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.65rem;
+      margin-bottom: 0.85rem;
+      color: #d6cec2;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      padding-top: 0.7rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .footer-link {
+      color: var(--ink);
+      text-decoration: none;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.34rem 0.62rem;
+      background: rgba(255, 255, 255, 0.03);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .footer-link:hover {
+      transform: translateY(-1px);
+      border-color: var(--accent);
     }
 
     .reveal {
@@ -897,7 +937,21 @@
   </main>
 
   <footer>
-    <div class="container">© <span id="year"></span> Mladen Stojanović. All rights reserved. · <a href="./roomli.html" class="alpha-link">Roomli — Shared Home Organizer</a> · <a href="./die-laughing-landing.html" class="alpha-link">Die Laughing — Open Alpha &amp; Beta</a> · <a href="./die-laughing-privacy-policy.html" class="alpha-link">Privacy Policy (iOS &amp; Android)</a> · <a href="./die-laughing-age-suitability.html" class="alpha-link">Age Suitability</a> · <a href="./rosica-privacy-policy.html" class="alpha-link">Rosica Privacy Policy (EN/SR)</a> · <a href="./roomli-privacy-policy.html" class="alpha-link">Roomli Privacy Policy</a> · <a href="./rule-rings-privacy-policy.html" class="alpha-link">Rule Rings Privacy Policy</a></div>
+    <div class="container footer-shell">
+      <div class="footer-top">
+        <span>© <span id="year"></span> Mladen Stojanović. All rights reserved.</span>
+        <a href="./roomli.html" class="alpha-link">Roomli — Shared Home Organizer</a>
+      </div>
+      <div class="footer-links">
+        <a href="./die-laughing-landing.html" class="footer-link">Die Laughing — Open Alpha &amp; Beta</a>
+        <a href="./die-laughing-privacy-policy.html" class="footer-link">Die Laughing Privacy Policy</a>
+        <a href="./die-laughing-age-suitability.html" class="footer-link">Die Laughing Age Suitability</a>
+        <a href="./rosica-privacy-policy.html" class="footer-link">Rosica Privacy Policy (EN/SR)</a>
+        <a href="./roomli-privacy-policy.html" class="footer-link">Roomli Privacy Policy</a>
+        <a href="./rule-rings-privacy-policy.html" class="footer-link">Rule Rings Privacy Policy</a>
+        <a href="./yurui-privacy-policy.html" class="footer-link">Yurui Privacy Policy</a>
+      </div>
+    </div>
   </footer>
 
   <script>
