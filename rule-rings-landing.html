@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rule Rings — Daily Logic Puzzle</title>
+  <meta name="description" content="Rule Rings is a clean daily logic puzzle where you place geometric tokens into overlapping rules until every condition clicks into place." />
+  <link rel="canonical" href="https://mladenstojanovic.art/rule-rings-landing.html" />
+  <meta name="theme-color" content="#0d1112" />
+  <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="./favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="./favicon-16.png" sizes="16x16" type="image/png" />
+  <link rel="apple-touch-icon" href="./favicon-32.png" />
+  <link rel="manifest" href="./manifest.json" />
+  <meta property="og:title" content="Rule Rings — Daily Logic Puzzle" />
+  <meta property="og:description" content="A smart daily puzzle game about shapes, patterns, and satisfying deduction." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mladenstojanovic.art/rule-rings-landing.html" />
+  <meta property="og:image" content="https://mladenstojanovic.art/assets/images/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Mladen Stojanović" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Rule Rings — Daily Logic Puzzle" />
+  <meta name="twitter:description" content="Place every token so all visible ring rules are true at once." />
+  <meta name="twitter:image" content="https://mladenstojanovic.art/assets/images/og-image.png" />
+  <meta name="twitter:image:alt" content="Rule Rings logic puzzle" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Rule Rings",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "iOS, Android",
+    "description": "A clean daily logic puzzle built around overlapping ring constraints and geometric deduction.",
+    "author": {
+      "@type": "Person",
+      "name": "Mladen Stojanović",
+      "url": "https://mladenstojanovic.art"
+    }
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0d1112;
+      --bg-soft: #161d1f;
+      --ink: #f1ece2;
+      --muted: #b7b0a5;
+      --line: #2e3a3c;
+      --card: #182123;
+      --accent: #df6b39;
+      --accent-2: #f4c5ad;
+      --shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      color: var(--ink);
+      min-height: 100vh;
+      line-height: 1.55;
+      background:
+        radial-gradient(1100px 600px at 85% -10%, rgba(223, 107, 57, 0.17), transparent 58%),
+        radial-gradient(900px 500px at 0% 20%, rgba(244, 197, 173, 0.1), transparent 50%),
+        linear-gradient(180deg, #0d1112 0%, #101618 45%, #0d1214 100%);
+      overflow-x: hidden;
+    }
+
+    .texture {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.08;
+      background-image:
+        radial-gradient(circle at 2px 2px, #ffffff 1px, transparent 0),
+        radial-gradient(circle at 1px 1px, #ffffff 1px, transparent 0);
+      background-size: 4px 4px, 3px 3px;
+      mix-blend-mode: soft-light;
+      z-index: -1;
+    }
+
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: color-mix(in oklab, var(--bg) 84%, transparent);
+      backdrop-filter: blur(9px);
+    }
+
+    .nav { min-height: 74px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+
+    .brand {
+      text-decoration: none;
+      color: var(--ink);
+      font-family: "Bebas Neue", sans-serif;
+      letter-spacing: 1px;
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    nav { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    nav a { color: var(--muted); text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: color 0.2s ease; }
+    nav a:hover { color: var(--ink); }
+
+    main { padding: 3.2rem 0 4rem; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1.2rem;
+      align-items: center;
+      margin-bottom: 2.4rem;
+    }
+
+    .kicker {
+      display: inline-flex;
+      border: 1px solid color-mix(in oklab, var(--accent) 55%, var(--line));
+      background: rgba(223, 107, 57, 0.14);
+      color: #ffd6c3;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 0.35rem 0.72rem;
+      margin-bottom: 0.95rem;
+      letter-spacing: 0.2px;
+    }
+
+    h1 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(2.4rem, 7vw, 5.3rem);
+      line-height: 0.95;
+      letter-spacing: 1px;
+      margin-bottom: 0.9rem;
+      text-wrap: balance;
+    }
+
+    .hero p { color: var(--muted); max-width: 62ch; margin-bottom: 1.35rem; font-size: 1.04rem; }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 1rem; }
+
+    .btn {
+      border: 1px solid var(--line);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.95rem;
+      border-radius: 10px;
+      padding: 0.72rem 1rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn.primary {
+      color: #fdf8f2;
+      background: linear-gradient(135deg, #ad4f2a, #df6b39);
+      border-color: #ef8b64;
+      box-shadow: 0 9px 22px rgba(223, 107, 57, 0.28);
+    }
+
+    .btn.ghost { color: var(--ink); background: rgba(255, 255, 255, 0.02); }
+
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+    .hero-tags span {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #e9d1c5;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.28rem 0.58rem;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .preview {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      justify-self: end;
+      width: min(100%, 410px);
+    }
+
+    .preview-art { position: relative; aspect-ratio: 9 / 16; background: #0e1315; isolation: isolate; }
+
+    .preview-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      background: #0f1629;
+    }
+
+    .preview-note {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      font-size: 0.75rem;
+      letter-spacing: 0.8px;
+      font-weight: 800;
+      color: #11181a;
+      background: rgba(241, 236, 226, 0.9);
+      border-radius: 7px;
+      padding: 0.3rem 0.5rem;
+      text-transform: uppercase;
+    }
+
+    section { margin-top: 2.3rem; }
+    .section-title {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(1.9rem, 5.2vw, 2.8rem);
+      letter-spacing: 0.7px;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-copy { color: var(--muted); max-width: 74ch; margin-bottom: 1rem; }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    .feature {
+      background: color-mix(in oklab, var(--card) 92%, black);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1rem;
+      box-shadow: var(--shadow);
+    }
+
+    .feature h3 { color: #ffd6c3; margin-bottom: 0.35rem; font-size: 1rem; }
+    .feature p { color: var(--muted); font-size: 0.95rem; }
+
+    .screenshots {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin-top: 0.9rem;
+    }
+
+    .screenshot-tile {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.02);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .screenshot-tile:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .screenshot-tile img {
+      width: 100%;
+      aspect-ratio: 9 / 18;
+      object-fit: contain;
+      object-position: center;
+      background: #0f1629;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .screenshot-tile figcaption {
+      padding: 0.5rem 0.6rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .contact-links { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1rem; }
+    .contact-links a {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.62rem 0.88rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .contact-links a:hover { transform: translateY(-2px); border-color: var(--accent); }
+
+    .repo-link {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 0.7rem;
+      color: #f3e4d7;
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.35rem 0.6rem;
+      background: rgba(255, 255, 255, 0.03);
+      transition: border-color 0.2s ease;
+    }
+
+    .repo-link:hover { border-color: var(--accent); }
+
+    footer {
+      margin-top: 2.6rem;
+      padding: 1.4rem 0 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .reveal { opacity: 0; transform: translateY(20px); animation: rise 0.7s ease forwards; }
+    .reveal.d2 { animation-delay: 0.1s; }
+    .reveal.d3 { animation-delay: 0.2s; }
+    @keyframes rise { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; }
+      .screenshots, .features { grid-template-columns: 1fr; }
+      main { padding-top: 2.3rem; }
+      .preview { justify-self: center; width: min(100%, 380px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="texture" aria-hidden="true"></div>
+
+  <header>
+    <div class="container nav">
+      <a href="./index.html#top" class="brand">MLADEN STOJANOVIĆ</a>
+      <nav>
+        <a href="./index.html#about">About</a>
+        <a href="./index.html#focus">Games</a>
+        <a href="./index.html#apps">Apps</a>
+        <a href="./index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="container">
+    <section class="hero">
+      <div>
+        <span class="kicker reveal">Daily Logic Puzzle</span>
+        <h1 class="reveal d2">WHERE ALL RULES FIT</h1>
+        <p class="reveal d3">
+          Rule Rings is a clean daily deduction game where you place geometric tokens into overlapping rings until every visible rule is true at the same time.
+        </p>
+        <div class="hero-actions reveal d3">
+          <a href="#features" class="btn primary">See features</a>
+          <a href="#screenshots" class="btn ghost">Screenshots</a>
+        </div>
+        <div class="hero-tags reveal d3">
+          <span>Constraint solving</span>
+          <span>Daily puzzles</span>
+          <span>Calm brain game</span>
+          <span>iOS &amp; Android</span>
+        </div>
+      </div>
+
+      <aside class="preview reveal d2" aria-label="Rule Rings app preview">
+        <div class="preview-art">
+          <img class="preview-image" src="./assets/rule-rings/rule-rings-screen1.png" alt="Rule Rings puzzle board with overlapping circles and geometric tokens" loading="eager" />
+          <span class="preview-note">Rule Rings</span>
+        </div>
+      </aside>
+    </section>
+
+    <section id="about">
+      <h2 class="section-title">WHAT IS RULE RINGS?</h2>
+      <p class="section-copy">
+        Rule Rings is built around one core puzzle question: can you place every piece so all visible constraints are true simultaneously?
+      </p>
+      <p class="section-copy">
+        It is designed as a durable daily puzzle habit with clean visuals, readable rules, and satisfying "click" moments when the final arrangement resolves.
+      </p>
+    </section>
+
+    <section id="features">
+      <h2 class="section-title">FEATURES</h2>
+      <p class="section-copy">Simple to read, deep to solve.</p>
+      <div class="features">
+        <article class="feature">
+          <h3>Overlapping Ring Logic</h3>
+          <p>Tokens placed in overlap zones satisfy multiple ring constraints at once, creating strong deduction chains.</p>
+        </article>
+        <article class="feature">
+          <h3>Readable Rule Language</h3>
+          <p>Short visual rules around color, shape, fill, and quantity keep every puzzle understandable on mobile.</p>
+        </article>
+        <article class="feature">
+          <h3>Daily Puzzle Habit</h3>
+          <p>Built for quick but meaningful daily sessions with steady difficulty progression.</p>
+        </article>
+        <article class="feature">
+          <h3>Calm Presentation</h3>
+          <p>Minimal, low-noise visual style focused on clarity rather than speed or chaos.</p>
+        </article>
+        <article class="feature">
+          <h3>System-First Scalability</h3>
+          <p>Rule combinations and board layouts support long-term puzzle variety without heavy content overhead.</p>
+        </article>
+        <article class="feature">
+          <h3>Mobile-First Interaction</h3>
+          <p>Drag-and-place token flow optimized for touch readability and satisfying solve feedback.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="screenshots">
+      <h2 class="section-title">SCREENSHOTS</h2>
+      <p class="section-copy">Rule Rings in its current playable build.</p>
+      <div class="screenshots">
+        <figure class="screenshot-tile">
+          <img src="./assets/rule-rings/rule-rings-screen1.png" alt="Rule Rings core puzzle board" loading="lazy" />
+          <figcaption>Puzzle Board</figcaption>
+        </figure>
+        <figure class="screenshot-tile">
+          <img src="./assets/rule-rings/rule-rings-screen2.png" alt="Rule Rings board variation" loading="lazy" />
+          <figcaption>Variant Board</figcaption>
+        </figure>
+        <figure class="screenshot-tile">
+          <img src="./assets/rule-rings/rule-rings-screen3.png" alt="Rule Rings puzzle progression" loading="lazy" />
+          <figcaption>Progression</figcaption>
+        </figure>
+        <figure class="screenshot-tile">
+          <img src="./assets/rule-rings/rule-rings-screen4.png" alt="Rule Rings gameplay snapshot" loading="lazy" />
+          <figcaption>Gameplay</figcaption>
+        </figure>
+        <figure class="screenshot-tile">
+          <img src="./assets/rule-rings/rule-rings-screen5.png" alt="Rule Rings additional puzzle view" loading="lazy" />
+          <figcaption>More Puzzles</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2 class="section-title">GET RULE RINGS</h2>
+      <p class="section-copy">Store links will be added here once public beta links are live.</p>
+      <div class="contact-links">
+        <a href="https://play.google.com/store/apps/details?id=REPLACE_WITH_RULE_RINGS_ANDROID_ID" target="_blank" rel="noreferrer">Android Beta (Placeholder)</a>
+        <a href="https://testflight.apple.com/join/REPLACE_WITH_RULE_RINGS_IOS_CODE" target="_blank" rel="noreferrer">iOS Beta (Placeholder)</a>
+        <a href="./rule-rings-privacy-policy.html">Privacy Policy</a>
+        <a href="./index.html#projects">Back to Portfolio</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Mladen Stojanović. All rights reserved. · <a href="./rule-rings-privacy-policy.html" class="repo-link">Rule Rings Privacy Policy</a> · <a href="./index.html" class="repo-link">Portfolio Home</a></div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
