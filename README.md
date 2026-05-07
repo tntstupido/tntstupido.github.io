@@ -12,11 +12,17 @@ It includes:
 - Privacy policy and compliance pages for published apps/games
 - Related SEO files (`sitemap.xml`, `robots.txt`, `manifest.json`)
 
-## Latest Updates (2026-05-03)
-- Added `yurui-privacy-policy.html` for the Yurui app.
-- Added Yurui privacy policy URL to `sitemap.xml`.
-- Polished footer layout on `index.html` for better readability.
-- Added `Yurui Privacy Policy` link in footer policy links.
+## Latest Updates (2026-05-07)
+- Added full Yurui app presence:
+  - `yurui-landing.html`
+  - `yurui-privacy-policy.html`
+  - `yurui-account-deletion.html`
+  - `yurui-age-suitability.html`
+- Added Yurui app card and project details in `index.html` Apps section.
+- Added Yurui footer links (landing/privacy/account deletion/age suitability).
+- Updated `sitemap.xml` with Yurui landing + compliance pages.
+- Added Yurui screenshot assets under `assets/yurui/`.
+- Updated Roomli screenshots and added App Store / Play Store buttons on `roomli.html`.
 
 ## Maintainer
 - Mladen Stojanovic

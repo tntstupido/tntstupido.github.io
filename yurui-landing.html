@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yurui — Gentle Habit Tracker</title>
+  <meta name="description" content="Yurui is a gentle habit tracker for iOS and Android. One habit at a time, no streak shame, calm progress." />
+  <link rel="canonical" href="https://mladenstojanovic.art/yurui-landing.html" />
+  <meta name="theme-color" content="#0d1112" />
+  <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="./favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="./favicon-16.png" sizes="16x16" type="image/png" />
+  <link rel="apple-touch-icon" href="./favicon-32.png" />
+  <link rel="manifest" href="./manifest.json" />
+  <meta property="og:title" content="Yurui — Gentle Habit Tracker" />
+  <meta property="og:description" content="Build one habit at a time. No streaks, no guilt, no pressure. Just gentle, steady progress." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mladenstojanovic.art/yurui-landing.html" />
+  <meta property="og:image" content="https://mladenstojanovic.art/assets/images/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Mladen Stojanović" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Yurui — Gentle Habit Tracker" />
+  <meta name="twitter:description" content="One habit at a time, no streak shame, calm and steady habit building." />
+  <meta name="twitter:image" content="https://mladenstojanovic.art/assets/images/og-image.png" />
+  <meta name="twitter:image:alt" content="Yurui gentle habit tracker" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Yurui",
+    "applicationCategory": "ProductivityApplication",
+    "operatingSystem": "iOS, Android",
+    "description": "A gentle habit tracker focused on one habit at a time with no streak pressure.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Mladen Stojanović",
+      "url": "https://mladenstojanovic.art"
+    }
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0d1112;
+      --bg-soft: #161d1f;
+      --ink: #f1ece2;
+      --muted: #b7b0a5;
+      --line: #2e3a3c;
+      --card: #182123;
+      --accent: #7BAE7F;
+      --accent-2: #A7D7AA;
+      --shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      color: var(--ink);
+      min-height: 100vh;
+      line-height: 1.55;
+      background:
+        radial-gradient(1100px 600px at 85% -10%, rgba(123, 174, 127, 0.18), transparent 58%),
+        radial-gradient(900px 500px at 0% 20%, rgba(167, 215, 170, 0.12), transparent 50%),
+        linear-gradient(180deg, #0d1112 0%, #101618 45%, #0d1214 100%);
+      overflow-x: hidden;
+    }
+
+    .texture {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.08;
+      background-image:
+        radial-gradient(circle at 2px 2px, #ffffff 1px, transparent 0),
+        radial-gradient(circle at 1px 1px, #ffffff 1px, transparent 0);
+      background-size: 4px 4px, 3px 3px;
+      mix-blend-mode: soft-light;
+      z-index: -1;
+    }
+
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: color-mix(in oklab, var(--bg) 84%, transparent);
+      backdrop-filter: blur(9px);
+    }
+
+    .nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      text-decoration: none;
+      color: var(--ink);
+      font-family: "Bebas Neue", sans-serif;
+      letter-spacing: 1px;
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    nav { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+    nav a:hover { color: var(--ink); }
+
+    main { padding: 3.2rem 0 4rem; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1.2rem;
+      align-items: center;
+      margin-bottom: 2.4rem;
+    }
+
+    .kicker {
+      display: inline-flex;
+      border: 1px solid color-mix(in oklab, var(--accent) 55%, var(--line));
+      background: rgba(123, 174, 127, 0.14);
+      color: #d8f0d9;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 0.35rem 0.72rem;
+      margin-bottom: 0.95rem;
+      letter-spacing: 0.2px;
+    }
+
+    h1 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(2.4rem, 7vw, 5.3rem);
+      line-height: 0.95;
+      letter-spacing: 1px;
+      margin-bottom: 0.9rem;
+      text-wrap: balance;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 62ch;
+      margin-bottom: 1.35rem;
+      font-size: 1.04rem;
+    }
+
+    .hero-actions,
+    .store-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .btn {
+      border: 1px solid var(--line);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.95rem;
+      border-radius: 10px;
+      padding: 0.72rem 1rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn.primary {
+      color: #f3fff4;
+      background: linear-gradient(135deg, #5f8d62, #7BAE7F);
+      border-color: #8ec892;
+      box-shadow: 0 9px 22px rgba(123, 174, 127, 0.3);
+    }
+
+    .btn.ghost {
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .btn.store {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: #f8fafc;
+      background: linear-gradient(180deg, rgba(24, 28, 31, 0.95), rgba(12, 15, 17, 0.95));
+      border-color: rgba(163, 172, 185, 0.45);
+      padding: 0.46rem 0.74rem;
+      border-radius: 11px;
+      min-height: 52px;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+    }
+
+    .btn.store:hover {
+      border-color: #a7d7aa;
+      box-shadow: 0 12px 28px rgba(123, 174, 127, 0.22);
+    }
+
+    .store-icon { width: 22px; height: 22px; flex: 0 0 auto; color: #f8fafc; }
+    .store-label { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.05; }
+    .store-kicker { font-size: 0.64rem; font-weight: 700; letter-spacing: 0.4px; color: #cbd5e1; text-transform: uppercase; }
+    .store-name { font-size: 0.96rem; font-weight: 800; letter-spacing: 0.1px; color: #f8fafc; }
+
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+    .hero-tags span {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #d2d9cb;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.28rem 0.58rem;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .preview {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      justify-self: end;
+      width: min(100%, 410px);
+    }
+
+    .preview-art { position: relative; aspect-ratio: 9 / 16; background: #0e1315; isolation: isolate; }
+
+    .preview-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+    }
+
+    .preview-note {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      font-size: 0.75rem;
+      letter-spacing: 0.8px;
+      font-weight: 800;
+      color: #11181a;
+      background: rgba(241, 236, 226, 0.9);
+      border-radius: 7px;
+      padding: 0.3rem 0.5rem;
+      text-transform: uppercase;
+    }
+
+    section { margin-top: 2.3rem; }
+    .section-title {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(1.9rem, 5.2vw, 2.8rem);
+      letter-spacing: 0.7px;
+      margin-bottom: 0.5rem;
+    }
+    .section-copy { color: var(--muted); max-width: 74ch; margin-bottom: 1rem; }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    .feature {
+      background: color-mix(in oklab, var(--card) 92%, black);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1rem;
+      box-shadow: var(--shadow);
+    }
+
+    .feature h3 { color: #c8f1cb; margin-bottom: 0.35rem; font-size: 1rem; }
+    .feature p { color: var(--muted); font-size: 0.95rem; }
+
+    .screenshots {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin-top: 0.9rem;
+    }
+
+    .screenshot-tile {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.02);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .screenshot-tile:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .screenshot-tile img {
+      width: 100%;
+      aspect-ratio: 9 / 18;
+      object-fit: cover;
+      object-position: center 20%;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .screenshot-tile figcaption {
+      padding: 0.5rem 0.6rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .contact-links { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1rem; }
+    .contact-links a {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.62rem 0.88rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .contact-links a:hover { transform: translateY(-2px); border-color: var(--accent); }
+
+    .repo-link {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 0.7rem;
+      color: #f3e4d7;
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.35rem 0.6rem;
+      background: rgba(255, 255, 255, 0.03);
+      transition: border-color 0.2s ease;
+    }
+
+    .repo-link:hover { border-color: var(--accent); }
+
+    footer {
+      margin-top: 2.6rem;
+      padding: 1.4rem 0 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .reveal { opacity: 0; transform: translateY(20px); animation: rise 0.7s ease forwards; }
+    .reveal.d2 { animation-delay: 0.1s; }
+    .reveal.d3 { animation-delay: 0.2s; }
+    @keyframes rise { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; }
+      .screenshots, .features { grid-template-columns: 1fr; }
+      main { padding-top: 2.3rem; }
+      .preview { justify-self: center; width: min(100%, 380px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="texture" aria-hidden="true"></div>
+
+  <header>
+    <div class="container nav">
+      <a href="./index.html#top" class="brand">MLADEN STOJANOVIĆ</a>
+      <nav>
+        <a href="./index.html#about">About</a>
+        <a href="./index.html#focus">Games</a>
+        <a href="./index.html#apps">Apps</a>
+        <a href="./index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="container">
+    <section class="hero">
+      <div>
+        <span class="kicker reveal">Gentle Habit Tracker</span>
+        <h1 class="reveal d2">ONE HABIT. CALM PROGRESS.</h1>
+        <p class="reveal d3">
+          Yurui helps you build one habit at a time with less pressure. No streak shame, no guilt loops, just simple check-ins and steady progress.
+        </p>
+        <div class="hero-actions reveal d3">
+          <a href="#features" class="btn primary">See features</a>
+          <a href="#screenshots" class="btn ghost">Screenshots</a>
+        </div>
+        <div class="store-actions reveal d3">
+          <a href="https://play.google.com/apps/testing/art.mladenstojanovic.yurui" class="btn store" target="_blank" rel="noopener noreferrer" aria-label="Download Yurui on Google Play">
+            <svg class="store-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M3.2 2.7c-.3.3-.5.8-.5 1.5v15.6c0 .7.2 1.2.5 1.5l.1.1L12.1 12 3.3 2.6l-.1.1Z"/>
+              <path fill="currentColor" d="m15 14.9-2.9-2.9-9 9.6c.4.4 1 .5 1.8.1l10.1-5.8Z" opacity=".85"/>
+              <path fill="currentColor" d="m15 9.1-10-5.8c-.8-.4-1.4-.3-1.8.1l9 9.6L15 9.1Z" opacity=".7"/>
+              <path fill="currentColor" d="m21.1 10.8-6.1-3.5L11.6 11l3.4 3.4 6.1-3.5c1.2-.7 1.2-1.4 0-2.1Z"/>
+            </svg>
+            <span class="store-label"><span class="store-kicker">Get it on</span><span class="store-name">Google Play</span></span>
+          </a>
+          <a href="https://testflight.apple.com/join/9jqDdGEA" class="btn store" target="_blank" rel="noopener noreferrer" aria-label="Download Yurui on the App Store">
+            <svg class="store-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M16.8 12.6c0-2 1.7-3 1.8-3.1-1-1.4-2.5-1.6-3-1.6-1.3-.1-2.5.7-3.2.7-.7 0-1.7-.7-2.8-.6-1.4 0-2.7.8-3.4 2.1-1.5 2.6-.4 6.5 1.1 8.6.7 1 1.6 2.1 2.8 2 .8 0 1.2-.5 2.3-.5s1.5.5 2.4.5c1.2 0 2-1 2.7-2 .8-1.2 1.1-2.3 1.1-2.4-.1 0-2-.8-2-3.7Z"/>
+              <path fill="currentColor" d="M14.8 6.6c.6-.7 1-1.6.9-2.6-.9 0-1.9.6-2.6 1.3-.6.7-1.1 1.6-1 2.6 1 .1 2-.5 2.7-1.3Z"/>
+            </svg>
+            <span class="store-label"><span class="store-kicker">Download on the</span><span class="store-name">App Store</span></span>
+          </a>
+        </div>
+        <div class="hero-tags reveal d3">
+          <span>One active habit</span>
+          <span>No streak shame</span>
+          <span>Gentle reminders</span>
+          <span>iOS &amp; Android</span>
+        </div>
+      </div>
+
+      <aside class="preview reveal d2" aria-label="Yurui app preview">
+        <div class="preview-art">
+          <img class="preview-image" src="./assets/yurui/yurui-screen1.png" alt="Yurui home screen with gentle habit check-in" loading="eager" />
+          <span class="preview-note">Gentle Habit</span>
+        </div>
+      </aside>
+    </section>
+
+    <section id="about">
+      <h2 class="section-title">WHAT IS YURUI?</h2>
+      <p class="section-copy">
+        Yurui (ゆるい) means gentle. The app is designed for people who want to build habits without anxiety from broken streaks or all-or-nothing pressure.
+      </p>
+      <p class="section-copy">
+        It focuses on one active habit at a time and uses a calm "never miss twice" mindset. You track progress with simple check-ins and completion rate, then keep moving.
+      </p>
+    </section>
+
+    <section id="features">
+      <h2 class="section-title">FEATURES</h2>
+      <p class="section-copy">Built to keep momentum gentle and sustainable.</p>
+      <div class="features">
+        <article class="feature">
+          <h3>One Habit at a Time</h3>
+          <p>Stay focused on a single active habit to reduce overwhelm and improve consistency.</p>
+        </article>
+        <article class="feature">
+          <h3>No Streak Guilt</h3>
+          <p>Progress is measured through completion rate and consistency, not fragile streak chains.</p>
+        </article>
+        <article class="feature">
+          <h3>Gentle Reminders</h3>
+          <p>Optional reminders help you show up without pressure-heavy notification patterns.</p>
+        </article>
+        <article class="feature">
+          <h3>Share Cards</h3>
+          <p>Share your calm progress with polished cards when you want external accountability.</p>
+        </article>
+        <article class="feature">
+          <h3>Theme Personalization</h3>
+          <p>Premium themes let you adjust the visual mood to keep the app feeling pleasant every day.</p>
+        </article>
+        <article class="feature">
+          <h3>Offline First</h3>
+          <p>Core habit data is stored locally for fast daily check-ins and reliable tracking.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="screenshots">
+      <h2 class="section-title">SCREENSHOTS</h2>
+      <p class="section-copy">A quick look at Yurui in action.</p>
+      <div class="screenshots">
+        <figure class="screenshot-tile">
+          <img src="./assets/yurui/yurui-screen1.png" alt="Yurui home habit check-in" loading="lazy" />
+          <figcaption>Home</figcaption>
+        </figure>
+        <figure class="screenshot-tile">
+          <img src="./assets/yurui/yurui-screen2.png" alt="Yurui progress and completion view" loading="lazy" />
+          <figcaption>Progress</figcaption>
+        </figure>
+        <figure class="screenshot-tile">
+          <img src="./assets/yurui/yurui-screen3.png" alt="Yurui gentle reminder settings" loading="lazy" />
+          <figcaption>Reminders</figcaption>
+        </figure>
+        <figure class="screenshot-tile">
+          <img src="./assets/yurui/yurui-screen4.png" alt="Yurui theme and personalization" loading="lazy" />
+          <figcaption>Themes</figcaption>
+        </figure>
+        <figure class="screenshot-tile">
+          <img src="./assets/yurui/yurui-screen5.png" alt="Yurui share card example" loading="lazy" />
+          <figcaption>Share Cards</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2 class="section-title">GET YURUI</h2>
+      <p class="section-copy">Yurui is available on Android and coming to iOS.</p>
+      <div class="contact-links">
+        <a href="https://play.google.com/apps/testing/art.mladenstojanovic.yurui" target="_blank" rel="noreferrer">Download on Google Play</a>
+        <a href="https://testflight.apple.com/join/9jqDdGEA" target="_blank" rel="noreferrer">Download on App Store</a>
+        <a href="./yurui-privacy-policy.html">Privacy Policy</a>
+        <a href="./yurui-account-deletion.html">Account Deletion</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Mladen Stojanović. All rights reserved. · <a href="./yurui-privacy-policy.html" class="repo-link">Yurui Privacy Policy</a> · <a href="./index.html" class="repo-link">Portfolio Home</a></div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

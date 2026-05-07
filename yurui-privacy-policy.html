@@ -34,21 +34,17 @@
       --ink: #f1ece2;
       --muted: #b7b0a5;
       --line: #2e3a3c;
-      --accent: #7fd1b9;
+      --accent: #7BAE7F;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: "Plus Jakarta Sans", "Segoe UI", sans-serif;
       color: var(--ink);
       line-height: 1.6;
       background:
-        radial-gradient(900px 500px at 85% -10%, rgba(127, 209, 185, 0.16), transparent 58%),
+        radial-gradient(900px 500px at 85% -10%, rgba(123, 174, 127, 0.16), transparent 58%),
         linear-gradient(180deg, #0d1112 0%, #101618 45%, #0d1214 100%);
       padding: 2rem 1rem 3rem;
     }
@@ -62,45 +58,15 @@
       padding: 1.2rem;
     }
 
-    h1, h2, h3 {
-      line-height: 1.2;
-      margin-bottom: 0.65rem;
-    }
+    h1, h2, h3 { line-height: 1.2; margin-bottom: 0.65rem; }
+    h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); margin-bottom: 0.9rem; }
+    h2 { margin-top: 1.2rem; font-size: 1.3rem; color: #d9efda; }
+    h3 { margin-top: 0.8rem; font-size: 1rem; color: #c7e4c9; }
 
-    h1 {
-      font-size: clamp(1.8rem, 5vw, 2.6rem);
-      margin-bottom: 0.9rem;
-    }
-
-    h2 {
-      margin-top: 1.2rem;
-      font-size: 1.3rem;
-      color: #d0fff1;
-    }
-
-    h3 {
-      margin-top: 0.8rem;
-      font-size: 1rem;
-      color: #b8eadc;
-    }
-
-    p, li {
-      color: var(--muted);
-      margin-bottom: 0.6rem;
-    }
-
-    ul {
-      padding-left: 1.2rem;
-      margin-bottom: 0.6rem;
-    }
-
-    strong {
-      color: var(--ink);
-    }
-
-    a {
-      color: #bff8e7;
-    }
+    p, li { color: var(--muted); margin-bottom: 0.6rem; }
+    ul { padding-left: 1.2rem; margin-bottom: 0.6rem; }
+    strong { color: var(--ink); }
+    a { color: #c4ebc7; }
 
     .back-link {
       display: inline-block;
@@ -118,7 +84,7 @@
 <body>
   <main class="wrap">
     <h1>Privacy Policy for Yurui</h1>
-    <p><strong>Last Updated:</strong> May 3, 2026</p>
+    <p><strong>Last Updated:</strong> May 7, 2026</p>
 
     <p><strong>Developer:</strong> Mladen Stojanovic<br />
     <strong>Contact:</strong> mladenstojanovicpo@gmail.com</p>
@@ -203,7 +169,7 @@
     <strong>Mladen Stojanovic</strong><br />
     <strong>Email:</strong> mladenstojanovicpo@gmail.com</p>
 
-    <a class="back-link" href="./index.html">Main Site</a>
+    <a class="back-link" href="./yurui-landing.html">Back to Yurui</a> · <a class="back-link" href="./index.html">Main Site</a>
   </main>
 </body>
 </html>
