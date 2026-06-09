@@ -263,6 +263,7 @@
       box-shadow: var(--shadow);
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
       aspect-ratio: 1 / 1;
+      position: relative;
     }
 
     .hero-screenshot img,
@@ -276,6 +277,38 @@
 
     .hero-screenshot .hero-fallback {
       display: none;
+    }
+
+    .hero-screenshot .hero-pause {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(0, 0, 0, 0.55);
+      color: #fdf8f2;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .hero-screenshot .hero-pause svg {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+
+    .hero-screenshot.is-paused .hero-pause {
+      display: flex;
+    }
+
+    .hero-screenshot.is-playing .hero-pause {
+      display: flex;
+      background: rgba(0, 0, 0, 0.25);
     }
 
     section {
@@ -518,6 +551,149 @@
         display: block;
       }
     }
+
+    /* Sticky mobile CTA bar */
+    .mobile-cta {
+      display: none;
+    }
+
+    .mobile-cta-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 30;
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.6rem 0.75rem calc(0.6rem + env(safe-area-inset-bottom, 0px));
+      background: color-mix(in oklab, var(--bg) 92%, transparent);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .mobile-cta-bar a {
+      flex: 1;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.9rem;
+      border-radius: 10px;
+      padding: 0.7rem 0.5rem;
+      text-align: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      min-height: 44px;
+    }
+
+    .mobile-cta-bar a.android {
+      color: #fdf8f2;
+      background: linear-gradient(135deg, #bf5428, #df6b39);
+      border: 1px solid #e27343;
+    }
+
+    .mobile-cta-bar a.ios {
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--line);
+    }
+
+    .mobile-cta-bar svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    /* Mobile polish */
+    @media (max-width: 639px) {
+      .brand {
+        font-size: 1.1rem;
+        letter-spacing: 0.5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .header-cta {
+        font-size: 0.75rem;
+        padding: 0.45rem 0.7rem;
+      }
+
+      .nav {
+        min-height: 56px;
+      }
+
+      main {
+        padding: 1rem 0 7rem; /* leave room for sticky CTA */
+      }
+
+      .hero {
+        padding: 1rem 0 1.5rem;
+      }
+
+      h1 {
+        font-size: clamp(2.4rem, 14vw, 4.5rem);
+        margin-bottom: 0.5rem;
+      }
+
+      .hero-sub {
+        font-size: 0.95rem;
+        margin-bottom: 1.25rem;
+        padding: 0 0.25rem;
+      }
+
+      .hero-sub .desktop-only {
+        display: none;
+      }
+
+      .cta-group {
+        margin-bottom: 1.25rem;
+      }
+
+      .cta-btn {
+        font-size: 0.95rem;
+        padding: 0.85rem 1.2rem;
+        min-height: 52px;
+      }
+
+      .hero-screenshot {
+        max-width: min(280px, 70vw);
+        max-height: 280px;
+        aspect-ratio: 1 / 1;
+      }
+
+      .section-title {
+        font-size: clamp(1.5rem, 7vw, 2rem);
+      }
+
+      .feature h3,
+      .info-card h3 {
+        font-size: 0.92rem;
+      }
+
+      .feature p,
+      .info-card p,
+      .info-card li {
+        font-size: 0.88rem;
+      }
+
+      .screenshots-scroll-wrap::after {
+        width: 24px;
+        opacity: 0.7;
+      }
+
+      .screenshots-scroll figure {
+        flex: 0 0 160px;
+      }
+
+      .final-cta h2 {
+        font-size: clamp(1.5rem, 7vw, 2.2rem);
+      }
+
+      .mobile-cta {
+        display: block;
+      }
+    }
   </style>
 </head>
 <body>
@@ -535,7 +711,7 @@
       <span class="kicker reveal">Out Now — Free, No Waiting List</span>
       <h1 class="reveal d2">DIE LAUGHING</h1>
       <p class="hero-sub reveal d3">
-        A roguelite wave survival game built for mobile. Dark humor, escalating chaos, and 10–15 minute runs. The alpha is over. The thing is real. Go break it.
+        A roguelite wave survival game built for mobile. Dark humor, escalating chaos, and 10–15 minute runs.<span class="desktop-only"> The alpha is over. The thing is real. Go break it.</span>
       </p>
 
       <div id="join" class="cta-group reveal d3">
@@ -559,8 +735,9 @@
         </div>
       </div>
 
-      <div class="hero-screenshot reveal d3">
+      <div class="hero-screenshot reveal d3 is-playing">
         <video
+          id="heroVideo"
           src="./assets/gameplay_video/web_video_square.mp4"
           poster="./assets/screenshots/die_laughing2.png"
           autoplay
@@ -571,6 +748,13 @@
           aria-label="Die Laughing gameplay loop"
         ></video>
         <img class="hero-fallback" src="./assets/screenshots/die_laughing2.png" alt="Die Laughing boss fight with The Auditor" />
+        <button class="hero-pause" id="heroPause" type="button" aria-label="Pause gameplay video" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <rect class="icon-pause" x="6" y="5" width="4" height="14" rx="1" />
+            <rect class="icon-pause" x="14" y="5" width="4" height="14" rx="1" />
+            <polygon class="icon-play" points="7,5 19,12 7,19" style="display:none" />
+          </svg>
+        </button>
       </div>
     </section>
 
@@ -697,8 +881,56 @@
     </div>
   </footer>
 
+  <div class="mobile-cta" aria-hidden="false">
+    <div class="mobile-cta-bar">
+      <a class="android" href="https://play.google.com/store/apps/details?id=com.MladenStojanovic.dielaughing" target="_blank" rel="noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893 2.302 2.302-10.937 6.333 8.635-8.635zm3.187-1.286 2.582 1.493a1 1 0 0 1 0 1.727l-2.582 1.493-2.428-2.428 2.428-2.285zM14.501 12l-8.637-8.637 10.937 6.333-2.3 2.304z"/></svg>
+        Google Play
+      </a>
+      <a class="ios" href="https://apps.apple.com/us/app/die-laughing-rogue-survival/id6760406886" target="_blank" rel="noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        App Store
+      </a>
+    </div>
+  </div>
+
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Tap-to-pause on hero video (saves mobile data)
+    (function () {
+      var video = document.getElementById("heroVideo");
+      var wrap = video ? video.parentElement : null;
+      var btn = document.getElementById("heroPause");
+      if (!video || !wrap || !btn) return;
+
+      var playIcons = btn.querySelectorAll(".icon-pause");
+      var pauseIcons = btn.querySelectorAll(".icon-play");
+
+      function setState(playing) {
+        wrap.classList.toggle("is-playing", playing);
+        wrap.classList.toggle("is-paused", !playing);
+        btn.setAttribute("aria-pressed", playing ? "false" : "true");
+        btn.setAttribute("aria-label", playing ? "Pause gameplay video" : "Play gameplay video");
+        for (var i = 0; i < playIcons.length; i++) playIcons[i].style.display = playing ? "" : "none";
+        for (var j = 0; j < pauseIcons.length; j++) pauseIcons[j].style.display = playing ? "none" : "";
+      }
+
+      btn.addEventListener("click", function () {
+        if (video.paused) {
+          video.play();
+          setState(true);
+        } else {
+          video.pause();
+          setState(false);
+        }
+      });
+
+      // Tap the video itself also toggles
+      video.addEventListener("click", function () {
+        btn.click();
+      });
+    })();
   </script>
 </body>
 </html>
