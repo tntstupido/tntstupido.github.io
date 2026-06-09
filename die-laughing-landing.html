@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Die Laughing — Open Alpha &amp; Beta</title>
-  <meta name="description" content="Die Laughing — free roguelite wave survival game for mobile. 10-15 minute runs with dark humor, XP leveling, and upgrade-driven builds. Open alpha on Android, beta on iOS." />
+  <title>Die Laughing — Free Roguelite Wave Survival</title>
+  <meta name="description" content="Die Laughing — free roguelite wave survival game for mobile. 10-15 minute runs, dark humor, XP leveling, and upgrade-driven builds. Now live on iOS and Android." />
   <link rel="canonical" href="https://mladenstojanovic.art/die-laughing-landing.html" />
   <meta name="theme-color" content="#0d1112" />
   <link rel="icon" href="./favicon.ico" type="image/x-icon" />
@@ -12,8 +12,8 @@
   <link rel="icon" href="./favicon-16.png" sizes="16x16" type="image/png" />
   <link rel="apple-touch-icon" href="./favicon-32.png" />
   <link rel="manifest" href="./manifest.json" />
-  <meta property="og:title" content="Die Laughing — Open Alpha & Beta" />
-  <meta property="og:description" content="Die Laughing — free roguelite wave survival game for mobile. 10-15 minute runs with dark humor, XP leveling, and upgrade-driven builds. Open alpha on Android, beta on iOS." />
+  <meta property="og:title" content="Die Laughing — Free Roguelite Wave Survival" />
+  <meta property="og:description" content="Die Laughing — free roguelite wave survival game for mobile. 10-15 minute runs, dark humor, XP leveling, and upgrade-driven builds. Now live on iOS and Android." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://mladenstojanovic.art/die-laughing-landing.html" />
   <meta property="og:image" content="https://mladenstojanovic.art/assets/images/og-image.png" />
@@ -21,8 +21,8 @@
   <meta property="og:image:height" content="630" />
   <meta property="og:site_name" content="Mladen Stojanović" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Die Laughing — Open Alpha & Beta" />
-  <meta name="twitter:description" content="Die Laughing — free roguelite wave survival game for mobile. 10-15 minute runs with dark humor, XP leveling, and upgrade-driven builds. Open alpha on Android, beta on iOS." />
+  <meta name="twitter:title" content="Die Laughing — Free Roguelite Wave Survival" />
+  <meta name="twitter:description" content="Die Laughing — free roguelite wave survival game for mobile. 10-15 minute runs, dark humor, XP leveling, and upgrade-driven builds. Now live on iOS and Android." />
   <meta name="twitter:image" content="https://mladenstojanovic.art/assets/images/og-image.png" />
   <meta name="twitter:image:alt" content="Die Laughing — roguelite wave survival game for mobile" />
   <script type="application/ld+json">
@@ -32,13 +32,18 @@
     "name": "Die Laughing",
     "genre": "Roguelite",
     "gamePlatform": ["iOS", "Android"],
-    "applicationCategory": "Game",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "iOS, Android",
     "description": "A roguelite wave survival game built for mobile. Dark humor, escalating chaos, and 10–15 minute runs that keep you coming back.",
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
     },
+    "installUrl": [
+      "https://apps.apple.com/us/app/die-laughing-rogue-survival/id6760406886",
+      "https://play.google.com/store/apps/details?id=com.MladenStojanovic.dielaughing"
+    ],
     "author": {
       "@type": "Person",
       "name": "Mladen Stojanović",
@@ -257,14 +262,20 @@
       overflow: hidden;
       box-shadow: var(--shadow);
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+      aspect-ratio: 1 / 1;
     }
 
-    .hero-screenshot img {
+    .hero-screenshot img,
+    .hero-screenshot video {
       width: 100%;
+      height: 100%;
       display: block;
-      aspect-ratio: 9 / 16;
       object-fit: cover;
-      object-position: center 30%;
+      object-position: center;
+    }
+
+    .hero-screenshot .hero-fallback {
+      display: none;
     }
 
     section {
@@ -319,11 +330,42 @@
       padding: 0.5rem 0 1rem;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
+      scrollbar-width: thin;
+      scrollbar-color: var(--line) transparent;
+      cursor: grab;
+    }
+
+    .screenshots-scroll:active {
+      cursor: grabbing;
     }
 
     .screenshots-scroll::-webkit-scrollbar {
-      display: none;
+      height: 6px;
+    }
+
+    .screenshots-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .screenshots-scroll::-webkit-scrollbar-thumb {
+      background: var(--line);
+      border-radius: 3px;
+    }
+
+    .screenshots-scroll-wrap {
+      position: relative;
+    }
+
+    .screenshots-scroll-wrap::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 1rem;
+      width: 32px;
+      pointer-events: none;
+      background: linear-gradient(to left, var(--bg), transparent);
+      opacity: 0.85;
     }
 
     .screenshots-scroll figure {
@@ -467,6 +509,15 @@
         padding: 2rem 0 2.5rem;
       }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-screenshot video {
+        display: none;
+      }
+      .hero-screenshot .hero-fallback {
+        display: block;
+      }
+    }
   </style>
 </head>
 <body>
@@ -475,16 +526,16 @@
   <header>
     <div class="container nav">
       <a href="https://mladenstojanovic.art" class="brand">MLADEN STOJANOVIĆ</a>
-      <a href="#join" class="header-cta">Join Now</a>
+      <a href="#join" class="header-cta">Play Free</a>
     </div>
   </header>
 
   <main class="container">
     <section class="hero">
-      <span class="kicker reveal">Open Alpha &amp; Beta — Free to Play</span>
+      <span class="kicker reveal">Out Now — Free, No Waiting List</span>
       <h1 class="reveal d2">DIE LAUGHING</h1>
       <p class="hero-sub reveal d3">
-        A roguelite wave survival game built for mobile. Dark humor, escalating chaos, and 10–15 minute runs that keep you coming back.
+        A roguelite wave survival game built for mobile. Dark humor, escalating chaos, and 10–15 minute runs. The alpha is over. The thing is real. Go break it.
       </p>
 
       <div id="join" class="cta-group reveal d3">
@@ -492,16 +543,16 @@
           <a class="cta-btn android" href="https://play.google.com/store/apps/details?id=com.MladenStojanovic.dielaughing" target="_blank" rel="noreferrer">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893 2.302 2.302-10.937 6.333 8.635-8.635zm3.187-1.286 2.582 1.493a1 1 0 0 1 0 1.727l-2.582 1.493-2.428-2.428 2.428-2.285zM14.501 12l-8.637-8.637 10.937 6.333-2.3 2.304z"/></svg>
             <span>
-              Play Store — Open Alpha
+              Get it on Google Play
               <span class="cta-label">Android devices</span>
             </span>
           </a>
         </div>
         <div>
-          <a class="cta-btn ios" href="https://testflight.apple.com/join/6wzgr1UE" target="_blank" rel="noreferrer">
+          <a class="cta-btn ios" href="https://apps.apple.com/us/app/die-laughing-rogue-survival/id6760406886" target="_blank" rel="noreferrer">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
             <span>
-              TestFlight — Open Beta
+              Download on the App Store
               <span class="cta-label">iOS devices</span>
             </span>
           </a>
@@ -509,7 +560,17 @@
       </div>
 
       <div class="hero-screenshot reveal d3">
-        <img src="./assets/screenshots/die_laughing1.png" alt="Die Laughing roguelite gameplay with enemy waves and XP gems" loading="eager" />
+        <video
+          src="./assets/gameplay_video/web_video_square.mp4"
+          poster="./assets/screenshots/die_laughing2.png"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          aria-label="Die Laughing gameplay loop"
+        ></video>
+        <img class="hero-fallback" src="./assets/screenshots/die_laughing2.png" alt="Die Laughing boss fight with The Auditor" />
       </div>
     </section>
 
@@ -537,67 +598,84 @@
     <section id="screenshots">
       <h2 class="section-title">SCREENSHOTS</h2>
       <p class="section-copy">
-        Swipe to see more from the current build.
+        Six sins, six flavors of bad day. Scroll sideways for more.
       </p>
-      <div class="screenshots-scroll">
-        <figure>
-          <img src="./assets/screenshots/die_laughing1.png" alt="Die Laughing roguelite gameplay with enemy waves and XP gems" loading="lazy" />
-          <figcaption>Wave pressure moment</figcaption>
-        </figure>
+      <div class="screenshots-scroll-wrap">
+        <div class="screenshots-scroll">
+          <figure>
+            <img src="./assets/screenshots/die_laughing1.png" alt="Die Laughing gameplay with the Interns enemy wave" loading="lazy" />
+            <figcaption>Interns — they're new. They're eager. They're everywhere.</figcaption>
+          </figure>
+          <figure>
+            <img src="./assets/screenshots/die_laughing2.png" alt="Die Laughing boss fight with The Auditor" loading="lazy" />
+            <figcaption>The Auditor — try not to die screaming.</figcaption>
+          </figure>
+          <figure>
+            <img src="./assets/screenshots/die_laughing3.png" alt="Die Laughing shop encounter with the Shopkeeper" loading="lazy" />
+            <figcaption>Shopkeeper — yes, the prices are a sin. Yes, you still want them.</figcaption>
+          </figure>
+          <figure>
+            <img src="./assets/screenshots/die_laughing4.png" alt="Die Laughing combat with the Angel enemy" loading="lazy" />
+            <figcaption>Angel — wings, halos, zero mercy.</figcaption>
+          </figure>
+          <figure>
+            <img src="./assets/screenshots/die_laughing5.png" alt="Die Laughing HP-7190 elite fight" loading="lazy" />
+            <figcaption>HP-7190 — when "dying laughing" stops being a joke.</figcaption>
+          </figure>
+          <figure>
+            <img src="./assets/screenshots/die_laughing6.png" alt="Die Laughing True Hell difficulty" loading="lazy" />
+            <figcaption>True Hell — you asked for this. Genuinely.</figcaption>
+          </figure>
+        </div>
       </div>
     </section>
 
     <section id="info">
-      <h2 class="section-title">BEFORE YOU JOIN</h2>
+      <h2 class="section-title">BEFORE YOU DOWNLOAD</h2>
       <p class="section-copy">
-        A few things to know about the open alpha and beta.
+        A few things to know before you install.
       </p>
       <div class="info-cards">
         <article class="info-card">
-          <h3>It's a Work in Progress</h3>
-          <p>This is an early build. Expect bugs, balance changes, and incomplete features. Your feedback directly shapes what comes next.</p>
+          <h3>It's Live, Not Perfect</h3>
+          <p>Launched, not finished. The first public build will still get patches, balance passes, and the occasional regrettable decision. We fix things fast and we don't pretend otherwise.</p>
         </article>
         <article class="info-card">
-          <h3>What We Need From You</h3>
+          <h3>How to Install</h3>
           <ul>
-            <li>Play through runs and note what feels off</li>
-            <li>Report crashes or game-breaking bugs</li>
-            <li>Share what's fun and what isn't</li>
-            <li>Tell us if difficulty feels fair</li>
+            <li><strong>Android:</strong> Tap the Google Play button, hit install, and you're in. Standard Play Store flow.</li>
+            <li><strong>iOS:</strong> Tap the App Store button, hit get, and you're in. No TestFlight, no invites, no waiting list.</li>
           </ul>
         </article>
         <article class="info-card">
-          <h3>How to Join</h3>
-          <ul>
-            <li><strong>Android:</strong> Click the Play Store button above, join the open alpha, then install from Google Play.</li>
-            <li><strong>iOS:</strong> Click the TestFlight button, accept the invite, and install through the TestFlight app.</li>
-          </ul>
+          <h3>What's Free, What's Not</h3>
+          <p>The full game is free to download and play. There are ads. There are no pay-to-win mechanics. If something feels rotten about that, it probably is — and we want to hear about it.</p>
         </article>
         <article class="info-card">
           <h3>Privacy &amp; Data</h3>
-          <p>We respect your privacy. Read our <a href="./die-laughing-privacy-policy.html" style="color: #f7c0a3;">Privacy Policy</a> for details on what data may be collected and how it's used.</p>
+          <p>We collect the bare minimum. Read our <a href="./die-laughing-privacy-policy.html" style="color: #f7c0a3;">Privacy Policy</a> for the full, slightly uncomfortable truth about what an ad-supported game actually does.</p>
         </article>
       </div>
     </section>
 
     <section class="final-cta">
-      <h2>READY TO PLAY?</h2>
-      <p>Grab your platform, jump in, and let us know what you think.</p>
+      <h2>READY TO DIE LAUGHING?</h2>
+      <p>Pick your platform, install, and find out what a wave really feels like.</p>
       <div class="cta-group">
         <div>
           <a class="cta-btn android" href="https://play.google.com/store/apps/details?id=com.MladenStojanovic.dielaughing" target="_blank" rel="noreferrer">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893 2.302 2.302-10.937 6.333 8.635-8.635zm3.187-1.286 2.582 1.493a1 1 0 0 1 0 1.727l-2.582 1.493-2.428-2.428 2.428-2.285zM14.501 12l-8.637-8.637 10.937 6.333-2.3 2.304z"/></svg>
             <span>
-              Play Store — Open Alpha
+              Get it on Google Play
               <span class="cta-label">Android devices</span>
             </span>
           </a>
         </div>
         <div>
-          <a class="cta-btn ios" href="https://testflight.apple.com/join/6wzgr1UE" target="_blank" rel="noreferrer">
+          <a class="cta-btn ios" href="https://apps.apple.com/us/app/die-laughing-rogue-survival/id6760406886" target="_blank" rel="noreferrer">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
             <span>
-              TestFlight — Open Beta
+              Download on the App Store
               <span class="cta-label">iOS devices</span>
             </span>
           </a>
