@@ -139,7 +139,7 @@
 <body>
   <main class="wrap">
     <h1>Privacy Policy for Die Laughing</h1>
-    <p><strong>Last Updated:</strong> June 8, 2026</p>
+    <p><strong>Last Updated:</strong> June 13, 2026</p>
 
     <p><strong>Developer:</strong> Mladen Stojanovic<br />
     <strong>Contact:</strong> mladenstojanovicpo@gmail.com</p>
@@ -152,7 +152,7 @@
       <li><strong>We do not collect personal information</strong> such as your name, email address, phone number, home address, or government identifier.</li>
       <li><strong>We do not collect location data</strong> &mdash; neither precise (GPS) nor coarse (IP-based, network-based, or cell-based).</li>
       <li><strong>We do not read your contacts, calendar, photos, microphone, camera, SMS, call logs, or health data.</strong></li>
-      <li>The only identifiers we process are: an anonymous analytics identifier (Firebase), an advertising identifier (AdMob, when ads are shown), and a hashed session identifier.</li>
+      <li>The only identifiers we process are: an anonymous analytics identifier (Firebase), advertising identifiers (AdMob, AppsFlyer, Meta when ads/attribution are enabled), and a hashed session identifier.</li>
       <li>You can request deletion of any data tied to you at any time by contacting us.</li>
     </ul>
 
@@ -176,7 +176,16 @@
     </ul>
     <p>We do <strong>not</strong> receive your full card number, bank details, billing address, or any payment credentials.</p>
 
-    <h3>c) Ads and Ad Measurement (If Enabled)</h3>
+    <h3>e) Install Attribution (If Enabled)</h3>
+    <p>When attribution providers are enabled, they may process data needed to measure whether an install came from their advertising campaigns, including:</p>
+    <ul>
+      <li>Advertising identifiers (Android Advertising ID, Apple IDFA where available)</li>
+      <li>Install referrer information (Google Play install referrer)</li>
+      <li>Attribution source, campaign, and click identifiers</li>
+    </ul>
+    <p>This data is used solely for measuring install sources and is not used by us for cross-app tracking-based advertising.</p>
+
+    <h3>f) Ads and Ad Measurement (If Enabled)</h3>
     <p>If ads are enabled, ad providers may process ad-related data including:</p>
     <ul>
       <li>Advertising identifier (for example the Android Advertising ID or Apple's IDFA) and app set identifier</li>
@@ -185,7 +194,7 @@
     </ul>
     <p>Where required by law, consent prompts may be shown before tracking-based ads are used. The advertising identifier is the only user-resettable identifier shared for ad purposes, and you can reset or limit it at any time from your device settings.</p>
 
-    <h3>d) Gameplay, Analytics, and Diagnostics</h3>
+    <h3>g) Gameplay, Analytics, and Diagnostics</h3>
     <ul>
       <li>Gameplay progress and settings (for example wave reached, weapons used, run duration)</li>
       <li>Crash logs, stack traces, and performance diagnostics</li>
@@ -193,7 +202,7 @@
     </ul>
     <p>These events are tied to an anonymous analytics identifier, not to your real-world identity.</p>
 
-    <h3>e) Optional Account-Linked Features</h3>
+    <h3>h) Optional Account-Linked Features</h3>
     <p>If account-linked features are enabled (for example cloud save or leaderboard integrations), provider-specific identifiers and feature activity may be processed by those providers.</p>
     <ul>
       <li>Platform identity identifiers (for example Google Play Games / Game Center player identifiers)</li>
@@ -203,7 +212,7 @@
     </ul>
     <p>These account-linked user identifiers are used for app functionality and analytics related to game operation, and are not used by us for cross-app tracking-based advertising. If you choose not to use account-linked features, none of this data is collected.</p>
 
-    <h3>f) Support Communications</h3>
+    <h3>i) Support Communications</h3>
     <p>If you contact us by email, we receive the information you include, such as your email address and message content. This is used only to respond to your request.</p>
 
     <h2>2. How We Use Data</h2>
@@ -225,6 +234,8 @@
       <li><strong>Google (AdMob, Play Services, Billing, Play Games where used):</strong> <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a></li>
       <li><strong>Firebase (Analytics / Crash diagnostics where used):</strong> <a href="https://firebase.google.com/support/privacy">https://firebase.google.com/support/privacy</a></li>
       <li><strong>Supabase (cloud profile/leaderboard backend where used):</strong> <a href="https://supabase.com/privacy">https://supabase.com/privacy</a></li>
+      <li><strong>AppsFlyer (install attribution and measurement where used):</strong> <a href="https://support.appsflyer.com/hc/en-us/articles/207963658-AppsFlyer-Privacy-and-GDPR">https://support.appsflyer.com/hc/en-us/articles/207963658-AppsFlyer-Privacy-and-GDPR</a></li>
+      <li><strong>Meta / Facebook (install attribution via Meta SDK where used):</strong> <a href="https://www.facebook.com/privacy/policy/">https://www.facebook.com/privacy/policy/</a></li>
     </ul>
     <p>These providers process data under their own privacy policies.</p>
 
