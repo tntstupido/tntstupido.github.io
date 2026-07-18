@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Devlog #01 — Main Menu Reveal — Slasher Manager</title>
+  <meta name="description" content="First Slasher Manager devlog: the new main menu overhaul blending VHS horror with hand-drawn ink-and-paper notebook aesthetics." />
+  <link rel="canonical" href="https://mladenstojanovic.art/devlog/2026-07-18-main-menu-reveal.html" />
+  <meta name="theme-color" content="#0d1112" />
+  <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="../favicon-16.png" sizes="16x16" type="image/png" />
+  <link rel="apple-touch-icon" href="../favicon-32.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Special+Elite&family=Patrick+Hand&display=swap" rel="stylesheet" />
+  <meta property="og:title" content="Devlog #01 — Slasher Manager Main Menu Reveal" />
+  <meta property="og:description" content="The new main menu blends VHS horror with hand-drawn ink-and-paper notebook aesthetics. First devlog from a solo developer building a horror idle/clicker." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://mladenstojanovic.art/devlog/2026-07-18-main-menu-reveal.html" />
+  <meta property="og:image" content="https://mladenstojanovic.art/devlog/assets/2026-07-18-menu-reveal.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="675" />
+  <meta property="og:site_name" content="Mladen Stojanović" />
+  <meta property="article:published_time" content="2026-07-18" />
+  <meta property="article:author" content="Mladen Stojanović" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Devlog #01 — Slasher Manager Main Menu Reveal" />
+  <meta name="twitter:description" content="The new main menu blends VHS horror with hand-drawn ink-and-paper notebook aesthetics." />
+  <meta name="twitter:image" content="https://mladenstojanovic.art/devlog/assets/2026-07-18-menu-reveal.jpg" />
+  <meta name="twitter:image:alt" content="Slasher Manager main menu with VHS cover and ink-and-paper cards" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Devlog #01 — Main Menu Reveal",
+    "datePublished": "2026-07-18",
+    "author": {
+      "@type": "Person",
+      "name": "Mladen Stojanović",
+      "url": "https://mladenstojanovic.art"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Mladen Stojanović"
+    },
+    "image": "https://mladenstojanovic.art/devlog/assets/2026-07-18-menu-reveal.jpg",
+    "url": "https://mladenstojanovic.art/devlog/2026-07-18-main-menu-reveal.html",
+    "description": "First Slasher Manager devlog: the new main menu overhaul blending VHS horror with hand-drawn ink-and-paper notebook aesthetics.",
+    "articleBody": "Welcome to the first Slasher Manager devlog. This week, the main menu got a complete visual overhaul blending VHS horror with hand-drawn ink-and-paper notebook aesthetics."
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #0d1112;
+      --bg-soft: #161d1f;
+      --ink: #f1ece2;
+      --muted: #b7b0a5;
+      --line: #2e3a3c;
+      --card: #182123;
+      --accent: #b32424;
+      --accent-2: #d96868;
+      --handwritten: "Patrick Hand", cursive;
+      --typewriter: "Special Elite", monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      color: var(--ink);
+      min-height: 100vh;
+      line-height: 1.65;
+      background:
+        radial-gradient(1100px 600px at 85% -10%, rgba(179, 36, 36, 0.16), transparent 58%),
+        linear-gradient(180deg, #0d1112 0%, #15151a 45%, #0d1214 100%);
+      overflow-x: hidden;
+    }
+
+    .container { width: min(820px, 92vw); margin: 0 auto; }
+
+    header {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: color-mix(in oklab, var(--bg) 84%, transparent);
+      backdrop-filter: blur(9px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .nav { min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+
+    .brand {
+      text-decoration: none;
+      color: var(--ink);
+      font-family: "Bebas Neue", sans-serif;
+      letter-spacing: 1px;
+      font-size: 1.5rem;
+    }
+
+    nav { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    nav a { color: var(--muted); text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: color 0.2s ease; }
+    nav a:hover { color: var(--ink); }
+
+    main { padding: 2.4rem 0 4rem; }
+
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.1rem;
+    }
+
+    .post-tag {
+      display: inline-flex;
+      border: 1px solid color-mix(in oklab, var(--accent) 55%, var(--line));
+      background: rgba(179, 36, 36, 0.18);
+      color: #ffc8c8;
+      font-size: 0.75rem;
+      font-weight: 800;
+      border-radius: 999px;
+      padding: 0.28rem 0.62rem;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+
+    .post-date {
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(2.2rem, 6vw, 3.4rem);
+      line-height: 1;
+      letter-spacing: 1px;
+      margin-bottom: 0.6rem;
+    }
+
+    .post-sub {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 65ch;
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-image {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.4);
+      margin-bottom: 2rem;
+    }
+
+    article p { color: var(--ink); margin-bottom: 1rem; font-size: 1.02rem; }
+    article p.lede { font-size: 1.12rem; color: var(--ink); }
+    article h2 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.8px;
+      color: #ffc8c8;
+      margin-top: 1.6rem;
+      margin-bottom: 0.6rem;
+    }
+
+    article ul {
+      color: var(--ink);
+      margin: 0 0 1rem 1.4rem;
+    }
+    article li { margin-bottom: 0.4rem; }
+
+    .callout {
+      border-left: 3px solid var(--accent);
+      background: color-mix(in oklab, var(--card) 92%, black);
+      padding: 0.9rem 1rem;
+      border-radius: 0 10px 10px 0;
+      margin: 1.4rem 0;
+    }
+    .callout p { margin: 0; color: var(--ink); }
+
+    .post-nav {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 2.4rem;
+      flex-wrap: wrap;
+    }
+    .post-nav a {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.6rem 0.9rem;
+      background: rgba(255, 255, 255, 0.03);
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .post-nav a:hover { border-color: var(--accent); transform: translateY(-1px); }
+
+    footer {
+      margin-top: 2.6rem;
+      padding: 1.4rem 0 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="../index.html" class="brand">MLADEN STOJANOVIĆ</a>
+      <nav>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#focus">Games</a>
+        <a href="./index.html">Devlog</a>
+        <a href="../slasher-landing.html">Slasher Manager</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="post-meta">
+      <span class="post-tag">Devlog #01</span>
+      <span class="post-date">July 18, 2026</span>
+    </div>
+
+    <h1>MAIN MENU REVEAL</h1>
+    <p class="post-sub">The first Slasher Manager devlog. A full visual overhaul of the main menu blending VHS horror with hand-drawn ink-and-paper notebook aesthetics.</p>
+
+    <img class="hero-image" src="./assets/2026-07-18-menu-reveal.jpg" alt="Slasher Manager main menu with VHS cover art, masked slasher figure, and scattered ink-and-paper index cards" loading="eager" />
+
+    <article>
+      <p class="lede">Welcome to the first Slasher Manager devlog. This is where I'll share what I'm working on, what shipped, what's broken, and where the design is going.</p>
+
+      <p>This week, the main menu got a complete visual overhaul. The new look blends two visual languages that drove the original mockup: a <strong>VHS horror cover</strong> and a <strong>hand-drawn ink-and-paper notebook</strong>. The result is a single 16:9 screen that feels like an old VHS tape case torn open over a detective's notebook.</p>
+
+      <h2>WHAT YOU'RE LOOKING AT</h2>
+      <ul>
+        <li>The <strong>masked figure</strong> in the center is the slasher — a Myers-style silhouette drawn in marker and ballpoint, with blood splatter added in a separate pass for the visceral hit.</li>
+        <li>The four <strong>index cards</strong> along the bottom (Achievements, Prestige, Stats, Settings) are physically scattered and rotated, like polaroids pinned to a corkboard.</li>
+        <li>The red <strong>MANAGER</strong> lettering at the top is screen-printed in distressed caps — it's the title card of the VHS case.</li>
+        <li>The right side carries the playable tape: Rules, a Continue button, and a slice of yellow duck tape that hints at the in-game upgrade shop.</li>
+        <li>A subtle <strong>VHS scanline overlay</strong> runs across the whole composition for an analog look.</li>
+      </ul>
+
+      <div class="callout">
+        <p><strong>Under the hood:</strong> every card, the masking tape, the background figure are Godot Control nodes — no runtime layout overrides. The VHS effect is a single shader applied to a TextureRect overlay. The whole thing is scene-first.</p>
+      </div>
+
+      <h2>WHAT'S NEXT</h2>
+      <p>The responsive in-game layout — topbar with resources, two-page notebook spread for hunt area and shop — is the second priority. The Steam page goes live as soon as the build is closer to ready.</p>
+
+      <p>Follow along here and on <a href="https://stojanovic.itch.io/" target="_blank" rel="noreferrer" style="color: #f7c0c0;">itch.io</a> for updates. If you have feedback on the menu direction, I'd love to hear it.</p>
+    </article>
+
+    <div class="post-nav">
+      <a href="./index.html">← All devlog posts</a>
+      <a href="../slasher-landing.html">Slasher Manager</a>
+      <a href="../index.html">Portfolio home</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Mladen Stojanović. All rights reserved.</div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
