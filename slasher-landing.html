@@ -281,6 +281,29 @@
       text-align: center;
     }
 
+    .screenshot-tile.coming-soon {
+      position: relative;
+      opacity: 0.55;
+      filter: grayscale(0.3);
+    }
+
+    .screenshot-tile.coming-soon::after {
+      content: "Coming soon";
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(13, 17, 18, 0.55);
+      color: #ffc8c8;
+      font-weight: 800;
+      letter-spacing: 1px;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      border-radius: 12px;
+      pointer-events: none;
+    }
+
     .contact-links { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1rem; }
     .contact-links a {
       color: var(--ink);
@@ -309,6 +332,16 @@
     }
 
     .repo-link:hover { border-color: var(--accent); }
+
+    .coming-soon-pill {
+      color: var(--muted);
+      border: 1px dashed var(--line);
+      border-radius: 10px;
+      padding: 0.62rem 0.88rem;
+      font-weight: 700;
+      font-size: 0.95rem;
+      background: rgba(255, 255, 255, 0.02);
+    }
 
     footer {
       margin-top: 2.6rem;
@@ -425,30 +458,30 @@
           <img src="./assets/screenshots/slasher_screenshot1.png" alt="Slasher Manager main gameplay view with victim panel and resource readout" loading="lazy" />
           <figcaption>Main Gameplay</figcaption>
         </figure>
-        <figure class="screenshot-tile">
+        <figure class="screenshot-tile coming-soon">
           <img src="./assets/screenshots/slasher_screenshot2.png" alt="Slasher Manager upgrade shop with weapons and methods" loading="lazy" />
-          <figcaption>Upgrade Shop</figcaption>
+          <figcaption>Upgrade Shop · Coming soon</figcaption>
         </figure>
-        <figure class="screenshot-tile">
+        <figure class="screenshot-tile coming-soon">
           <img src="./assets/screenshots/slasher_screenshot3.png" alt="Slasher Manager prestige skill tree with four branches" loading="lazy" />
-          <figcaption>Prestige Tree</figcaption>
+          <figcaption>Prestige Tree · Coming soon</figcaption>
         </figure>
-        <figure class="screenshot-tile">
+        <figure class="screenshot-tile coming-soon">
           <img src="./assets/screenshots/slasher_screenshot4.png" alt="Slasher Manager achievements panel" loading="lazy" />
-          <figcaption>Achievements</figcaption>
+          <figcaption>Achievements · Coming soon</figcaption>
         </figure>
-        <figure class="screenshot-tile">
+        <figure class="screenshot-tile coming-soon">
           <img src="./assets/screenshots/slasher_screenshot5.png" alt="Slasher Manager level transition with notebook aesthetic" loading="lazy" />
-          <figcaption>Level Transition</figcaption>
+          <figcaption>Level Transition · Coming soon</figcaption>
         </figure>
       </div>
     </section>
 
     <section id="contact">
       <h2 class="section-title">GET SLASHER MANAGER</h2>
-      <p class="section-copy">Wishlist on Steam to be notified when the game launches. Store link will be added here once the Steam page is live.</p>
+      <p class="section-copy">Slasher Manager is currently in development. A Steam page will be added once the game is closer to launch — for now, follow along on this site and itch.io for updates.</p>
       <div class="contact-links">
-        <a href="https://store.steampowered.com/app/REPLACE_WITH_STEAM_APP_ID" target="_blank" rel="noreferrer">Steam Wishlist (Placeholder)</a>
+        <span class="coming-soon-pill">Steam page — coming soon</span>
         <a href="./slasher-privacy-policy.html">Privacy Policy</a>
         <a href="./slasher-account-deletion.html">Data Deletion</a>
         <a href="./slasher-age-suitability.html">Age Suitability</a>
