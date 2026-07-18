@@ -44,7 +44,6 @@
       "name": "Mladen Stojanović"
     },
     "image": "https://mladenstojanovic.art/devlog/assets/2026-07-18-responsive-ui.jpg",
-    "_image_note": "Replace the URL above with the real path once screenshot is provided",
     "url": "https://mladenstojanovic.art/devlog/2026-07-18-responsive-ui-complete.html",
     "description": "Landscape pivot finalization (0 free-standing Position nodes) and shop density upgrade (ScrollContainer + affordability sort, 6 displayed upgrades).",
     "articleBody": "The in-game UI is now fully responsive and the shop can handle the L5-L9 upgrade pack. Two things shipped in this session — landscape pivot finalization and shop density."
@@ -246,8 +245,7 @@
     <h1>RESPONSIVE UI COMPLETE + SHOP UPGRADE</h1>
     <p class="post-sub">The in-game UI is now fully responsive and the shop can handle the L5-L9 upgrade pack. Two things shipped in one session: landscape pivot finalization and shop density.</p>
 
-    <!-- Hero image: replace assets/2026-07-18-responsive-ui.jpg with real screenshot -->
-    <img class="hero-image" src="https://placehold.co/1200x675/0d1112/b32424?text=Slasher+Manager+Responsive+UI" alt="Slasher Manager responsive in-game UI placeholder — real screenshot pending" loading="eager" />
+    <img class="hero-image" src="./assets/2026-07-18-responsive-ui.jpg" alt="Slasher Manager landscape two-page spread — Lake Camp level 1 in the Godot editor with the responsive UI layout, cream duck-tape top bar, notebook spiral binding, and the empty Upgrades column on the right" loading="eager" />
 
     <article>
       <p class="lede">The notebook layout is now 100% responsive. The shop can hold twice the upgrades and sorts itself by what you can actually afford. Both came out of pre-launch stress-testing for the L5–L9 upgrade pack.</p>
@@ -274,9 +272,8 @@
         <p><strong>Why scroll, not pagination or categories:</strong> this is the standard pattern from Cookie Clicker, Adventure Capitalist, and Egg Inc — same trade-off they made. For an idle clicker where momentum matters, scroll is the right call. Pagination breaks the flow (Next/Prev on every refresh feels clunky) and category tabs add UI complexity for a problem that "show me what I can afford right now" already solves.</p>
       </div>
 
-      <!-- Shop screenshot: replace assets/2026-07-18-shop-scroll.jpg with real screenshot -->
-      <img class="inline-image" src="https://placehold.co/1200x675/0d1112/d96868?text=Shop+Scroll+%2B+Affordability+Sort" alt="Slasher Manager shop ScrollContainer placeholder — real screenshot pending" loading="lazy" />
-      <span class="inline-caption">Shop with affordability sort — affordable upgrades float to the top.</span>
+      <img class="inline-image" src="./assets/2026-07-18-shop-scroll.jpg" alt="Slasher Manager shop ScrollContainer with five upgrade cards (Hockey Mask, Rusty Knife, Leather Gloves, Piano Wire, Bear Trap) sorted by affordability — affordable upgrades float to the top of the panel" loading="lazy" />
+      <span class="inline-caption">Shop with affordability sort — affordable upgrades (Hockey Mask, Rusty Knife) float to the top, more expensive ones (Leather Gloves, Piano Wire, Bear Trap) sit below.</span>
 
       <h2>TOOLING</h2>
       <p>One thing that came out of this session is a small reusable asset: a <strong>godot-ux-ui-master skill</strong> that encodes the responsive layout lessons (anchors vs containers vs position, size flags, common mistakes) for future agents and projects. It includes a <code>scripts/audit_layout.js</code> Node tool that scans a project and reports free-standing Position nodes vs in-container ones, with the right filtering for Container children.</p>
