@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Devlog #03 — All Sub-Menus Live + Audio System Complete — Slasher Manager</title>
+  <meta name="description" content="Third Slasher Manager devlog: 7 sub-menus polished to spec, menu music now loops and updates in real-time, in-game settings gets a dark horror palette, difficulty cards cleaned up." />
+  <link rel="canonical" href="https://mladenstojanovic.art/devlog/2026-07-21-sub-menus-ship.html" />
+  <meta name="theme-color" content="#0d1112" />
+  <meta rel="icon" href="../favicon.ico" type="image/x-icon" />
+  <meta rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png" />
+  <meta rel="icon" href="../favicon-16.png" sizes="16x16" type="image/png" />
+  <link rel="apple-touch-icon" href="../favicon-32.png" />
+  <meta property="og:title" content="Devlog #03 — Slasher Manager All Sub-Menus Live + Audio System Complete" />
+  <meta property="og:description" content="7 sub-menus polished to spec, menu music now loops and updates in real-time, in-game settings gets a dark horror palette." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://mladenstojanovic.art/devlog/2026-07-21-sub-menus-ship.html" />
+  <meta property="og:image" content="https://mladenstojanovic.art/devlog/assets/2026-07-21-editor-and-game.jpg" />
+  <meta property="og:image:width" content="1920" />
+  <meta property="og:image:height" content="1080" />
+  <meta property="og:site_name" content="Mladen Stojanović" />
+  <meta property="article:published_time" content="2026-07-21" />
+  <meta property="article:author" content="Mladen Stojanović" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Devlog #03 — Slasher Manager All Sub-Menus Live + Audio System Complete" />
+  <meta name="twitter:description" content="7 sub-menus polished to spec, menu music now loops and updates in real-time, in-game settings gets a dark horror palette." />
+  <meta name="twitter:image" content="https://mladenstojanovic.art/devlog/assets/2026-07-21-editor-and-game.jpg" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Devlog #03 — All Sub-Menus Live + Audio System Complete",
+    "datePublished": "2026-07-21",
+    "author": {
+      "@type": "Person",
+      "name": "Mladen Stojanović",
+      "url": "https://mladenstojanovic.art"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Mladen Stojanović"
+    },
+    "image": "https://mladenstojanovic.art/devlog/assets/2026-07-21-editor-and-game.jpg",
+    "url": "https://mladenstojanovic.art/devlog/2026-07-21-sub-menus-ship.html",
+    "description": "7 sub-menus polished to spec, menu music now loops and updates in real-time, in-game settings gets a dark horror palette, difficulty cards cleaned up.",
+    "articleBody": "Sub-menu system complete and the audio system finally works the way it was supposed to. 7 sub-menus polished to spec, menu music continuous across navigation, real-time volume updates, in-game settings gets a dark horror palette, difficulty cards text-cleaned up."
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #0d1112;
+      --bg-soft: #161d1f;
+      --ink: #f1ece2;
+      --muted: #b7b0a5;
+      --line: #2e3a3c;
+      --card: #182123;
+      --accent: #b32424;
+      --accent-2: #d96868;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      color: var(--ink);
+      min-height: 100vh;
+      line-height: 1.65;
+      background:
+        radial-gradient(1100px 600px at 85% -10%, rgba(179, 36, 36, 0.16), transparent 58%),
+        linear-gradient(180deg, #0d1112 0%, #15151a 45%, #0d1214 100%);
+      overflow-x: hidden;
+    }
+
+    .container { width: min(820px, 92vw); margin: 0 auto; }
+
+    header {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: color-mix(in oklab, var(--bg) 84%, transparent);
+      backdrop-filter: blur(9px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .nav { min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+
+    .brand {
+      text-decoration: none;
+      color: var(--ink);
+      font-family: "Bebas Neue", sans-serif;
+      letter-spacing: 1px;
+      font-size: 1.5rem;
+    }
+
+    nav { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    nav a { color: var(--muted); text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: color 0.2s ease; }
+    nav a:hover { color: var(--ink); }
+
+    main { padding: 2.4rem 0 4rem; }
+
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.1rem;
+    }
+
+    .post-tag {
+      display: inline-flex;
+      border: 1px solid color-mix(in oklab, var(--accent) 55%, var(--line));
+      background: rgba(179, 36, 36, 0.18);
+      color: #ffc8c8;
+      font-size: 0.75rem;
+      font-weight: 800;
+      border-radius: 999px;
+      padding: 0.28rem 0.62rem;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+
+    .post-date {
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(2.2rem, 6vw, 3.4rem);
+      line-height: 1;
+      letter-spacing: 1px;
+      margin-bottom: 0.6rem;
+    }
+
+    .post-sub {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 65ch;
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-image {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.4);
+      margin-bottom: 2rem;
+    }
+
+    article p { color: var(--ink); margin-bottom: 1rem; font-size: 1.02rem; }
+    article p.lede { font-size: 1.12rem; color: var(--ink); }
+    article h2 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.8px;
+      color: #ffc8c8;
+      margin-top: 1.6rem;
+      margin-bottom: 0.6rem;
+    }
+
+    article ul {
+      color: var(--ink);
+      margin: 0 0 1rem 1.4rem;
+    }
+    article li { margin-bottom: 0.4rem; }
+
+    .callout {
+      border-left: 3px solid var(--accent);
+      background: color-mix(in oklab, var(--card) 92%, black);
+      padding: 0.9rem 1rem;
+      border-radius: 0 10px 10px 0;
+      margin: 1.4rem 0;
+    }
+    .callout p { margin: 0; color: var(--ink); }
+
+    .inline-image {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      margin: 1.2rem 0 0.6rem;
+    }
+    .inline-caption {
+      display: block;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 1rem;
+    }
+
+    .post-nav {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 2.4rem;
+      flex-wrap: wrap;
+    }
+    .post-nav a {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.6rem 0.9rem;
+      background: rgba(255, 255, 255, 0.03);
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .post-nav a:hover { border-color: var(--accent); transform: translateY(-1px); }
+
+    footer {
+      margin-top: 2.6rem;
+      padding: 1.4rem 0 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="../index.html" class="brand">MLADEN STOJANOVIĆ</a>
+      <nav>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#focus">Games</a>
+        <a href="./index.html">Devlog</a>
+        <a href="../slasher-landing.html">Slasher Manager</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="post-meta">
+      <span class="post-tag">Devlog #03</span>
+      <span class="post-date">July 21, 2026</span>
+    </div>
+
+    <h1>ALL SUB-MENUS LIVE + AUDIO SYSTEM COMPLETE</h1>
+    <p class="post-sub">7 sub-menus polished to a shared visual spec, menu music now continuous across navigation and updates in real-time, in-game settings gets a dark horror palette, and the difficulty cards are finally text-free.</p>
+
+    <img class="hero-image" src="./assets/2026-07-21-editor-and-game.jpg" alt="Godot editor on the left showing the main_menu scene tree with the new NewGameButton node, and the running game on the right with the new NEW GAME button visible below CONTINUE on the clean paper texture, against the VHS cover background" loading="eager" />
+
+    <article>
+      <p class="lede">Sub-menu system is complete and the audio system finally works the way it was supposed to. This session is the catch-up work after the responsive UI shipped — the smaller details that made the menus feel like a finished product instead of an early prototype.</p>
+
+      <h2>7 SUB-MENUS, ONE SHARED VISUAL LANGUAGE</h2>
+      <p>Every sub-menu reached the "matches the rest of the family" bar. The previous notebook-paper look on <strong>stats</strong> got swapped for the same VHS cover + scanline overlay as the other menus, because the user-facing feedback was unambiguous: "looks out of place, doesn't match". Same call on the <strong>in-game settings overlay</strong> — the spec said "Ink & Paper" cream + navy, the screen looked like a Microsoft Office dialog, and the fix was a dark sepia paper with a blood-red border that reads "horror notebook page" rather than "admin dialog".</p>
+
+      <p>All seven sub-screens are now spec-compliant: <code>main_menu</code>, <code>continue_run</code>, <code>achievements</code>, <code>new_game</code>, <code>prestige_tree</code>, <code>stats</code>, <code>settings</code>, plus the modal <code>in_game_settings_overlay</code>. Shared foundations across all of them: 1280×720, Patrick Hand / Special Elite / Gloria Hallelujah fonts, sepia palette, the same back-button convention, and the "content priority" rule that decorations never block UI.</p>
+
+      <h2>THE IN-GAME SETTINGS OVERHAUL</h2>
+      <p>The in-game settings overlay was the messiest of the bunch. Two things landed in the same session:</p>
+      <ul>
+        <li><strong>Back-to-menu button at top-left</strong> (per spec rule "Back button is always top-left — even on in-game settings"). Previously the only way out was the X close button, which just resumed gameplay. The <code>← MAIN MENU</code> button saves the run and returns to the main menu.</li>
+        <li><strong>Dark horror palette</strong>: dark sepia paper <code>Color(0.18, 0.13, 0.08)</code> + blood-red border <code>Color(0.55, 0.12, 0.1)</code> + cream ink. The X button stayed as a contrasting blood-red square in the top-right.</li>
+      </ul>
+
+      <p>The save flow had to be explicit: <code>Main.save_current_state()</code> (renamed from <code>_save_current_state</code> to make it public) runs <em>before</em> <code>change_scene_to_file()</code>, otherwise Main is freed before the save can read its state. The music pause/resume is via the "music" group — <code>Main.tscn</code>'s <code>MusicPlayer</code> is in the group, the overlay iterates the group on show/hide. Decoupled from any direct path access.</p>
+
+      <h2>MENU MUSIC NOW LOOPS AND UPDATES IN REAL-TIME</h2>
+      <p>Two related bugs, same root cause: a static music player parented to the wrong node.</p>
+
+      <p><strong>Bug #1 — music cut on every scene change.</strong> <code>MainMenu</code> had its own <code>music_player</code> child node that got freed on every scene transition; the sub-menus had no music at all. Fix: centralized via <code>MenuAudio</code> (a static helper that parents the music player to <code>tree.root</code> so it survives every scene change). Every sub-menu's <code>_ready()</code> now calls <code>MenuAudio.start_menu_music(get_tree())</code>. <code>Main.gd._ready()</code> still calls <code>MenuAudio.stop_menu_music()</code> to silence the menu music when entering gameplay. Net result: music is continuous from Main Menu through Continue Run through New Game through Settings through back to Main Menu. No cuts.</p>
+
+      <p><strong>Bug #2 — the music didn't loop.</strong> This one took three attempts. First I tried forcing <code>stream.loop_mode = AudioStreamWAV.LOOP_FORWARD</code> in code after load — that broke music entirely (user reported "no music anywhere in the game"). Then I tried tracking the <code>.import</code> files via <code>git add -f</code> to bypass the <code>*.import</code> gitignore — that didn't work either. The final answer was the <code>finished</code> signal.</p>
+
+      <div class="callout">
+        <p><strong>Why loop_mode didn't work:</strong> VRAD-compressed WAV streams (which is what every music <code>.wav</code> in this project uses, <code>compress/mode=2</code>) silently ignore the <code>loop_mode</code> property — both the <code>.import</code> setting and the runtime override. This is a Godot 4 quirk. The only reliable loop is to connect to <code>AudioStreamPlayer.finished</code> and call <code>play()</code> from the handler. Applied to <code>MenuAudio._menu_player</code> and <code>Main.gd.music_player</code>. Now both menu music and level music loop indefinitely regardless of compression mode.</p>
+      </div>
+
+      <p>The side-effect fix that came with the loop: <code>MenuAudio.start_menu_music()</code> now also subscribes to <code>AudioSettings.music_volume_changed</code> (with an <code>is_connected</code> guard for repeated scene entries). So moving the music slider in the menu settings panel updates the menu music loudness in real-time — not on the next menu entry, not on the next game start, <em>right now</em>. Previously the listener only ran during gameplay, so menu changes didn't apply until Main.gd took over again.</p>
+
+      <h2>CLEAN DIFFICULTY CARDS</h2>
+      <p>The three difficulty cards on the new-game screen each had their own baked-in <code>difficulty_easy.png</code> / <code>difficulty_normal.png</code> / <code>difficulty_hard.png</code> textures with "20-30 MIN, RELAXED, ROOM TO EXPERIMENT" and similar text rendered into the image. Two problems with that approach: the AI image generators kept putting extra text on the surface despite prompt iterations, and any text change meant a full asset regeneration.</p>
+
+      <p>Fix: generated one clean yellow sticky note (no text), then put the labels in-engine as <code>Label</code> nodes — <code>EASY</code> / <code>NORMAL</code> / <code>HARD</code> in blood-red Patrick Hand 48pt at the top, the time / description in Special Elite 16pt at the bottom, both with autowrap and a pre-wrapped two-line layout that fits the 360×200 card bounds.</p>
+
+      <img class="inline-image" src="./assets/2026-07-21-difficulty-cards.jpg" alt="Three clean yellow sticky note cards in a row — EASY (20-30 min, relaxed, room to experiment), NORMAL (30-45 min, the intended experience), HARD (45-60 min, punishing, no margin for error) — slight hand-pinned tilt, all using the same texture with in-engine text" loading="lazy" />
+      <span class="inline-caption">The three difficulty cards share one clean yellow texture. Title and subtitle text are Label children, in Patrick Hand blood red and Special Elite typewriter. The slight rotation on the left and right cards gives the hand-pinned feel.</span>
+
+      <p>Same pattern was applied to the main menu: the <code>btn_continue_paper.png</code> and <code>btn_newgame_paper.png</code> textures used to have "▶ CONTINUE" / "▶ NEW GAME" baked into the image. Both got cleaned up to a generic paper texture, and the text is now in-engine via Label children. Two buttons, one texture, in-engine text — and any future button text change is a 5-second <code>.tscn</code> edit instead of a 30-minute asset regeneration.</p>
+
+      <h2>SMALLER WINS, INDEXED</h2>
+      <ul>
+        <li><strong>MainActionButton Label enabled.</strong> Was <code>visible=false</code> with no font/color/size overrides — only the paper texture was visible. Enabled, styled Patrick Hand 36pt gold + black 4px outline. Now "▶ CONTINUE" / "▶ NEW GAME" reads clearly.</li>
+        <li><strong>New <code>NewGameButton</code></strong> below the MainActionButton at the right side. Always visible, always routes to the difficulty picker — even if a save exists. So once you've played once, the main menu has both CONTINUE and NEW GAME, side by side.</li>
+        <li><strong>DifficultyContainer re-centered</strong> (anchors 15 → 8, ±560 / ±100) so the three cards sit in the middle of the viewport, not pushed to the bottom.</li>
+        <li><strong>Sub-menus + main menu now use the <code>MenuAudio</code> centralization</strong>, so a single play call at game-start sets up the menu music for the entire session.</li>
+        <li><strong>Stats <code>PageOverlay</code> kept</strong> (the cream "page" surface where the stats list sits) so the numbers stay readable on top of the VHS background.</li>
+      </ul>
+
+      <h2>WHAT'S NEXT</h2>
+      <p>Sub-menu polishing is done. The next workstream is the L5–L9 content pack: 40+ new upgrades themed per level, 50+ achievements, the Prestige skill tree expansion from 7 to 30+ nodes across 4 branches. None of that is blocked on UI or audio anymore — it's content work.</p>
+
+      <p>After that, Steam page setup. The build is closer to launch-ready than ever, but the L5–L9 pack is the difference between "early prototype" and "feature-complete demo". Once that lands, the Steam announcement cycle can start.</p>
+
+      <p>Follow along on <a href="https://stojanovic.itch.io/slasher-manager-horror-idle-clicker" target="_blank" rel="noreferrer" style="color: #f7c0c0;">itch.io</a> and the <a href="./index.html" style="color: #f7c0c0;">devlog index</a>. If you have feedback on the audio or the dark horror UI direction, drop it in the comments.</p>
+    </article>
+
+    <div class="post-nav">
+      <a href="./index.html">← All devlog posts</a>
+      <a href="./2026-07-18-responsive-ui-complete.html">← Devlog #02: Responsive UI + Shop Upgrade</a>
+      <a href="./2026-07-18-main-menu-reveal.html">← Devlog #01: Main Menu Reveal</a>
+      <a href="../slasher-landing.html">Slasher Manager</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Mladen Stojanović. All rights reserved.</div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
