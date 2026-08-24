@@ -69,7 +69,7 @@
       <li><strong>We do not collect personal information</strong> such as your name, email address, phone number, postal address, contacts, photos, microphone, or camera data.</li>
       <li><strong>We do not collect precise or coarse location data</strong>. The Game does not request GPS, network-based, or other location permissions.</li>
       <li><strong>No puzzle boards, solutions, hints, or notes are sent to any server.</strong> What you play stays on your device.</li>
-      <li>Anonymous gameplay analytics and crash diagnostics are enabled by default. You can disable them at any time in the Game's Settings under <strong>Privacy &rarr; Analytics</strong>.</li>
+      <li>Firebase Analytics may be enabled by default where permitted. You can disable it at any time in the Game's Settings under <strong>Privacy &rarr; Analytics</strong>. Where applicable law, regional requirements, or platform rules require prior consent, Analytics remains off until consent is provided. Crashlytics stability diagnostics are a separate system, also controlled in Privacy settings.</li>
       <li>Core puzzle play continues to work with analytics, crash diagnostics, and all ads disabled. Privacy choices never lock you out of any puzzle.</li>
       <li>The Game may show advertisements through Google AdMob. A one-time <strong>Remove Ads</strong> purchase disables those advertisements.</li>
       <li>Meta is used only for install-attribution measurement (whether a download came from one of our ad campaigns). It is not used to track you across other apps or websites.</li>
@@ -82,33 +82,41 @@
     <ul>
       <li>Active puzzle state, bridge placements, undo history for the current session</li>
       <li>Settings, language, theme, audio preferences</li>
-      <li>Tutorial progress and progression through Beginner / Medium / Hard bands</li>
-      <li>Best times per puzzle, No-Hint status, Daily-puzzle history</li>
-      <li>Local statistics: total puzzles solved, hint usage, time played, win streaks</li>
+      <li>Tutorial progress and progression through Beginner / Medium bands</li>
+      <li>Per-puzzle records such as best times, No-Hint solves, and Daily Routes history</li>
+      <li>Local statistics such as puzzles solved, Daily Routes solved, No-Hint solves, best times, and recent solve-time statistics.</li>
     </ul>
     <p>This data is not transmitted off the device unless you explicitly enable a future cloud-save feature (not present in this release).</p>
 
-    <h3>b) Gameplay, Analytics, and Diagnostics (only when enabled)</h3>
-    <p>When analytics are enabled, Firebase Analytics and Firebase Crashlytics may process:</p>
+    <h3>b) Analytics (Firebase Analytics)</h3>
+    <p>Hashi Bridges uses Firebase Analytics to understand app usage, puzzle progression, feature engagement, and overall app performance. Where permitted, analytics collection may be enabled by default and can be disabled through the app's Privacy settings. Where applicable law, regional requirements, or platform rules require prior consent, analytics collection remains disabled until consent is provided.</p>
+    <p>When Analytics is enabled, Firebase Analytics may process:</p>
     <ul>
       <li>Limited gameplay events, such as starting, completing, or abandoning a puzzle, viewing hint steps, opening screens, and changing settings.</li>
       <li>Puzzle identifier, difficulty, content version, hint technique used, hint stage reached, elapsed time bucket, undo count, invalid-action count.</li>
       <li>Device and app information: device model, operating-system version, app version, language, app-instance identifiers, and other technical identifiers used by Firebase services.</li>
       <li>Approximate location: a coarse region derived from a masked IP address by Firebase Analytics for aggregated reporting. The Game does not request or collect GPS or other precise location data.</li>
-      <li>Crash logs: stack traces, relevant app state at the time of the crash, and a Firebase installation UUID used to dedupe and prioritize stability issues.</li>
     </ul>
     <p>We do not set a Firebase user ID. We do not send puzzle boards, solutions, hint copy, notes, or any other player-created puzzle content to Firebase.</p>
+    <p><strong>Separation from advertising and tracking.</strong> Advertising, personalized advertising, Meta advertising measurement, and other tracking-related processing are controlled separately and may require additional consent. Accepting or rejecting ads does not automatically enable or disable Analytics, and Analytics is not used for advertising, marketing, or personalization.</p>
 
-    <h3>c) Advertising (only when enabled)</h3>
+    <h3>c) Diagnostics (Firebase Crashlytics)</h3>
+    <p>Firebase Crashlytics is a separate stability-diagnostics system. It is not used for advertising, marketing, personalization, or tracking, and its consent is independent of advertising consent. When Crashlytics is enabled, it may process:</p>
+    <ul>
+      <li>Crash logs: stack traces, relevant app state at the time of the crash, and a Firebase installation UUID used to dedupe and prioritize stability issues.</li>
+      <li>Device and app metadata that Firebase Crashlytics needs to deliver and group crash reports.</li>
+    </ul>
+
+    <h3>d) Advertising (only when enabled)</h3>
     <p>When ads are enabled, the Game uses Google Mobile Ads (AdMob) to load and display ads at selected non-solving boundaries (between puzzles, after a Result, in free-play interstitials). Google may process information such as the device's advertising identifier, IP address, device and app information, approximate location inferred from the IP, and ad interaction data to provide, measure, secure, and personalize its advertising services. Whether an ad is personalized depends on your device, your Google account, applicable law, and the consent choice you make in the Game's <strong>Privacy Options</strong> screen (managed by Google UMP, see Section 3).</p>
 
-    <h3>d) Install Attribution (Meta)</h3>
+    <h3>e) Install Attribution (Meta)</h3>
     <p>The Game uses Meta's install-attribution tools to measure whether a download came from one of our advertising campaigns on Meta platforms. Meta may process the Android Advertising ID, install referrer information, and campaign or click identifiers. This data is used solely for measuring install sources and is not used by us for cross-app tracking-based advertising or to build a profile of you across other apps or websites.</p>
 
-    <h3>e) In-App Purchase (Remove Ads)</h3>
+    <h3>f) In-App Purchase (Remove Ads)</h3>
     <p>You can purchase <strong>Remove Ads</strong> as a one-time in-app product through Google Play Billing. Google Play processes the transaction and the purchase record. The Game receives only the information needed to verify, restore, and apply the entitlement (purchase state, product identifier, and the receipt validation token). We do not receive or store your payment-card details, billing address, or other payment credentials.</p>
 
-    <h3>f) Support Communications</h3>
+    <h3>g) Support Communications</h3>
     <p>If you contact us by email, we receive the information you choose to include, such as your email address and the message content. We use it only to respond to your request.</p>
 
     <h2>2. How We Use Data</h2>
@@ -137,7 +145,8 @@
     <ul>
       <li><strong>Privacy Policy</strong> &mdash; opens this page.</li>
       <li><strong>Privacy Options</strong> &mdash; opens the Google UMP consent flow so you can revisit or change your EEA / UK / Switzerland ad-consent choice at any time. The Game does not hide this control when UMP reports that it is required.</li>
-      <li><strong>Analytics</strong> &mdash; shows the current state of analytics and crash-diagnostics collection. Turning analytics off stops future Firebase Analytics and Crashlytics events from being sent from the Game. Some aggregated, non-identifying diagnostic data may still be produced by the underlying platform.</li>
+      <li><strong>Analytics</strong> &mdash; shows the current state of Firebase Analytics collection and lets you turn product analytics on or off. Analytics is enabled by default where permitted; where prior consent is required by law or platform rules, Analytics remains off until consent is provided. Analytics consent is separate from advertising consent and from Crashlytics diagnostics consent.</li>
+      <li><strong>Diagnostics</strong> &mdash; shows the current state of Firebase Crashlytics stability-diagnostics collection and lets you turn it on or off. Diagnostics consent is separate from advertising consent and from Analytics consent.</li>
       <li><strong>Ad personalization</strong> &mdash; surfaces the current ad-consent choice and lets you open Privacy Options to change it.</li>
       <li><strong>Reset local progress</strong> &mdash; clears puzzle progress, statistics, and settings from your device. This is a device-side reset, not a request to delete vendor-side data; vendor-side controls are listed below.</li>
     </ul>
@@ -148,7 +157,7 @@
       <li>Use platform-level controls to manage Google ad personalization and Firebase data.</li>
       <li>Contact us for any other privacy question or request (see Section 12).</li>
     </ul>
-    <p>Core puzzle play, including the First-Time User Experience, free play, the Daily puzzle, the Smart Hint system, the Result screen, and local Statistics, continues to work with analytics, crash diagnostics, and ads disabled. Privacy choices never remove or lock any puzzle.</p>
+    <p>Core puzzle play, including the First-Time User Experience, free play, the Daily Route, the Smart Hint system, the Result screen, and local Statistics, continues to work with analytics, crash diagnostics, and ads disabled. Privacy choices never remove or lock any puzzle.</p>
 
     <h2>5. Data Retention and Deletion</h2>
     <ul>
