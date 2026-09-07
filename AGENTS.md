@@ -14,6 +14,20 @@ App pages: `[app-name]-[type].html` (types: `landing`, `privacy-policy`, `accoun
 - `CNAME`: Points to `mladenstojanovic.art`
 - `sitemap.xml`, `robots.txt`, `manifest.json`: SEO files
 
+## Image Convention (established 2026-09-07)
+- Ship WebP alongside source PNG: `[name]-480w.webp` (480px wide, q75) next to original.
+- Reference WebP in `<img>` with explicit `width`/`height` (prevents layout shift).
+- OG image is `assets/images/og-image.jpg` (~210KB). Do NOT reintroduce `og-image.png` (was 1.3MB).
+- Homepage cards use unified `.project-cover` (240px, `object-position: center 30%`) — image + text in ONE card, no separate media-grid layer.
+
+## Site Status (2026-09-07, commit `1ae6e68`)
+- `sitemap.xml` + footer links synced; `/` lastmod 2026-09-07. Checklist applies to every new page.
+- New: `suguru-tectonic-landing.html` (MobileApplication + FAQPage schema), `404.html`, PWA icons `assets/icons/icon-192/512.png`.
+- FAQ sections + FAQPage schema live on: roomli, yurui-landing, suguru-tectonic-landing.
+- Orphan 55MB videos (`gamepla_project.mp4`, `web_video_square.mp4`) deleted — not referenced by any page.
+- Homepage ~15MB → ~240KB; landings saved ~50MB total via WebP.
+- Pending: custom cover graphics for project cards (Die Laughing, Rule Rings, Slasher, Suguru, Roomli, Yurui, VR Lab) — current 240px crops are placeholders.
+
 ## Die Laughing landing — known follow-ups
 Captured 2026-06-09 after the production-launch + mobile-polish pass. Not urgent, but worth doing when there's bandwidth.
 
