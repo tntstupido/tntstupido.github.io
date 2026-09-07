@@ -16,23 +16,24 @@
   <meta property="og:description" content="Build one habit at a time. No streaks, no guilt, no pressure. Just gentle, steady progress." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://mladenstojanovic.art/yurui-landing.html" />
-  <meta property="og:image" content="https://mladenstojanovic.art/assets/images/og-image.png" />
+  <meta property="og:image" content="https://mladenstojanovic.art/assets/images/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:site_name" content="Mladen Stojanović" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Yurui — Gentle Habit Tracker" />
   <meta name="twitter:description" content="One habit at a time, no streak shame, calm and steady habit building." />
-  <meta name="twitter:image" content="https://mladenstojanovic.art/assets/images/og-image.png" />
+  <meta name="twitter:image" content="https://mladenstojanovic.art/assets/images/og-image.jpg" />
   <meta name="twitter:image:alt" content="Yurui gentle habit tracker" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "MobileApplication",
     "name": "Yurui",
-    "applicationCategory": "ProductivityApplication",
-    "operatingSystem": "iOS, Android",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": ["iOS", "Android"],
     "description": "A gentle habit tracker focused on one habit at a time with no streak pressure.",
+    "url": "https://mladenstojanovic.art/yurui-landing.html",
     "offers": {
       "@type": "Offer",
       "price": "0",
@@ -43,6 +44,38 @@
       "name": "Mladen Stojanović",
       "url": "https://mladenstojanovic.art"
     }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Yurui?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yurui is a gentle habit tracker for iOS and Android. It focuses on one active habit at a time with a completion-rate mindset — no streak shame pressure."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is Yurui different from streak-based trackers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Instead of punishing missed days with broken streaks, Yurui tracks your completion rate over time. Missing a day lowers the rate slightly instead of resetting everything to zero."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Yurui free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, Yurui is free with optional premium themes via a one-time purchase."
+        }
+      }
+    ]
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -359,6 +392,16 @@
 
     .repo-link:hover { border-color: var(--accent); }
 
+    .faq { display: grid; gap: 0.7rem; margin-top: 1rem; }
+    .faq details {
+      background: color-mix(in oklab, var(--card) 92%, black);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.8rem 1rem;
+    }
+    .faq summary { cursor: pointer; font-weight: 800; color: #d9ecd9; }
+    .faq p { color: var(--muted); font-size: 0.95rem; margin-top: 0.45rem; }
+
     footer {
       margin-top: 2.6rem;
       padding: 1.4rem 0 2rem;
@@ -435,7 +478,7 @@
 
       <aside class="preview reveal d2" aria-label="Yurui app preview">
         <div class="preview-art">
-          <img class="preview-image" src="./assets/yurui/yurui-screen1.png" alt="Yurui home screen with gentle habit check-in" loading="eager" />
+          <img width="480" height="852" class="preview-image" src="./assets/yurui/yurui-screen1-480w.webp" alt="Yurui home screen with gentle habit check-in" loading="eager" />
           <span class="preview-note">Gentle Habit</span>
         </div>
       </aside>
@@ -487,25 +530,43 @@
       <p class="section-copy">A quick look at Yurui in action.</p>
       <div class="screenshots">
         <figure class="screenshot-tile">
-          <img src="./assets/yurui/yurui-screen1.png" alt="Yurui home habit check-in" loading="lazy" />
+          <img width="480" height="852" src="./assets/yurui/yurui-screen1-480w.webp" alt="Yurui home habit check-in" loading="lazy" />
           <figcaption>Home</figcaption>
         </figure>
         <figure class="screenshot-tile">
-          <img src="./assets/yurui/yurui-screen2.png" alt="Yurui progress and completion view" loading="lazy" />
+          <img width="480" height="852" src="./assets/yurui/yurui-screen2-480w.webp" alt="Yurui progress and completion view" loading="lazy" />
           <figcaption>Progress</figcaption>
         </figure>
         <figure class="screenshot-tile">
-          <img src="./assets/yurui/yurui-screen3.png" alt="Yurui gentle reminder settings" loading="lazy" />
+          <img width="480" height="852" src="./assets/yurui/yurui-screen3-480w.webp" alt="Yurui gentle reminder settings" loading="lazy" />
           <figcaption>Reminders</figcaption>
         </figure>
         <figure class="screenshot-tile">
-          <img src="./assets/yurui/yurui-screen4.png" alt="Yurui theme and personalization" loading="lazy" />
+          <img width="480" height="852" src="./assets/yurui/yurui-screen4-480w.webp" alt="Yurui theme and personalization" loading="lazy" />
           <figcaption>Themes</figcaption>
         </figure>
         <figure class="screenshot-tile">
-          <img src="./assets/yurui/yurui-screen5.png" alt="Yurui share card example" loading="lazy" />
+          <img width="480" height="852" src="./assets/yurui/yurui-screen5-480w.webp" alt="Yurui share card example" loading="lazy" />
           <figcaption>Share Cards</figcaption>
         </figure>
+      </div>
+    </section>
+
+    <section id="faq">
+      <h2 class="section-title">FAQ</h2>
+      <div class="faq">
+        <details>
+          <summary>What is Yurui?</summary>
+          <p>Yurui is a gentle habit tracker for iOS and Android — one active habit at a time, no streak shame pressure.</p>
+        </details>
+        <details>
+          <summary>How is Yurui different from streak-based trackers?</summary>
+          <p>Missing a day lowers your completion rate slightly instead of resetting a streak to zero. Progress feels forgiving, not punishing.</p>
+        </details>
+        <details>
+          <summary>Is Yurui free?</summary>
+          <p>Yes, Yurui is free with optional premium themes via a one-time purchase.</p>
+        </details>
       </div>
     </section>
 

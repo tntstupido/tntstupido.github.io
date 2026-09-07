@@ -19,23 +19,24 @@
   <meta property="og:description" content="Roomli — shared home organizer app for couples, families, and roommates. Manage shopping lists, chores, bills, and expenses together on iOS and Android." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://mladenstojanovic.art/roomli.html" />
-  <meta property="og:image" content="https://mladenstojanovic.art/assets/images/og-image.png" />
+  <meta property="og:image" content="https://mladenstojanovic.art/assets/images/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:site_name" content="Mladen Stojanović" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Roomli — One App for Shared Home Life" />
   <meta name="twitter:description" content="Roomli — shared home organizer app for couples, families, and roommates. Manage shopping lists, chores, bills, and expenses together on iOS and Android." />
-  <meta name="twitter:image" content="https://mladenstojanovic.art/assets/images/og-image.png" />
+  <meta name="twitter:image" content="https://mladenstojanovic.art/assets/images/og-image.jpg" />
   <meta name="twitter:image:alt" content="Roomli — shared home organizer app for couples, families, and roommates" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Roomli",
-    "applicationCategory": "ProductivityApplication",
-    "operatingSystem": "iOS, Android",
+    "applicationCategory": "LifestyleApplication",
+    "operatingSystem": ["iOS", "Android"],
     "description": "Roomli helps couples, families, and roommates manage shopping, chores, bills, and everyday household tasks in one shared place.",
+    "url": "https://mladenstojanovic.art/roomli.html",
     "offers": {
       "@type": "Offer",
       "price": "0",
@@ -46,6 +47,46 @@
       "name": "Mladen Stojanović",
       "url": "https://mladenstojanovic.art"
     }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Roomli?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Roomli is a shared home organizer app for couples, families, and roommates. It keeps shopping lists, chores, bills, and expenses in one shared place on iOS and Android."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Roomli free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Roomli is free to use with light ads."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does household sharing work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Create a shared household and invite members. Shopping lists, tasks, bills, and expenses sync in real time across all devices via Supabase."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which platforms does Roomli support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Roomli is built with Flutter and runs on both iOS and Android from a single codebase."
+        }
+      }
+    ]
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -527,6 +568,16 @@
       border-color: var(--accent);
     }
 
+    .faq { display: grid; gap: 0.7rem; margin-top: 1rem; }
+    .faq details {
+      background: color-mix(in oklab, var(--card) 92%, black);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.8rem 1rem;
+    }
+    .faq summary { cursor: pointer; font-weight: 800; color: #ffd6c3; }
+    .faq p { color: var(--muted); font-size: 0.95rem; margin-top: 0.45rem; }
+
     footer {
       margin-top: 2.6rem;
       padding: 1.4rem 0 2rem;
@@ -633,7 +684,7 @@
 
       <aside class="preview reveal d2" aria-label="Roomli app preview">
         <div class="preview-art">
-          <img class="preview-image" src="./assets/roomli/shopping-list-screenshot1.png" alt="Roomli home dashboard showing open tasks, bills due, shopping list, and expenses" loading="eager" />
+          <img width="480" height="853" class="preview-image" src="./assets/roomli/shopping-list-screenshot1-480w.webp" alt="Roomli home dashboard showing open tasks, bills due, shopping list, and expenses" loading="eager" />
           <span class="preview-note">Shared Home</span>
         </div>
       </aside>
@@ -689,23 +740,23 @@
       </p>
       <div class="screenshots">
         <figure class="screenshot-tile">
-          <img src="./assets/roomli/shopping-list-screenshot1.png" alt="Roomli home dashboard showing open tasks, bills due, shopping list, and expenses" loading="lazy" />
+          <img width="480" height="853" src="./assets/roomli/shopping-list-screenshot1-480w.webp" alt="Roomli home dashboard showing open tasks, bills due, shopping list, and expenses" loading="lazy" />
           <figcaption>Home Dashboard</figcaption>
         </figure>
         <figure class="screenshot-tile">
-          <img src="./assets/images/roomli-screen2a.png" alt="Roomli shared shopping list with items and quantities" loading="lazy" />
+          <img width="480" height="853" src="./assets/images/roomli-screen2a-480w.webp" alt="Roomli shared shopping list with items and quantities" loading="lazy" />
           <figcaption>Shopping List</figcaption>
         </figure>
         <figure class="screenshot-tile">
-          <img src="./assets/roomli/tasks-chores-screenshot3.png" alt="Roomli tasks and chores assignment screen" loading="lazy" />
+          <img width="480" height="853" src="./assets/roomli/tasks-chores-screenshot3-480w.webp" alt="Roomli tasks and chores assignment screen" loading="lazy" />
           <figcaption>Tasks & Chores</figcaption>
         </figure>
         <figure class="screenshot-tile">
-          <img src="./assets/roomli/bills-screenshot4.png" alt="Roomli bills tracking screen" loading="lazy" />
+          <img width="480" height="853" src="./assets/roomli/bills-screenshot4-480w.webp" alt="Roomli bills tracking screen" loading="lazy" />
           <figcaption>Bills</figcaption>
         </figure>
         <figure class="screenshot-tile">
-          <img src="./assets/roomli/expenses-screenshot5.png" alt="Roomli shared expenses tracking screen" loading="lazy" />
+          <img width="480" height="853" src="./assets/roomli/expenses-screenshot5-480w.webp" alt="Roomli shared expenses tracking screen" loading="lazy" />
           <figcaption>Expenses</figcaption>
         </figure>
       </div>
@@ -729,6 +780,28 @@
           <h3>Supabase</h3>
           <p>Real-time database and auth for instant sync across all household members.</p>
         </article>
+      </div>
+    </section>
+
+    <section id="faq">
+      <h2 class="section-title">FAQ</h2>
+      <div class="faq">
+        <details>
+          <summary>What is Roomli?</summary>
+          <p>Roomli is a shared home organizer app for couples, families, and roommates — shopping lists, chores, bills, and expenses in one shared place.</p>
+        </details>
+        <details>
+          <summary>Is Roomli free?</summary>
+          <p>Yes. Roomli is free to use with light ads.</p>
+        </details>
+        <details>
+          <summary>How does household sharing work?</summary>
+          <p>Create a shared household and invite members. Everything syncs in real time across all devices.</p>
+        </details>
+        <details>
+          <summary>Which platforms are supported?</summary>
+          <p>Roomli runs on both iOS and Android, built with Flutter from a single codebase.</p>
+        </details>
       </div>
     </section>
 

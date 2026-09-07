@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Suguru Tectonic — Daily Logic Puzzle for Android</title>
+  <meta name="description" content="Suguru Tectonic is a calm daily logic puzzle for Android built around irregular regions and adjacency rules — with Smart Hint explanations, notes, and dark mode." />
+  <link rel="canonical" href="https://mladenstojanovic.art/suguru-tectonic-landing.html" />
+  <meta name="theme-color" content="#0d1112" />
+  <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="./favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="./favicon-16.png" sizes="16x16" type="image/png" />
+  <link rel="apple-touch-icon" href="./favicon-32.png" />
+  <link rel="manifest" href="./manifest.json" />
+  <meta property="og:title" content="Suguru Tectonic — Daily Logic Puzzle for Android" />
+  <meta property="og:description" content="Readable region rules, deliberate deduction, and hints that explain the reasoning — a calm daily puzzle." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mladenstojanovic.art/suguru-tectonic-landing.html" />
+  <meta property="og:image" content="https://mladenstojanovic.art/assets/images/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Mladen Stojanović" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Suguru Tectonic — Daily Logic Puzzle for Android" />
+  <meta name="twitter:description" content="Every move readable and explainable. Smart Hints, notes, dark mode, and a daily puzzle." />
+  <meta name="twitter:image" content="https://mladenstojanovic.art/assets/images/og-image.jpg" />
+  <meta name="twitter:image:alt" content="Suguru Tectonic logic puzzle" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "Suguru Tectonic",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "Android",
+    "description": "A calm logic puzzle built around irregular regions, adjacency rules, and deliberate deduction. Smart Hint explanations, notes, dark mode, and a daily puzzle.",
+    "url": "https://mladenstojanovic.art/suguru-tectonic-landing.html",
+    "author": {
+      "@type": "Person",
+      "name": "Mladen Stojanović",
+      "url": "https://mladenstojanovic.art"
+    },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Suguru Tectonic?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Suguru Tectonic is a calm logic puzzle for Android built around irregular regions and adjacency rules. Fill each region so no equal numbers touch — every move is designed to be readable and explainable."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do Smart Hints work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Instead of just revealing an answer, Smart Hints explain the reasoning behind a move step by step, so you learn the deduction technique and can apply it yourself."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Suguru Tectonic free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The game is free with interstitial ads at non-solving boundaries. A one-time Remove Ads purchase disables them permanently."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Suguru Tectonic require an account?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. There is no account or sign-in. Puzzle progress, notes, settings, and statistics are stored locally on your device."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which platforms are supported?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Suguru Tectonic is available on Android via Google Play."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0d1112;
+      --bg-soft: #161d1f;
+      --ink: #f1ece2;
+      --muted: #b7b0a5;
+      --line: #2e3a3c;
+      --card: #182123;
+      --accent: #df6b39;
+      --accent-2: #f4c5ad;
+      --shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      color: var(--ink);
+      min-height: 100vh;
+      line-height: 1.55;
+      background:
+        radial-gradient(1100px 600px at 85% -10%, rgba(223, 107, 57, 0.17), transparent 58%),
+        radial-gradient(900px 500px at 0% 20%, rgba(244, 197, 173, 0.1), transparent 50%),
+        linear-gradient(180deg, #0d1112 0%, #101618 45%, #0d1214 100%);
+      overflow-x: hidden;
+    }
+
+    .texture {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.08;
+      background-image:
+        radial-gradient(circle at 2px 2px, #ffffff 1px, transparent 0),
+        radial-gradient(circle at 1px 1px, #ffffff 1px, transparent 0);
+      background-size: 4px 4px, 3px 3px;
+      mix-blend-mode: soft-light;
+      z-index: -1;
+    }
+
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: color-mix(in oklab, var(--bg) 84%, transparent);
+      backdrop-filter: blur(9px);
+    }
+
+    .nav { min-height: 74px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+
+    .brand {
+      text-decoration: none;
+      color: var(--ink);
+      font-family: "Bebas Neue", sans-serif;
+      letter-spacing: 1px;
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    nav { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    nav a { color: var(--muted); text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: color 0.2s ease; }
+    nav a:hover { color: var(--ink); }
+
+    main { padding: 3.2rem 0 4rem; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1.2rem;
+      align-items: center;
+      margin-bottom: 2.4rem;
+    }
+
+    .kicker {
+      display: inline-flex;
+      border: 1px solid color-mix(in oklab, var(--accent) 55%, var(--line));
+      background: rgba(223, 107, 57, 0.14);
+      color: #ffd6c3;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 0.35rem 0.72rem;
+      margin-bottom: 0.95rem;
+      letter-spacing: 0.2px;
+    }
+
+    h1 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(2.4rem, 7vw, 5.3rem);
+      line-height: 0.95;
+      letter-spacing: 1px;
+      margin-bottom: 0.9rem;
+      text-wrap: balance;
+    }
+
+    .hero p { color: var(--muted); max-width: 62ch; margin-bottom: 1.35rem; font-size: 1.04rem; }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 1rem; }
+
+    .btn {
+      border: 1px solid var(--line);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.95rem;
+      border-radius: 10px;
+      padding: 0.72rem 1rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn.primary {
+      color: #fdf8f2;
+      background: linear-gradient(135deg, #ad4f2a, #df6b39);
+      border-color: #ef8b64;
+      box-shadow: 0 9px 22px rgba(223, 107, 57, 0.28);
+    }
+
+    .btn.ghost { color: var(--ink); background: rgba(255, 255, 255, 0.02); }
+
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+    .hero-tags span {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #e9d1c5;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.28rem 0.58rem;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .preview {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      justify-self: end;
+      width: min(100%, 410px);
+    }
+
+    .preview-art { position: relative; aspect-ratio: 9 / 16; background: #0e1315; isolation: isolate; }
+
+    .preview-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    .preview-note {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      font-size: 0.75rem;
+      letter-spacing: 0.8px;
+      font-weight: 800;
+      color: #11181a;
+      background: rgba(241, 236, 226, 0.9);
+      border-radius: 7px;
+      padding: 0.3rem 0.5rem;
+      text-transform: uppercase;
+    }
+
+    section { margin-top: 2.3rem; }
+    .section-title {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(1.9rem, 5.2vw, 2.8rem);
+      letter-spacing: 0.7px;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-copy { color: var(--muted); max-width: 74ch; margin-bottom: 1rem; }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    .feature {
+      background: color-mix(in oklab, var(--card) 92%, black);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1rem;
+      box-shadow: var(--shadow);
+    }
+
+    .feature h3 { color: #ffd6c3; margin-bottom: 0.35rem; font-size: 1rem; }
+    .feature p { color: var(--muted); font-size: 0.95rem; }
+
+    .screenshots {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin-top: 0.9rem;
+    }
+
+    .screenshot-tile {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.02);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .screenshot-tile:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .screenshot-tile img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .screenshot-tile figcaption {
+      padding: 0.5rem 0.6rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .faq { display: grid; gap: 0.7rem; margin-top: 1rem; }
+    .faq details {
+      background: color-mix(in oklab, var(--card) 92%, black);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.8rem 1rem;
+    }
+    .faq summary { cursor: pointer; font-weight: 800; color: #f4c5ad; }
+    .faq p { color: var(--muted); font-size: 0.95rem; margin-top: 0.45rem; }
+
+    .contact-links { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1rem; }
+    .contact-links a {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.62rem 0.88rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .contact-links a:hover { transform: translateY(-2px); border-color: var(--accent); }
+
+    .repo-link {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 0.7rem;
+      color: #f3e4d7;
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.35rem 0.6rem;
+      background: rgba(255, 255, 255, 0.03);
+      transition: border-color 0.2s ease;
+    }
+
+    .repo-link:hover { border-color: var(--accent); }
+
+    footer {
+      margin-top: 2.6rem;
+      padding: 1.4rem 0 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .reveal { opacity: 0; transform: translateY(20px); animation: rise 0.7s ease forwards; }
+    .reveal.d2 { animation-delay: 0.1s; }
+    .reveal.d3 { animation-delay: 0.2s; }
+    @keyframes rise { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; }
+      .screenshots, .features { grid-template-columns: 1fr; }
+      main { padding-top: 2.3rem; }
+      .preview { justify-self: center; width: min(100%, 380px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="texture" aria-hidden="true"></div>
+
+  <header>
+    <div class="container nav">
+      <a href="./index.html#top" class="brand">MLADEN STOJANOVIĆ</a>
+      <nav>
+        <a href="./index.html#games">Games</a>
+        <a href="./index.html#apps">Apps</a>
+        <a href="./index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="container">
+    <section class="hero">
+      <div>
+        <span class="kicker reveal">Daily Logic Puzzle · Android</span>
+        <h1 class="reveal d2">EVERY MOVE, EXPLAINABLE</h1>
+        <p class="reveal d3">
+          Suguru Tectonic is a calm logic puzzle built around irregular regions and adjacency rules.
+          Fill each region so no equal numbers touch — with Smart Hints that teach the reasoning,
+          not just the answer.
+        </p>
+        <div class="hero-actions reveal d3">
+          <a href="https://play.google.com/store/search?q=Suguru%20Tectonic%20Mladen%20Stojanovic&c=apps" class="btn primary" target="_blank" rel="noopener noreferrer">Get it on Google Play</a>
+          <a href="#screenshots" class="btn ghost">Screenshots</a>
+        </div>
+        <div class="hero-tags reveal d3">
+          <span>Irregular regions</span>
+          <span>Smart Hints</span>
+          <span>Daily puzzle</span>
+          <span>Dark mode</span>
+        </div>
+      </div>
+
+      <aside class="preview reveal d2" aria-label="Suguru Tectonic app preview">
+        <div class="preview-art">
+          <img class="preview-image" src="./assets/suguru/suguru-core-gameplay-480w.webp" alt="Suguru Tectonic irregular-region logic puzzle gameplay" loading="eager" fetchpriority="high" width="480" height="853" />
+          <span class="preview-note">Suguru Tectonic</span>
+        </div>
+      </aside>
+    </section>
+
+    <section id="about">
+      <h2 class="section-title">WHAT IS SUGURU TECTONIC?</h2>
+      <p class="section-copy">
+        Suguru (also called Tectonics) is a number-placement puzzle: each irregular region must contain
+        every digit exactly once, and equal numbers may never touch — not even diagonally.
+      </p>
+      <p class="section-copy">
+        Suguru Tectonic is built for deliberate, focused solving. No timer pressure, no streak guilt —
+        just readable boards, an interactive tutorial, and a hint system that explains <em>why</em>
+        a move is correct before it shows you <em>what</em> it is.
+      </p>
+    </section>
+
+    <section id="features">
+      <h2 class="section-title">FEATURES</h2>
+      <p class="section-copy">Simple to read, deep to solve.</p>
+      <div class="features">
+        <article class="feature">
+          <h3>Smart Hint Explanations</h3>
+          <p>Hints walk through the deduction step by step — place 5 here because the region already contains every other value — so you learn the technique.</p>
+        </article>
+        <article class="feature">
+          <h3>Daily Puzzle</h3>
+          <p>A fresh shared puzzle every day, built for a short focused session and steady difficulty progression.</p>
+        </article>
+        <article class="feature">
+          <h3>Interactive Tutorial</h3>
+          <p>Learn region rules and adjacency constraints by playing, not by reading a manual.</p>
+        </article>
+        <article class="feature">
+          <h3>Notes, Undo &amp; Erase</h3>
+          <p>Candidate notes, full undo history, and erase support longer solving sessions without fear of mistakes.</p>
+        </article>
+        <article class="feature">
+          <h3>Dark Mode</h3>
+          <p>A dedicated dark board theme for evening solving and low-light focus.</p>
+        </article>
+        <article class="feature">
+          <h3>No Account Needed</h3>
+          <p>No sign-in. Progress, notes, settings, and statistics stay locally on your device.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="screenshots">
+      <h2 class="section-title">SCREENSHOTS</h2>
+      <p class="section-copy">Suguru Tectonic in its current playable build.</p>
+      <div class="screenshots">
+        <figure class="screenshot-tile">
+          <img src="./assets/suguru/suguru-core-gameplay-480w.webp" alt="Suguru Tectonic core puzzle gameplay with irregular regions" loading="lazy" width="480" height="853" />
+          <figcaption>Core Puzzle</figcaption>
+        </figure>
+        <figure class="screenshot-tile">
+          <img src="./assets/suguru/suguru-smart-hint-480w.webp" alt="Suguru Tectonic Smart Hint explaining the reasoning behind a move" loading="lazy" width="480" height="853" />
+          <figcaption>Smart Hint</figcaption>
+        </figure>
+        <figure class="screenshot-tile">
+          <img src="./assets/suguru/suguru-notes-dark-480w.webp" alt="Suguru Tectonic dark mode puzzle with candidate notes" loading="lazy" width="480" height="853" />
+          <figcaption>Dark Mode + Notes</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="faq">
+      <h2 class="section-title">FAQ</h2>
+      <div class="faq">
+        <details>
+          <summary>What is Suguru Tectonic?</summary>
+          <p>A calm logic puzzle for Android built around irregular regions and adjacency rules. Fill each region so no equal numbers touch — every move readable and explainable.</p>
+        </details>
+        <details>
+          <summary>How do Smart Hints work?</summary>
+          <p>Instead of just revealing an answer, Smart Hints explain the reasoning step by step, so you learn the deduction technique and can apply it yourself.</p>
+        </details>
+        <details>
+          <summary>Is Suguru Tectonic free?</summary>
+          <p>Yes. The game is free with interstitial ads at non-solving boundaries. A one-time Remove Ads purchase disables them permanently.</p>
+        </details>
+        <details>
+          <summary>Does it require an account?</summary>
+          <p>No. There is no account or sign-in. Progress, notes, settings, and statistics are stored locally on your device.</p>
+        </details>
+        <details>
+          <summary>Which platforms are supported?</summary>
+          <p>Suguru Tectonic is available on Android via Google Play.</p>
+        </details>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2 class="section-title">GET SUGURU TECTONIC</h2>
+      <p class="section-copy">Free on Android with an optional one-time Remove Ads purchase.</p>
+      <div class="contact-links">
+        <a href="https://play.google.com/store/search?q=Suguru%20Tectonic%20Mladen%20Stojanovic&c=apps" target="_blank" rel="noopener noreferrer">Google Play</a>
+        <a href="./suguru-tectonic-privacy-policy.html">Privacy Policy</a>
+        <a href="./index.html#games">Back to Portfolio</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Mladen Stojanović. All rights reserved. · <a href="./suguru-tectonic-privacy-policy.html" class="repo-link">Suguru Tectonic Privacy Policy</a> · <a href="./index.html" class="repo-link">Portfolio Home</a></div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
