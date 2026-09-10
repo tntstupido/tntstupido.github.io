@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Devlog #05 — Late Mourner: A Character That Arrives Too Late — Die Laughing</title>
+  <meta name="description" content="A look at building the Late Mourner enemy for Die Laughing: a four-frame character sheet, readable movement, and the small details that give an early-horde enemy its identity." />
+  <link rel="canonical" href="https://mladenstojanovic.art/devlog/2026-09-10-late-mourner-character-sheet.html" />
+  <meta name="theme-color" content="#0d1112" />
+  <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="../favicon-16.png" sizes="16x16" type="image/png" />
+  <link rel="apple-touch-icon" href="../favicon-32.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <meta property="og:title" content="Devlog #05 — Late Mourner: A Character That Arrives Too Late" />
+  <meta property="og:description" content="A four-frame character sheet for one of Die Laughing's early No Exit enemies — from silhouette and movement to the final attack pose." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://mladenstojanovic.art/devlog/2026-09-10-late-mourner-character-sheet.html" />
+  <meta property="og:image" content="https://mladenstojanovic.art/devlog/assets/2026-09-10-late-mourner-sprite-sheet.png" />
+  <meta property="og:image:width" content="1920" />
+  <meta property="og:image:height" content="1200" />
+  <meta property="og:site_name" content="Mladen Stojanović" />
+  <meta property="article:published_time" content="2026-09-10" />
+  <meta property="article:author" content="Mladen Stojanović" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Devlog #05 — Late Mourner: A Character That Arrives Too Late" />
+  <meta name="twitter:description" content="Building a readable four-frame enemy sheet for Die Laughing's Late Mourner." />
+  <meta name="twitter:image" content="https://mladenstojanovic.art/devlog/assets/2026-09-10-late-mourner-sprite-sheet.png" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Devlog #05 — Late Mourner: A Character That Arrives Too Late",
+    "datePublished": "2026-09-10",
+    "author": { "@type": "Person", "name": "Mladen Stojanović" },
+    "image": "https://mladenstojanovic.art/devlog/assets/2026-09-10-late-mourner-sprite-sheet.png",
+    "url": "https://mladenstojanovic.art/devlog/2026-09-10-late-mourner-character-sheet.html",
+    "description": "A look at building the Late Mourner enemy for Die Laughing: a four-frame character sheet, readable movement, and the small details that give an early-horde enemy its identity.",
+    "articleBody": "Late Mourner is one of the early No Exit enemies in Die Laughing. This devlog follows the character from silhouette to a four-frame sheet: idle, two movement poses, and attack. The goal is a grotesque, readable enemy that keeps its personality when surrounded by a mobile horde, while remaining lightweight and predictable in-game."
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #0d1112;
+      --ink: #f1ece2;
+      --muted: #b7b0a5;
+      --line: #2e3a3c;
+      --card: #182123;
+      --accent: #b32424;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      color: var(--ink);
+      min-height: 100vh;
+      line-height: 1.65;
+      background:
+        radial-gradient(1100px 600px at 85% -10%, rgba(179, 36, 36, 0.16), transparent 58%),
+        linear-gradient(180deg, #0d1112 0%, #15151a 45%, #0d1214 100%);
+      overflow-x: hidden;
+    }
+
+    .container { width: min(820px, 92vw); margin: 0 auto; }
+
+    header {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: color-mix(in oklab, var(--bg) 84%, transparent);
+      backdrop-filter: blur(9px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .nav { min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .brand { text-decoration: none; color: var(--ink); font-family: "Bebas Neue", sans-serif; letter-spacing: 1px; font-size: 1.5rem; }
+    nav { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    nav a { color: var(--muted); text-decoration: none; font-weight: 700; font-size: 0.9rem; }
+    nav a:hover { color: var(--ink); }
+
+    main { padding: 2.4rem 0 4rem; }
+    .post-meta { display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap; margin-bottom: 1.1rem; }
+    .post-tag { display: inline-flex; border: 1px solid color-mix(in oklab, var(--accent) 55%, var(--line)); background: rgba(179, 36, 36, 0.18); color: #ffc8c8; font-size: 0.75rem; font-weight: 800; border-radius: 999px; padding: 0.28rem 0.62rem; letter-spacing: 0.4px; text-transform: uppercase; }
+    .post-date { color: var(--muted); font-size: 0.88rem; font-weight: 700; }
+    h1 { font-family: "Bebas Neue", sans-serif; font-size: 2rem; letter-spacing: 0.5px; color: var(--ink); margin-bottom: 0.4rem; line-height: 1.1; }
+    .post-sub { color: var(--muted); font-size: 1.02rem; margin-bottom: 1.4rem; line-height: 1.55; }
+    .hero-image { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: center 44%; border-radius: 14px; border: 1px solid var(--line); box-shadow: 0 18px 36px rgba(0, 0, 0, 0.4); margin-bottom: 2rem; }
+    article p { color: var(--ink); margin-bottom: 1rem; font-size: 1.02rem; }
+    article p.lede { font-size: 1.12rem; }
+    article h2 { font-family: "Bebas Neue", sans-serif; font-size: 1.4rem; letter-spacing: 0.8px; color: #ffc8c8; margin-top: 1.6rem; margin-bottom: 0.6rem; }
+    article ul, article ol { color: var(--ink); margin: 0 0 1rem 1.4rem; }
+    article li { margin-bottom: 0.45rem; }
+    .callout { border-left: 3px solid var(--accent); background: color-mix(in oklab, var(--card) 92%, black); padding: 0.9rem 1rem; border-radius: 0 10px 10px 0; margin: 1.4rem 0; }
+    .callout p { margin: 0; }
+    code { background: rgba(255, 255, 255, 0.06); padding: 0.08rem 0.36rem; border-radius: 4px; font-size: 0.92em; font-family: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace; }
+    .post-nav { display: flex; gap: 0.8rem; margin-top: 2.4rem; flex-wrap: wrap; }
+    .post-nav a { color: var(--ink); text-decoration: none; font-weight: 700; border: 1px solid var(--line); border-radius: 10px; padding: 0.6rem 0.9rem; background: rgba(255, 255, 255, 0.03); }
+    .post-nav a:hover { border-color: var(--accent); }
+    footer { margin-top: 2.6rem; padding: 1.4rem 0 2rem; border-top: 1px solid rgba(255, 255, 255, 0.08); color: var(--muted); font-size: 0.9rem; }
+
+    @media (max-width: 720px) {
+      .nav { align-items: flex-start; padding: 0.8rem 0; flex-direction: column; }
+      .hero-image { aspect-ratio: 4 / 3; object-position: center 38%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="../index.html" class="brand">MLADEN STOJANOVIĆ</a>
+      <nav>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#focus">Games</a>
+        <a href="./index.html">Devlog</a>
+        <a href="../die-laughing-landing.html">Die Laughing</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="post-meta">
+      <span class="post-tag">Devlog #05 · Die Laughing</span>
+      <span class="post-date">September 10, 2026</span>
+    </div>
+
+    <h1>LATE MOURNER: A CHARACTER THAT ARRIVES TOO LATE</h1>
+    <p class="post-sub">Building a readable four-frame enemy for Die Laughing — from a strong silhouette to movement and attack poses that still read in the middle of a mobile horde.</p>
+
+    <img class="hero-image" src="./assets/2026-09-10-late-mourner-sprite-sheet.png" alt="Late Mourner four-frame character sheet shown in the Godot editor, with idle, two movement poses, and an attack pose arranged across a horizontal strip" loading="eager" />
+
+    <article>
+      <p class="lede">Late Mourner is one of the early enemies in Die Laughing's No Exit mode. The name says what the character feels like: a figure who has already missed the moment, but keeps drifting toward the player anyway. That idea gives the enemy a very simple job — be recognizable, unsettling, and readable before the screen fills with bodies.</p>
+
+      <h2>START WITH THE SILHOUETTE</h2>
+
+      <p>The first test was not animation. It was the silhouette. A tall, narrow body, heavy hair, a trailing shape behind the head, and one small contrasting detail are enough to make Late Mourner distinct from the rest of the roster. At mobile scale, those large shapes matter more than tiny facial details.</p>
+
+      <p>This is the useful constraint of character work for a horde survival game: every enemy needs a personality, but that personality has to survive being seen for half a second between the player, projectiles, pickups, and several other enemies. The design has to work as a thumbnail before it can work as a close-up.</p>
+
+      <div class="callout">
+        <p><strong>The test:</strong> if the enemy is reduced to a dark shape moving across the arena, can you still tell which one it is? Late Mourner needs to pass that test before any extra detail earns its place.</p>
+      </div>
+
+      <h2>FOUR FRAMES, ONE CLEAR READ</h2>
+
+      <p>The sheet uses four compact poses: idle, move A, move B, and attack. It is a small animation set, but it covers the moments that matter most in play.</p>
+
+      <ul>
+        <li><strong>Idle</strong> establishes the default posture and keeps the character from feeling like a static cutout.</li>
+        <li><strong>Move A and move B</strong> add a visible rhythm to the approach without turning the walk cycle into a distraction.</li>
+        <li><strong>Attack</strong> breaks the silhouette enough to communicate intent before the gameplay event lands.</li>
+      </ul>
+
+      <p>The two movement frames are deliberately different, but they still belong to the same character. That balance is important: too little change and the enemy looks frozen; too much and the player reads the frames as unrelated drawings. The attack pose is allowed to be more expressive because it has a communication job, not just a looped animation job.</p>
+
+      <h2>FROM SPRITESHEET TO GAMEPLAY ASSET</h2>
+
+      <p>The art is authored as a horizontal sheet with matching frame cells, consistent pivots, and a shared baseline. That makes the transition from image to in-game body predictable: the character can animate without changing its collision position or suddenly appearing to slide across the arena.</p>
+
+      <p>The visual target size is kept independent from the source texture resolution. That means the source can be optimized later without changing Late Mourner's world scale, collision, or gameplay feel. It is a small technical detail, but it prevents art optimization from becoming a balance change by accident.</p>
+
+      <h2>GROTESQUE, BUT NOT NOISY</h2>
+
+      <p>Die Laughing's current character direction is intentionally economical: large color shapes, thick contours, and only the details that prove the character's role. Late Mourner keeps the strange, mournful energy of the original design while avoiding a wall of texture that would disappear on a phone screen.</p>
+
+      <p>The result should feel authored rather than over-explained. The hair gives the head a strong shape. The trailing fabric creates motion even when the body is moving slowly. The small flower-like detail breaks up the darker mass. Everything else has to justify its pixels.</p>
+
+      <h2>WHY THIS MATTERS IN A HORDE</h2>
+
+      <p>Late Mourner is not a boss and does not need a complicated attack language. It needs to create pressure through presence. When several enemies are approaching at once, the player should be able to identify the Late Mourner, understand that it is closing in, and recognize its attack pose without stopping to inspect the character.</p>
+
+      <p>That is why the animation pass is part of gameplay readability, not just presentation polish. A stronger silhouette and a clearer attack frame make the same encounter easier to parse, especially in the portrait layout the game is built around.</p>
+
+      <h2>WHAT'S NEXT</h2>
+
+      <p>Late Mourner is one step in the broader character pass for Die Laughing. The same workflow now needs to be applied across the roster: consistent four-frame sheets, stable pivots and baselines, attack poses tied to real gameplay moments, and a final phone check for readability and performance.</p>
+
+      <p>The goal is not to make every enemy equally elaborate. The goal is to give every enemy one clear visual idea — then make that idea survive the chaos.</p>
+
+      <p>Follow the project on the <a href="../die-laughing-landing.html" style="color: #f7c0c0;">Die Laughing page</a> and browse the <a href="./index.html" style="color: #f7c0c0;">full devlog</a> for more behind-the-scenes updates.</p>
+    </article>
+
+    <div class="post-nav">
+      <a href="./index.html">← All devlog posts</a>
+      <a href="./2026-07-26-image-authoring-l1-l2.html">← Devlog #04: Image Set Complete</a>
+      <a href="../die-laughing-landing.html">Die Laughing</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Mladen Stojanović. All rights reserved.</div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
