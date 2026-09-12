@@ -1,0 +1,30 @@
+feat(site): Hashi Bridges Privacy Policy + footer link
+
+Adds hashi-bridges-privacy-policy.html (English, Suguru / Die Laughing
+visual style — same theme, same fonts, same back-link pattern) and
+registers it in the index.html footer-link list.
+
+Scope locked to the shipping configuration confirmed against
+`docs/Privacy_Consent_Store_Compliance_Spec_Hashi_Bridges_v1.0.md`:
+
+- Android-only first release (iOS designed in, not shipping — Section 13).
+- Firebase Analytics + Crashlytics (Section 1.b).
+- Google AdMob (Section 1.c).
+- Google UMP consent flow with Privacy Options in Settings (Section 3, 4).
+- Meta for install attribution only — not cross-app tracking
+  (Section 1.d, mirrors spec §22 scope).
+- Remove Ads IAP through Google Play Billing (Section 1.e).
+- Settings → Privacy: Privacy Policy, Privacy Options, Analytics
+  status, Ad personalization, Reset local progress (spec §45 default).
+- Core gameplay works with analytics, crash diagnostics, and ads
+  disabled (spec §1 non-negotiable rule #2).
+- No precise or coarse location, no contacts/photos/microphone/
+  camera, no user account, no puzzle content sent to any server
+  (spec §7 data minimization).
+
+Coverage deliberately tighter than the spec (e.g. spec also covers
+FBSDKCoreKit Apple requirement, iOS privacy manifests, Required
+Reason APIs) — those apply only when iOS ships. The Platform Notes
+section (Section 13) commits to updating the policy when an iOS
+build is published, per spec §44 (runtime / policy / store
+declarations must agree).

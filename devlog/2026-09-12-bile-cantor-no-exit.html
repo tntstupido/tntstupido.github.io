@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Devlog #06 — Bile Cantor: A Voice for No Exit — Die Laughing</title>
+  <meta name="description" content="A look at building Bile Cantor for Die Laughing's upcoming No Exit mode: a readable ranged enemy with a stronger four-frame animation sheet, grounded movement, and a clear acid attack." />
+  <link rel="canonical" href="https://mladenstojanovic.art/devlog/2026-09-12-bile-cantor-no-exit.html" />
+  <meta name="theme-color" content="#0d1112" />
+  <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="../favicon-16.png" sizes="16x16" type="image/png" />
+  <link rel="apple-touch-icon" href="../favicon-32.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <meta property="og:title" content="Devlog #06 — Bile Cantor: A Voice for No Exit" />
+  <meta property="og:description" content="Building a more dynamic, readable ranged enemy for Die Laughing's upcoming No Exit mode." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://mladenstojanovic.art/devlog/2026-09-12-bile-cantor-no-exit.html" />
+  <meta property="og:image" content="https://mladenstojanovic.art/devlog/assets/2026-09-12-bile-cantor-devlog-banner.png" />
+  <meta property="og:image:width" content="1728" />
+  <meta property="og:image:height" content="910" />
+  <meta property="og:site_name" content="Mladen Stojanović" />
+  <meta property="article:published_time" content="2026-09-12" />
+  <meta property="article:author" content="Mladen Stojanović" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Devlog #06 — Bile Cantor: A Voice for No Exit" />
+  <meta name="twitter:description" content="A behind-the-scenes look at Bile Cantor's animation pass for Die Laughing's upcoming No Exit mode." />
+  <meta name="twitter:image" content="https://mladenstojanovic.art/devlog/assets/2026-09-12-bile-cantor-devlog-banner.png" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Devlog #06 — Bile Cantor: A Voice for No Exit",
+    "datePublished": "2026-09-12",
+    "author": { "@type": "Person", "name": "Mladen Stojanović" },
+    "image": "https://mladenstojanovic.art/devlog/assets/2026-09-12-bile-cantor-devlog-banner.png",
+    "url": "https://mladenstojanovic.art/devlog/2026-09-12-bile-cantor-no-exit.html",
+    "description": "A look at building Bile Cantor for Die Laughing's upcoming No Exit mode: a readable ranged enemy with a stronger four-frame animation sheet, grounded movement, and a clear acid attack.",
+    "articleBody": "Bile Cantor is one of the ranged specialists being prepared for Die Laughing's upcoming No Exit mode. This devlog follows the character through a more dynamic four-frame sheet, a grounded visual pivot, and an attack pose that communicates its acid payload without getting stuck on screen."
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #0d1112;
+      --ink: #f1ece2;
+      --muted: #b7b0a5;
+      --line: #2e3a3c;
+      --card: #182123;
+      --accent: #b32424;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      color: var(--ink);
+      min-height: 100vh;
+      line-height: 1.65;
+      background:
+        radial-gradient(1100px 600px at 85% -10%, rgba(179, 36, 36, 0.16), transparent 58%),
+        linear-gradient(180deg, #0d1112 0%, #15151a 45%, #0d1214 100%);
+      overflow-x: hidden;
+    }
+
+    .container { width: min(820px, 92vw); margin: 0 auto; }
+
+    header {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: color-mix(in oklab, var(--bg) 84%, transparent);
+      backdrop-filter: blur(9px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .nav { min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .brand { text-decoration: none; color: var(--ink); font-family: "Bebas Neue", sans-serif; letter-spacing: 1px; font-size: 1.5rem; }
+    nav { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    nav a { color: var(--muted); text-decoration: none; font-weight: 700; font-size: 0.9rem; }
+    nav a:hover { color: var(--ink); }
+
+    main { padding: 2.4rem 0 4rem; }
+    .post-meta { display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap; margin-bottom: 1.1rem; }
+    .post-tag { display: inline-flex; border: 1px solid color-mix(in oklab, var(--accent) 55%, var(--line)); background: rgba(179, 36, 36, 0.18); color: #ffc8c8; font-size: 0.75rem; font-weight: 800; border-radius: 999px; padding: 0.28rem 0.62rem; letter-spacing: 0.4px; text-transform: uppercase; }
+    .post-date { color: var(--muted); font-size: 0.88rem; font-weight: 700; }
+    h1 { font-family: "Bebas Neue", sans-serif; font-size: 2rem; letter-spacing: 0.5px; color: var(--ink); margin-bottom: 0.4rem; line-height: 1.1; }
+    .post-sub { color: var(--muted); font-size: 1.02rem; margin-bottom: 1.4rem; line-height: 1.55; }
+    .hero-image { display: block; width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--line); box-shadow: 0 18px 36px rgba(0, 0, 0, 0.4); margin-bottom: 2rem; }
+    article p { color: var(--ink); margin-bottom: 1rem; font-size: 1.02rem; }
+    article p.lede { font-size: 1.12rem; }
+    article h2 { font-family: "Bebas Neue", sans-serif; font-size: 1.4rem; letter-spacing: 0.8px; color: #ffc8c8; margin-top: 1.6rem; margin-bottom: 0.6rem; }
+    article ul { color: var(--ink); margin: 0 0 1rem 1.4rem; }
+    article li { margin-bottom: 0.45rem; }
+    .callout { border-left: 3px solid var(--accent); background: color-mix(in oklab, var(--card) 92%, black); padding: 0.9rem 1rem; border-radius: 0 10px 10px 0; margin: 1.4rem 0; }
+    .callout p { margin: 0; }
+    .sheet-figure { margin: 1.5rem 0 1.8rem; padding: 1rem; background: rgba(255, 255, 255, 0.035); border: 1px solid var(--line); border-radius: 12px; }
+    .sheet-image { display: block; width: 100%; height: auto; image-rendering: auto; }
+    figcaption { color: var(--muted); font-size: 0.85rem; margin-top: 0.7rem; }
+    code { background: rgba(255, 255, 255, 0.06); padding: 0.08rem 0.36rem; border-radius: 4px; font-size: 0.92em; font-family: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace; }
+    .post-nav { display: flex; gap: 0.8rem; margin-top: 2.4rem; flex-wrap: wrap; }
+    .post-nav a { color: var(--ink); text-decoration: none; font-weight: 700; border: 1px solid var(--line); border-radius: 10px; padding: 0.6rem 0.9rem; background: rgba(255, 255, 255, 0.03); }
+    .post-nav a:hover { border-color: var(--accent); }
+    footer { margin-top: 2.6rem; padding: 1.4rem 0 2rem; border-top: 1px solid rgba(255, 255, 255, 0.08); color: var(--muted); font-size: 0.9rem; }
+
+    @media (max-width: 720px) {
+      .nav { align-items: flex-start; padding: 0.8rem 0; flex-direction: column; }
+      h1 { font-size: 1.8rem; }
+      .sheet-figure { padding: 0.65rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="../index.html" class="brand">MLADEN STOJANOVIĆ</a>
+      <nav>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#focus">Games</a>
+        <a href="./index.html">Devlog</a>
+        <a href="../die-laughing-landing.html">Die Laughing</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="post-meta">
+      <span class="post-tag">Devlog #06 · Die Laughing</span>
+      <span class="post-date">September 12, 2026</span>
+    </div>
+
+    <h1>BILE CANTOR: A VOICE FOR NO EXIT</h1>
+    <p class="post-sub">A more dynamic ranged enemy for Die Laughing's upcoming No Exit mode — from a stronger four-frame sheet to a grounded attack that is impossible to miss.</p>
+
+    <picture>
+      <source srcset="./assets/2026-09-12-bile-cantor-devlog-banner.webp" type="image/webp" />
+      <img class="hero-image" width="1728" height="910" src="./assets/2026-09-12-bile-cantor-devlog-banner.png" alt="Bile Cantor launching a bright acid attack across the simplified square-tile arena in Die Laughing" loading="eager" />
+    </picture>
+
+    <article>
+      <p class="lede">No Exit is the next major mode being prepared for Die Laughing. It is built around a larger roster of strange enemies and authored encounters, but the goal is still the same: every threat has to be readable while the screen is moving, crowded, and full of effects. Bile Cantor is one of the ranged specialists being shaped for that mode.</p>
+
+      <h2>THE RANGED ENEMY IN THE NEXT MODE</h2>
+
+      <p>Bile Cantor does not need to chase the player into a corner. It creates pressure by holding a little distance, marking a position, and sending a bright acid payload toward where the player was. That makes its visual language important: the player needs to recognize the body, understand the warning, and read the release before the puddle becomes part of the arena.</p>
+
+      <p>The original poses had the right character, but not enough movement. The idle, movement, and attack silhouettes sat too close together, so the sprite could feel static even when the gameplay event was working correctly. The new pass gives the body more compression, lean, and extension without changing what the enemy does.</p>
+
+      <h2>FOUR FRAMES, FOUR JOBS</h2>
+
+      <figure class="sheet-figure">
+        <picture>
+          <source srcset="./assets/2026-09-12-bile-cantor-sprite-sheet.webp" type="image/webp" />
+          <img class="sheet-image" width="512" height="128" src="./assets/2026-09-12-bile-cantor-sprite-sheet.png" alt="Bile Cantor four-frame sprite sheet with idle, two dynamic movement poses, and an extended acid attack pose" loading="lazy" />
+        </picture>
+        <figcaption>Idle, move A, move B, and attack — each frame is allowed to change the silhouette enough to communicate a different moment.</figcaption>
+      </figure>
+
+      <ul>
+        <li><strong>Idle</strong> keeps the heavy, sleepy body readable when the Cantor is waiting for its next shot.</li>
+        <li><strong>Move A</strong> compresses the body into a low, forward-moving shape.</li>
+        <li><strong>Move B</strong> stretches the silhouette into a longer, more directional pose.</li>
+        <li><strong>Attack</strong> opens the mouth and throws the tongue forward so the payload launch reads immediately.</li>
+      </ul>
+
+      <p>The movement frames are deliberately not subtle. A horde enemy only gets a fraction of a second to register on a phone screen, so animation needs to do more than add life. It needs to separate states.</p>
+
+      <h2>KEEP THE BODY ON THE FLOOR</h2>
+
+      <p>The first grounded pass exposed a familiar 2D character problem: the artwork could look like it was rotating or floating even though the collision body was in the right place. The fix was to treat the bottom of the character — not the center of the transparent sprite cell — as the visual anchor.</p>
+
+      <p>Bile Cantor now stretches, bounces, and reacts to hits around that bottom point. Its procedural tilt is disabled because this character reads better as a planted ranged body. The visual Sprite2D can change shape while the collision position and gameplay footprint stay stable.</p>
+
+      <div class="callout">
+        <p><strong>The rule:</strong> art can move, squash, and speak, but the character's feet should keep telling the truth about where it is standing.</p>
+      </div>
+
+      <h2>ANIMATION THAT RETURNS TO PLAY</h2>
+
+      <p>The four-frame sheet is driven by the shared AnimationPlayer setup used by the current No Exit visual trials. Idle and movement are selected from the enemy's actual state, while the attack frame is a short override tied to the payload launch.</p>
+
+      <p>There was one final small bug in that handoff: because Bile Cantor has a custom movement loop for its ranged spacing, it was not advancing the shared attack timer. The result was an enemy that could remain stuck in its extended attack pose after the first launch. The timer now advances inside that custom loop, so the Cantor returns cleanly to idle or movement after the attack.</p>
+
+      <h2>NO EXIT IS GETTING CLOSER</h2>
+
+      <p>Bile Cantor is one piece of the larger No Exit pass: distinct enemies, readable authored encounters, consistent ground anchors, and visuals that still make sense when the arena is busy. The mode is coming soon, and the remaining work is about bringing the same level of clarity and personality across the rest of the roster.</p>
+
+      <p>The target is not maximum detail. It is a character that can be understood at a glance, then remembered because it has one strange idea of its own: a sleepy cantor that sings in acid.</p>
+
+      <p>Follow the project on the <a href="../die-laughing-landing.html" style="color: #f7c0c0;">Die Laughing page</a> and browse the <a href="./index.html" style="color: #f7c0c0;">full devlog</a> for more behind-the-scenes updates.</p>
+    </article>
+
+    <div class="post-nav">
+      <a href="./index.html">← All devlog posts</a>
+      <a href="./2026-09-10-late-mourner-character-sheet.html">← Devlog #05: Late Mourner</a>
+      <a href="../die-laughing-landing.html">Die Laughing</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Mladen Stojanović. All rights reserved.</div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
