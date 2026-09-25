@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ball Sort — Color Sorting Puzzle</title>
+  <meta name="description" content="Sort colorful balls, unwind with a daily puzzle, and work your way through 100 levels and endless mode in Ball Sort." />
+  <link rel="canonical" href="https://mladenstojanovic.art/ball-sort-landing.html" />
+  <meta name="theme-color" content="#0b1324" />
+  <link rel="icon" href="./favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="./assets/ball-sort/icon.png" />
+  <meta property="og:title" content="Ball Sort — Color Sorting Puzzle" />
+  <meta property="og:description" content="A calm color-sorting puzzle with 100 levels, endless mode, and a new daily challenge." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mladenstojanovic.art/ball-sort-landing.html" />
+  <meta property="og:image" content="https://mladenstojanovic.art/assets/ball-sort/menu.jpg" />
+  <meta property="og:site_name" content="Mladen Stojanović" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ball Sort — Color Sorting Puzzle" />
+  <meta name="twitter:description" content="Sort colorful balls, unwind with a daily puzzle, and work your way through 100 levels." />
+  <meta name="twitter:image" content="https://mladenstojanovic.art/assets/ball-sort/menu.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "Ball Sort",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "iOS, Android",
+    "description": "A color-sorting puzzle with 100 levels, endless mode, offline play, and a daily challenge.",
+    "url": "https://mladenstojanovic.art/ball-sort-landing.html",
+    "image": "https://mladenstojanovic.art/assets/ball-sort/icon.png",
+    "author": {
+      "@type": "Person",
+      "name": "Mladen Stojanović",
+      "url": "https://mladenstojanovic.art"
+    }
+  }
+  </script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1324;
+      --panel: #121e34;
+      --panel-soft: #172641;
+      --ink: #f4f7ff;
+      --muted: #b1bfd6;
+      --line: rgba(213, 228, 255, .14);
+      --blue: #71a5ff;
+      --mint: #73e1a2;
+      --shadow: 0 24px 70px rgba(1, 8, 22, .38);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      background:
+        radial-gradient(900px 560px at 78% -10%, rgba(64, 118, 218, .24), transparent 60%),
+        radial-gradient(700px 460px at 0% 38%, rgba(89, 173, 255, .11), transparent 62%),
+        linear-gradient(180deg, #0b1324, #0d1729 54%, #0a1221);
+    }
+    a { color: inherit; }
+    .wrap { width: min(1080px, calc(100% - 40px)); margin: 0 auto; }
+    .topbar { position: sticky; top: 0; z-index: 5; background: rgba(11, 19, 36, .82); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+    .nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; font-weight: 800; letter-spacing: -.04em; }
+    .brand img { width: 42px; height: 42px; border-radius: 12px; }
+    .brand span { font-size: 1.1rem; }
+    .nav-links { display: flex; gap: 22px; align-items: center; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: .9rem; font-weight: 700; }
+    .nav-links a:hover, .text-link:hover { color: white; }
+    main { overflow: hidden; }
+    .hero { min-height: 620px; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: clamp(32px, 7vw, 88px); padding: 56px 0 76px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: #d5e5ff; background: rgba(98, 151, 245, .13); border: 1px solid rgba(142, 184, 255, .26); border-radius: 999px; padding: 7px 12px; font-size: .76rem; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 14px var(--mint); }
+    h1 { max-width: 650px; margin: 20px 0 18px; font-size: clamp(2.8rem, 7vw, 5.3rem); line-height: .99; letter-spacing: -.065em; text-wrap: balance; }
+    .hero-copy { max-width: 580px; color: var(--muted); font-size: clamp(1rem, 2vw, 1.15rem); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 28px 0 24px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 17px; border-radius: 13px; text-decoration: none; font-weight: 800; font-size: .9rem; transition: transform .18s ease, background .18s ease; }
+    .button:hover { transform: translateY(-2px); }
+    .button.primary { color: #091425; background: linear-gradient(135deg, #a8ccff, #6d9fff); box-shadow: 0 10px 28px rgba(75, 129, 228, .24); }
+    .button.secondary { border: 1px solid var(--line); background: rgba(255,255,255,.035); }
+    .chips { display: flex; flex-wrap: wrap; gap: 9px; }
+    .chips span { border: 1px solid var(--line); color: #cfdaec; background: rgba(255,255,255,.025); border-radius: 999px; padding: 6px 10px; font-size: .77rem; font-weight: 700; }
+    .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; min-height: 470px; }
+    .glow { position: absolute; width: 78%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(72, 128, 235, .28), rgba(89, 144, 237, .06) 58%, transparent 72%); filter: blur(9px); }
+    .hero-shot { position: relative; width: min(74%, 330px); margin: 0; border: 7px solid rgba(236, 244, 255, .9); border-radius: 34px; overflow: hidden; background: #eaf1ff; box-shadow: var(--shadow), 0 0 0 1px rgba(255,255,255,.35); transform: rotate(2deg); }
+    .hero-shot img { display: block; width: 100%; height: auto; }
+    .float-card { position: absolute; right: 0; bottom: 14%; max-width: 235px; padding: 14px 17px; border: 1px solid rgba(221, 236, 255, .2); border-radius: 18px; background: rgba(17, 31, 54, .88); box-shadow: var(--shadow); backdrop-filter: blur(12px); }
+    .float-card strong { display: block; font-size: .87rem; }
+    .float-card span { color: var(--muted); font-size: .77rem; }
+    section { padding: 64px 0; border-top: 1px solid rgba(213,228,255,.08); }
+    .section-head { max-width: 660px; margin-bottom: 28px; }
+    .section-head h2 { margin: 0 0 9px; font-size: clamp(1.8rem, 4vw, 2.7rem); letter-spacing: -.045em; line-height: 1.1; }
+    .section-head p { margin: 0; color: var(--muted); }
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .feature { min-height: 185px; padding: 22px; border: 1px solid var(--line); border-radius: 20px; background: linear-gradient(145deg, rgba(26,43,70,.84), rgba(16,29,50,.88)); }
+    .feature-icon { display: grid; place-items: center; width: 42px; height: 42px; margin-bottom: 18px; border-radius: 14px; color: #10203a; background: #bcd5ff; font-size: 1.2rem; }
+    .feature:nth-child(2) .feature-icon { background: #a8efc5; }
+    .feature:nth-child(3) .feature-icon { background: #ffe18d; }
+    .feature h3 { margin: 0 0 7px; font-size: 1.08rem; }
+    .feature p { margin: 0; color: var(--muted); font-size: .9rem; }
+    .how-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 50px; align-items: center; }
+    .steps { display: grid; gap: 16px; }
+    .step { display: grid; grid-template-columns: 38px 1fr; gap: 13px; align-items: start; }
+    .step-number { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 12px; background: rgba(113,165,255,.16); color: #c9dcff; font-weight: 800; }
+    .step h3 { margin: 0 0 4px; font-size: .98rem; }
+    .step p { margin: 0; color: var(--muted); font-size: .87rem; }
+    .screens { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: start; }
+    .screen { margin: 0; padding: 8px; border: 1px solid var(--line); border-radius: 22px; background: rgba(255,255,255,.045); box-shadow: 0 16px 40px rgba(0,0,0,.2); }
+    .screen:nth-child(2) { margin-top: 30px; }
+    .screen img { display: block; width: 100%; height: auto; border-radius: 15px; }
+    .screen figcaption { padding: 10px 5px 4px; color: #d3def0; font-size: .78rem; font-weight: 700; text-align: center; }
+    .support-panel { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: clamp(22px, 4vw, 38px); border: 1px solid rgba(142,184,255,.24); border-radius: 24px; background: linear-gradient(120deg, rgba(39,74,130,.48), rgba(20,37,64,.78)); }
+    .support-panel h2 { margin: 0 0 7px; font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -.04em; }
+    .support-panel p { margin: 0; color: var(--muted); }
+    .text-link { color: #bcd5ff; font-weight: 800; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    footer { padding: 24px 0 36px; color: #8998b1; font-size: .8rem; }
+    .footer-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; border-top: 1px solid var(--line); padding-top: 18px; }
+    .footer-inner a { color: #b9c9e1; text-decoration: none; }
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 28px, 580px); }
+      .nav { min-height: 64px; }
+      .nav-links { gap: 12px; }
+      .nav-links a { font-size: .8rem; }
+      .hero { min-height: 0; grid-template-columns: 1fr; gap: 8px; padding: 44px 0 56px; }
+      .hero-visual { min-height: 380px; }
+      .hero-shot { width: min(62%, 260px); }
+      .float-card { right: 1%; bottom: 10%; }
+      section { padding: 48px 0; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .feature { min-height: 0; }
+      .how-grid { grid-template-columns: 1fr; gap: 25px; }
+      .screens { gap: 9px; }
+      .screen { padding: 5px; border-radius: 15px; }
+      .screen img { border-radius: 10px; }
+      .screen figcaption { font-size: .67rem; }
+      .support-panel { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="./ball-sort-landing.html" aria-label="Ball Sort home"><img src="./assets/ball-sort/icon.png" alt="" width="42" height="42" /><span>Ball Sort</span></a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#features">Features</a>
+        <a href="#how-to-play">How to play</a>
+        <a href="./ball-sort-support.html">Support</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <section class="hero" aria-labelledby="hero-title" style="border-top:0">
+        <div>
+          <span class="eyebrow">A little puzzle break</span>
+          <h1 id="hero-title">Sort the colors.<br />Clear your mind.</h1>
+          <p class="hero-copy">Move the top ball from tube to tube, group each color, and find the rhythm of a satisfying sort. Start with simple boards, then take on tougher levels and a fresh daily challenge.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#features">Explore the game</a>
+            <a class="button secondary" href="./ball-sort-support.html">Get support</a>
+          </div>
+          <div class="chips" aria-label="Game highlights"><span>100 levels</span><span>Endless mode</span><span>Daily challenge</span><span>Offline play</span></div>
+        </div>
+        <div class="hero-visual" aria-label="Ball Sort game preview">
+          <div class="glow" aria-hidden="true"></div>
+          <figure class="hero-shot"><img src="./assets/ball-sort/menu.jpg" alt="Ball Sort main menu with colorful balls arranged in glass tubes" width="555" height="1200" fetchpriority="high" /></figure>
+          <div class="float-card"><strong>One more satisfying sort</strong><span>Play at your own pace, with no timer.</span></div>
+        </div>
+      </section>
+
+      <section id="features" aria-labelledby="features-title">
+        <div class="section-head"><h2 id="features-title">A simple puzzle with room to grow</h2><p>Clear rules, tactile moves, and new boards as your sorting skills improve.</p></div>
+        <div class="feature-grid">
+          <article class="feature"><span class="feature-icon" aria-hidden="true">◉</span><h3>100 levels</h3><p>Work through a steady progression, from a few colors to denser, more demanding boards.</p></article>
+          <article class="feature"><span class="feature-icon" aria-hidden="true">∞</span><h3>Endless mode</h3><p>Finish the main set to unlock an ongoing stream of fresh sorting puzzles.</p></article>
+          <article class="feature"><span class="feature-icon" aria-hidden="true">▦</span><h3>Daily challenge</h3><p>Take on the same date-based puzzle for the day and keep your completion streak going.</p></article>
+        </div>
+      </section>
+
+      <section id="how-to-play" aria-labelledby="how-title">
+        <div class="how-grid">
+          <div class="section-head"><h2 id="how-title">Easy to learn.<br />Satisfying to solve.</h2><p>Every move has a clear rule. Plan a few steps ahead, or just unwind one ball at a time.</p></div>
+          <div class="steps">
+            <article class="step"><span class="step-number">1</span><div><h3>Choose a tube</h3><p>Tap a tube to lift its top ball.</p></div></article>
+            <article class="step"><span class="step-number">2</span><div><h3>Pick a destination</h3><p>Move the ball to an empty tube or one with the same color on top.</p></div></article>
+            <article class="step"><span class="step-number">3</span><div><h3>Sort every color</h3><p>Fill each tube with matching balls to complete the board. Use undo or a hint if you want a hand.</p></div></article>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="screens-title">
+        <div class="section-head"><h2 id="screens-title">A look at the game</h2><p>Colorful boards, glass tubes, and a clean view of every move.</p></div>
+        <div class="screens">
+          <figure class="screen"><img src="./assets/ball-sort/level-1.jpg" alt="Early Ball Sort level with a few colors and open tubes" width="555" height="1200" loading="lazy" /><figcaption>Start with the basics</figcaption></figure>
+          <figure class="screen"><img src="./assets/ball-sort/level-50.jpg" alt="Hard Ball Sort level with five colors across multiple tubes" width="555" height="1200" loading="lazy" /><figcaption>Take on tougher boards</figcaption></figure>
+          <figure class="screen"><img src="./assets/ball-sort/level-complete.jpg" alt="Ball Sort level-complete screen with three stars" width="555" height="1200" loading="lazy" /><figcaption>Enjoy the satisfying finish</figcaption></figure>
+        </div>
+      </section>
+
+      <section id="support" aria-labelledby="support-title">
+        <div class="support-panel">
+          <div><h2 id="support-title">Need a hand?</h2><p>For gameplay help, feedback, or a bug report, visit the support page.</p></div>
+          <a class="button primary" href="./ball-sort-support.html">Ball Sort Support</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer><div class="wrap footer-inner"><span>© <span id="year"></span> Mladen Stojanović</span><span><a href="./ball-sort-support.html">Support</a> · <a href="./ball-sort-puzzle-privacy-policy.html">Privacy Policy</a> · <a href="./index.html">Main site</a></span></div></footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

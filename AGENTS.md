@@ -3,7 +3,7 @@
 Static GitHub Pages site, no build step. Pushes to `main` deploy immediately to `mladenstojanovic.art` / `tntstupido.github.io`.
 
 ## File Naming
-App pages: `[app-name]-[type].html` (types: `landing`, `privacy-policy`, `account-deletion`, `age-suitability`).
+App pages: `[app-name]-[type].html` (types: `landing`, `support`, `privacy-policy`, `account-deletion`, `age-suitability`).
 
 ## New Page Checklist
 - Add to `sitemap.xml` with `lastmod` (YYYY-MM-DD) and priority: 1.0 (index), 0.9 (landing), 0.5 (privacy), 0.4 (other)
