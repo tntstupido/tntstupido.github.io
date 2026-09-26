@@ -39,23 +39,23 @@
   <main class="wrap">
     <h1>Privacy Policy for Hitori BLACKOUT</h1>
     <div class="meta">
-      <p><strong>Last updated:</strong> September 14, 2026</p>
+      <p><strong>Last updated:</strong> September 26, 2026</p>
       <p><strong>Developer:</strong> Mladen Stojanovic<br />
       <strong>Contact:</strong> <a href="mailto:mladenstojanovicpo@gmail.com">mladenstojanovicpo@gmail.com</a></p>
     </div>
 
-    <p>Hitori BLACKOUT ("the App", "we", "us") is a logic-puzzle game for Android. This policy explains what information may be processed when you use the App, why it is processed, and the choices available to you.</p>
+    <p>Hitori BLACKOUT ("the App", "we", "us") is a logic-puzzle game for Android and iOS. This policy explains what information may be processed when you use the App, why it is processed, and the choices available to you.</p>
 
-    <div class="notice"><strong>Short version:</strong> the App does not require an account. Puzzle progress, settings, notes, and statistics are stored locally on your device. The App uses Google Mobile Ads for interstitial advertising and Google Play Billing for the optional lifetime Remove Ads purchase. Firebase analytics, crash reporting, and remote configuration may be used in releases where those services are enabled.</div>
+    <div class="notice"><strong>Short version:</strong> the App does not require an account. Puzzle progress, settings, notes, and statistics are stored locally on your device. The App uses Google Mobile Ads for interstitial advertising and Google Play Billing on Android or Apple StoreKit on iOS for the optional lifetime Remove Ads purchase. In releases with Firebase Analytics, usage analytics is enabled by default and can be turned off at any time in <strong>More → Privacy</strong>. Crash reporting and remote configuration may also be used where those services are enabled.</div>
 
     <h2>1. Information stored on your device</h2>
     <p>The App stores the game information needed to provide its features, including puzzle progress, marks, notes, settings, statistics, Daily progress, Journey progress, and a locally cached Remove Ads entitlement. This information is stored in the App's local storage and is not an account or cloud save.</p>
-    <p>Uninstalling the App or clearing its Android app data removes locally stored game data. A Google Play purchase may remain restorable through the Google account and Google Play purchase record used to make it.</p>
+    <p>Uninstalling the App or clearing its app data removes locally stored game data. A store purchase may remain restorable through the Google Play or Apple Account and the corresponding store purchase record used to make it.</p>
 
     <h2>2. Advertising and consent</h2>
-    <p>The Android App may show interstitial advertisements through Google Mobile Ads (AdMob) at selected non-solving boundaries. AdMob and Google Play services may process technical and advertising information such as your device and app information, IP address, advertising identifier, approximate location inferred from an IP address, consent signals, and ad interaction or measurement information. Whether ads are personalized depends on your consent, device settings, applicable law, and Google's processing choices.</p>
-    <p>Google's User Messaging Platform (UMP) is used where required to request and manage advertising consent. You can review available advertising privacy choices from <strong>More → Privacy → Privacy choices</strong> in the App when that option is provided, and through Android or Google advertising settings. Gameplay remains available when ads cannot be requested.</p>
-    <p>A one-time <strong>Remove Ads</strong> purchase disables interstitial advertisements after the purchase is verified by Google Play.</p>
+    <p>The App may show interstitial advertisements through Google Mobile Ads (AdMob) at selected non-solving boundaries. AdMob may process technical and advertising information such as your device and app information, IP address, advertising identifier, approximate location inferred from an IP address, consent signals, and ad interaction or measurement information. Whether ads are personalized depends on your consent, device settings, applicable law, and Google's processing choices.</p>
+    <p>Google's User Messaging Platform (UMP) is used where required to request and manage advertising consent. You can review available advertising privacy choices from <strong>More → Privacy → Privacy choices</strong> in the App when that option is provided, and through your device or Google advertising settings. On iOS, if a release uses the advertising identifier (IDFA) for cross-company tracking and has a corresponding AdMob UMP message configured, UMP presents the explanation and manages the App Tracking Transparency (ATT) request. If you do not allow tracking, gameplay remains available and ads may still be requested without IDFA where permitted. The App does not issue a second, separate ATT prompt.</p>
+    <p>A one-time <strong>Remove Ads</strong> purchase disables interstitial advertisements after the purchase is verified by Google Play on Android or Apple StoreKit on iOS.</p>
 
     <h2>3. Analytics, crash reports, and remote configuration</h2>
     <p>Releases that enable Firebase may use the following services:</p>
@@ -65,10 +65,10 @@
       <li><strong>Firebase Remote Config:</strong> may process technical app and device information needed to deliver feature and operational settings, such as ad or content flags. It is not used to store accounts, puzzle boards, notes, or cloud saves.</li>
     </ul>
     <p>We do not require sign-in, set a real-name profile, or send puzzle boards, solutions, notes, or other free-text content to Firebase. The App does not request contacts, photos, microphone access, or precise GPS location.</p>
-    <p>Firebase collection is controlled by the release configuration and applicable consent state. If a release does not include a configured Firebase project, the App's Firebase adapters fail safely and local gameplay continues.</p>
+    <p>In releases with Firebase Analytics, usage analytics is enabled by default. You can turn it off or back on at any time in <strong>More → Privacy</strong>; the choice is saved on your device and applies independently of advertising consent and ATT. Analytics events are not sent while collection is disabled. Other Firebase services, such as Crashlytics or Remote Config, may have separate release configuration and collection behavior. If a release does not include a configured Firebase project, the App's Firebase adapters fail safely and local gameplay continues.</p>
 
     <h2>4. Purchases</h2>
-    <p>The App offers one optional non-consumable purchase, Remove Ads, through Google Play Billing. Google processes the payment and keeps the store transaction record. We do not receive or store your payment-card number. The App receives only the store information needed to verify, restore, and apply the Remove Ads entitlement on that Google Play account.</p>
+    <p>The App offers one optional non-consumable purchase, Remove Ads. Android purchases use Google Play Billing and iOS purchases use Apple StoreKit. The applicable store processes the payment and keeps the transaction record. We do not receive or store your payment-card number. The App receives only the store information needed to verify, restore, and apply the Remove Ads entitlement on the store account used for the purchase.</p>
 
     <h2>5. How we use information</h2>
     <ul>
@@ -86,11 +86,12 @@
       <li><strong>Google Mobile Ads / AdMob and UMP:</strong> <a href="https://policies.google.com/technologies/partner-sites">Google partner privacy information</a></li>
       <li><strong>Firebase Analytics, Crashlytics, and Remote Config:</strong> <a href="https://firebase.google.com/support/privacy">Firebase privacy and security</a></li>
       <li><strong>Google Play Billing:</strong> <a href="https://policies.google.com/privacy">Google Privacy Policy</a></li>
+      <li><strong>Apple StoreKit and App Tracking Transparency:</strong> <a href="https://www.apple.com/legal/privacy/">Apple Privacy Policy</a></li>
     </ul>
     <p>These providers process information under their own privacy policies and terms. Their processing may occur in countries other than your own.</p>
 
     <h2>7. Retention and deletion</h2>
-    <p>Local game data remains on your device until you uninstall the App or clear its app data. Google, AdMob, and Firebase retain provider-side data according to their applicable policies and retention settings. Because Hitori BLACKOUT has no user account and does not collect your name or email address in the App, we generally cannot identify a particular anonymous analytics or crash record on request. For questions about a privacy request, contact us using the address below.</p>
+    <p>Local game data remains on your device until you uninstall the App or clear its app data. Store purchase records remain subject to the applicable store's retention policies. Google, AdMob, and Firebase retain provider-side data according to their applicable policies and retention settings. Because Hitori BLACKOUT has no user account and does not collect your name or email address in the App, we generally cannot identify a particular anonymous analytics or crash record on request. For questions about a privacy request, contact us using the address below.</p>
 
     <h2>8. Children's privacy</h2>
     <p>Hitori BLACKOUT is a general-audience logic game and is not directed to children under 13, or the higher minimum age required by local law. We do not knowingly collect personal information directly from children.</p>
