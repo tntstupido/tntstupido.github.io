@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Way Too Many — 10,000 enemies. One weapon. | Mobile horde game in development</title>
+  <meta name="description" content="Way Too Many is a one-thumb mobile horde-survival game in development: one silly weapon against 10,000 cartoon enemies in 2–3 minute runs. Built in Godot with a custom C++ crowd simulation. Follow the devlog." />
+  <link rel="canonical" href="https://mladenstojanovic.art/way-too-many/" />
+  <meta name="theme-color" content="#15131c" />
+  <link rel="icon" href="./assets/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./style.css" />
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="02038801-c8f0-4317-845e-b72e03f331e0"></script>
+  <meta property="og:title" content="Way Too Many — 10,000 enemies. One weapon." />
+  <meta property="og:description" content="A one-thumb mobile horde game in development. 10,000 cartoon enemies at 60 fps on a 2021 phone." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mladenstojanovic.art/way-too-many/" />
+  <meta property="og:image" content="https://mladenstojanovic.art/way-too-many/assets/banner.jpg" />
+  <meta property="og:image:width" content="1728" />
+  <meta property="og:image:height" content="910" />
+  <meta property="og:site_name" content="Mladen Stojanović" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Way Too Many — 10,000 enemies. One weapon." />
+  <meta name="twitter:description" content="A one-thumb mobile horde game in development. Follow the devlog." />
+  <meta name="twitter:image" content="https://mladenstojanovic.art/way-too-many/assets/banner.jpg" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Way Too Many",
+    "alternateName": "Way Too Many: Horde Survival",
+    "description": "A one-thumb mobile horde-survival game in development: one silly weapon against 10,000 cartoon enemies in 2–3 minute runs.",
+    "url": "https://mladenstojanovic.art/way-too-many/",
+    "image": "https://mladenstojanovic.art/way-too-many/assets/banner.jpg",
+    "genre": ["Action", "Horde survival"],
+    "gamePlatform": ["Android"],
+    "author": { "@type": "Person", "name": "Mladen Stojanović", "url": "https://mladenstojanovic.art/" },
+    "sameAs": ["https://www.tiktok.com/@waytoomanygame", "https://www.youtube.com/@waytoomanygame"]
+  }
+  </script>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="../index.html" class="brand">MLADEN STOJANOVIĆ</a>
+      <nav>
+        <a href="./" aria-current="page">Way Too Many</a>
+        <a href="#devlog">Devlog</a>
+        <a href="../index.html#games">All games</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="hero">
+      <div>
+        <picture>
+          <source srcset="./assets/logo-240w.webp" type="image/webp" />
+          <img class="hero-logo" src="./assets/logo.png" width="96" height="96" alt="Way Too Many logo: a goofy green trash can in front of an endless horde" />
+        </picture>
+        <span class="tag">Prototype · In development</span>
+        <h1>WAY TOO<br /><span>MANY</span></h1>
+        <p class="pitch">10,000 enemies. One silly weapon. A portrait, one-thumb horde-survival game for phones, built around 2–3 minute runs where the screen fills up with way too much.</p>
+        <div class="btns">
+          <a class="btn primary" href="./devlog/2026-11-05-10000-enemies-on-a-phone.html">Read devlog #01</a>
+          <a class="btn" href="https://www.tiktok.com/@waytoomanygame" target="_blank" rel="noreferrer" data-umami-event="social-click" data-umami-event-network="tiktok">TikTok</a>
+          <a class="btn" href="https://www.youtube.com/@waytoomanygame" target="_blank" rel="noreferrer" data-umami-event="social-click" data-umami-event-network="youtube">YouTube</a>
+        </div>
+      </div>
+      <div class="phone">
+        <video autoplay muted loop playsinline preload="metadata" poster="./assets/loop-poster.webp" width="540" height="960" aria-label="Gameplay: a leaf blower scattering a horde of trash cans">
+          <source src="./assets/loop.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </div>
+
+    <section>
+      <h2 class="section-title">THE IDEA</h2>
+      <p class="section-copy">You play with one thumb. Your weapon fires on its own; all you do is move. The game is about the moment a crowd that big starts to break: cans flying, the horde scattering, a kill counter that will not stop climbing.</p>
+      <div class="facts">
+        <div class="fact"><b>10,000</b><span>enemies on screen at once</span></div>
+        <div class="fact"><b>60 FPS</b><span>steady on a 2021 phone</span></div>
+        <div class="fact"><b>2–3 MIN</b><span>per run, made for short breaks</span></div>
+        <div class="fact"><b>1 THUMB</b><span>portrait, move only</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">WHERE IT IS</h2>
+      <p class="section-copy">The game is built in gates: nothing new gets built until the current gate passes. It is an early prototype with blockout art; there is no release date and nothing to download yet.</p>
+      <div class="status">
+        <div class="step done">
+          <span class="pill done">Passed · Nov 4, 2026</span>
+          <h3>Gate 1: crowd tech</h3>
+          <p>10,000 enemies at a steady 60 fps on a Xiaomi 11T Pro, with a leaf blower pushing them around.</p>
+        </div>
+        <div class="step">
+          <span class="pill now">Next</span>
+          <h3>Gate 2: feel &amp; audio</h3>
+          <p>One level, no meta. Hit feedback, juice and sound until the 10-second moment is fun on its own.</p>
+        </div>
+        <div class="step">
+          <span class="pill later">Later</span>
+          <h3>Content &amp; launch</h3>
+          <p>More weapons, upgrades and levels, then Android first and iOS after.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="devlog">
+      <h2 class="section-title">DEVLOG</h2>
+      <p class="section-copy">Building it in public: the tech, the numbers, and what goes wrong.</p>
+      <a class="post-card" href="./devlog/2026-11-05-10000-enemies-on-a-phone.html">
+        <picture>
+          <source srcset="./assets/banner-480w.webp" type="image/webp" />
+          <img src="./assets/banner.jpg" width="480" height="253" alt="Way Too Many banner: an endless horde of trash cans" loading="lazy" />
+        </picture>
+        <div>
+          <span class="tag">Devlog #01</span>
+          <h3>10,000 enemies at 60 fps on a 2021 phone</h3>
+          <p>How the first gate passed: a C++ crowd simulation in Godot, one draw call per enemy type, and why the frame-time number that mattered came from the display, not the game.</p>
+          <span class="meta">November 5, 2026 · 7 min read</span>
+        </div>
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Mladen Stojanović. Way Too Many is a game in development. <a href="../index.html">mladenstojanovic.art</a></div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

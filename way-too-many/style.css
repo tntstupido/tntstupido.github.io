@@ -1,0 +1,147 @@
+/* Way Too Many section: shared by the game page and its devlog posts. */
+:root {
+  --bg: #15131c;
+  --ink: #f6f1e4;
+  --muted: #b9b2a4;
+  --line: #2f2c3a;
+  --card: #1e1b27;
+  --sun: #ffd240;
+  --sunset: #ff8c3c;
+  --grass: #8fbd66;
+  --can: #4d8c5c;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  color: var(--ink);
+  min-height: 100vh;
+  line-height: 1.65;
+  background:
+    radial-gradient(1000px 520px at 80% -12%, rgba(255, 140, 60, 0.20), transparent 60%),
+    radial-gradient(800px 480px at 0% 110%, rgba(143, 189, 102, 0.10), transparent 60%),
+    var(--bg);
+  overflow-x: hidden;
+}
+
+a { color: var(--sun); }
+.container { width: min(960px, 92vw); margin: 0 auto; }
+.narrow { width: min(820px, 92vw); margin: 0 auto; }
+
+header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: color-mix(in oklab, var(--bg) 84%, transparent);
+  backdrop-filter: blur(9px);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+.nav { min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.brand { text-decoration: none; color: var(--ink); font-family: "Bebas Neue", sans-serif; letter-spacing: 1px; font-size: 1.5rem; }
+nav { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+nav a { color: var(--muted); text-decoration: none; font-weight: 700; font-size: 0.9rem; }
+nav a:hover, nav a[aria-current] { color: var(--ink); }
+
+.tag {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  border: 1px solid color-mix(in oklab, var(--sun) 50%, var(--line));
+  background: rgba(255, 210, 64, 0.12); color: var(--sun);
+  font-size: 0.75rem; font-weight: 800; border-radius: 999px; padding: 0.28rem 0.66rem;
+  letter-spacing: 0.4px; text-transform: uppercase;
+}
+.muted { color: var(--muted); }
+
+/* Game page hero */
+.hero { display: grid; grid-template-columns: 1fr 300px; gap: 2.4rem; align-items: center; padding: 3rem 0 2.4rem; }
+.hero-logo { width: 96px; height: 96px; border-radius: 50%; border: 3px solid var(--sun); margin-bottom: 1rem; display: block; }
+.hero h1 { font-family: "Bebas Neue", sans-serif; font-size: clamp(3rem, 9vw, 5.4rem); line-height: 0.92; letter-spacing: 1px; margin: 0.8rem 0 0.9rem; }
+.hero h1 span { color: var(--sun); }
+.hero .pitch { font-size: 1.15rem; max-width: 34rem; margin-bottom: 1.4rem; }
+.phone {
+  justify-self: center; width: 100%; max-width: 300px; aspect-ratio: 9 / 16;
+  border-radius: 28px; overflow: hidden; border: 6px solid #2a2733;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  background: #0b0a0f;
+}
+.phone video, .phone img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.btns { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; font-weight: 800;
+  border-radius: 12px; padding: 0.7rem 1.05rem; border: 1px solid var(--line); color: var(--ink);
+  background: rgba(255, 255, 255, 0.04);
+}
+.btn:hover { border-color: var(--sun); }
+.btn.primary { background: var(--sun); color: #1b1712; border-color: var(--sun); }
+.btn.primary:hover { filter: brightness(1.06); }
+
+section { padding: 2.2rem 0; border-top: 1px solid rgba(255, 255, 255, 0.06); }
+.section-title { font-family: "Bebas Neue", sans-serif; font-size: 2rem; letter-spacing: 1px; margin-bottom: 0.4rem; }
+.section-copy { color: var(--muted); max-width: 40rem; margin-bottom: 1.4rem; }
+
+.facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; }
+.fact { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 1rem; }
+.fact b { display: block; font-family: "Bebas Neue", sans-serif; font-size: 2rem; letter-spacing: 0.5px; color: var(--sun); line-height: 1; margin-bottom: 0.3rem; }
+.fact span { color: var(--muted); font-size: 0.9rem; }
+
+.status { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
+.step { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 1rem 1.1rem; }
+.step h3 { font-size: 1rem; margin: 0.5rem 0 0.3rem; }
+.step p { color: var(--muted); font-size: 0.93rem; }
+.step.done { border-color: color-mix(in oklab, var(--grass) 55%, var(--line)); }
+.pill { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.4px; padding: 0.2rem 0.55rem; border-radius: 999px; }
+.pill.done { background: rgba(143, 189, 102, 0.18); color: #c6e6a6; }
+.pill.now { background: rgba(255, 210, 64, 0.16); color: var(--sun); }
+.pill.later { background: rgba(255, 255, 255, 0.07); color: var(--muted); }
+
+.post-card {
+  display: grid; grid-template-columns: 240px 1fr; gap: 1.2rem; text-decoration: none; color: var(--ink);
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 1rem; margin-bottom: 0.9rem;
+}
+.post-card:hover { border-color: var(--sun); }
+.post-card img { width: 100%; height: auto; border-radius: 10px; display: block; }
+.post-card h3 { font-family: "Bebas Neue", sans-serif; font-size: 1.6rem; letter-spacing: 0.5px; line-height: 1.1; margin: 0.5rem 0 0.4rem; }
+.post-card p { color: var(--muted); font-size: 0.95rem; }
+.post-card .meta { color: var(--muted); font-size: 0.82rem; font-weight: 700; margin-top: 0.5rem; display: block; }
+
+/* Devlog post */
+main.post { padding: 2.4rem 0 4rem; }
+.post-meta { display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap; margin-bottom: 1.1rem; }
+.post-date { color: var(--muted); font-size: 0.88rem; font-weight: 700; }
+.post h1 { font-family: "Bebas Neue", sans-serif; font-size: 2.3rem; letter-spacing: 0.5px; line-height: 1.05; margin-bottom: 0.5rem; }
+.post-sub { color: var(--muted); font-size: 1.04rem; margin-bottom: 1.4rem; }
+.hero-image { display: block; width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--line); box-shadow: 0 18px 36px rgba(0, 0, 0, 0.4); margin-bottom: 2rem; }
+article p { margin-bottom: 1rem; font-size: 1.02rem; }
+article p.lede { font-size: 1.14rem; }
+article h2 { font-family: "Bebas Neue", sans-serif; font-size: 1.5rem; letter-spacing: 0.8px; color: var(--sun); margin: 1.8rem 0 0.6rem; }
+article ul, article ol { margin: 0 0 1rem 1.4rem; }
+article li { margin-bottom: 0.45rem; }
+.callout { border-left: 3px solid var(--sun); background: color-mix(in oklab, var(--card) 92%, black); padding: 0.9rem 1rem; border-radius: 0 10px 10px 0; margin: 1.4rem 0; }
+.callout p { margin: 0; }
+figure { margin: 1.5rem 0 1.8rem; }
+figcaption { color: var(--muted); font-size: 0.85rem; margin-top: 0.6rem; }
+.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+.duo img { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line); display: block; }
+.post-video { display: block; width: min(340px, 100%); height: auto; margin: 0 auto; aspect-ratio: 9 / 16; border-radius: 18px; border: 1px solid var(--line); background: #0b0a0f; }
+table { width: 100%; border-collapse: collapse; margin: 0.6rem 0 1.2rem; font-size: 0.95rem; }
+th, td { text-align: left; padding: 0.55rem 0.6rem; border-bottom: 1px solid var(--line); }
+th { color: var(--muted); font-weight: 700; }
+td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+code { background: rgba(255, 255, 255, 0.07); padding: 0.08rem 0.36rem; border-radius: 4px; font-size: 0.92em; font-family: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace; }
+.post-nav { display: flex; gap: 0.8rem; margin-top: 2.4rem; flex-wrap: wrap; }
+.post-nav a { color: var(--ink); text-decoration: none; font-weight: 700; border: 1px solid var(--line); border-radius: 10px; padding: 0.6rem 0.9rem; background: rgba(255, 255, 255, 0.03); }
+.post-nav a:hover { border-color: var(--sun); }
+
+footer { margin-top: 2.6rem; padding: 1.4rem 0 2rem; border-top: 1px solid rgba(255, 255, 255, 0.08); color: var(--muted); font-size: 0.9rem; }
+
+@media (max-width: 760px) {
+  .nav { align-items: flex-start; padding: 0.8rem 0; flex-direction: column; gap: 0.4rem; }
+  .hero { grid-template-columns: 1fr; padding-top: 2rem; }
+  .phone { max-width: 260px; }
+  .facts { grid-template-columns: repeat(2, 1fr); }
+  .status { grid-template-columns: 1fr; }
+  .post-card { grid-template-columns: 1fr; }
+  .post h1 { font-size: 1.9rem; }
+}

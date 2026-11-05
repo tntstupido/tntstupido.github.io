@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Devlog #01 — 10,000 enemies at 60 fps on a 2021 phone — Way Too Many</title>
+  <meta name="description" content="How Way Too Many's first gate passed: a C++ crowd simulation in Godot, one buffer upload per enemy type, a 30 Hz async tick, and why the frame-time number that mattered came from the display." />
+  <link rel="canonical" href="https://mladenstojanovic.art/way-too-many/devlog/2026-11-05-10000-enemies-on-a-phone.html" />
+  <meta name="theme-color" content="#15131c" />
+  <link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="02038801-c8f0-4317-845e-b72e03f331e0"></script>
+  <meta property="og:title" content="Devlog #01 — 10,000 enemies at 60 fps on a 2021 phone" />
+  <meta property="og:description" content="The crowd tech behind Way Too Many, with real device numbers." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://mladenstojanovic.art/way-too-many/devlog/2026-11-05-10000-enemies-on-a-phone.html" />
+  <meta property="og:image" content="https://mladenstojanovic.art/way-too-many/assets/banner.jpg" />
+  <meta property="og:image:width" content="1728" />
+  <meta property="og:image:height" content="910" />
+  <meta property="og:site_name" content="Mladen Stojanović" />
+  <meta property="article:published_time" content="2026-11-05" />
+  <meta property="article:author" content="Mladen Stojanović" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Devlog #01 — 10,000 enemies at 60 fps on a 2021 phone" />
+  <meta name="twitter:description" content="The crowd tech behind Way Too Many, with real device numbers." />
+  <meta name="twitter:image" content="https://mladenstojanovic.art/way-too-many/assets/banner.jpg" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Devlog #01 — 10,000 enemies at 60 fps on a 2021 phone",
+    "datePublished": "2026-11-05",
+    "author": { "@type": "Person", "name": "Mladen Stojanović" },
+    "image": "https://mladenstojanovic.art/way-too-many/assets/banner.jpg",
+    "url": "https://mladenstojanovic.art/way-too-many/devlog/2026-11-05-10000-enemies-on-a-phone.html",
+    "description": "How Way Too Many's first gate passed: a C++ crowd simulation in Godot, one buffer upload per enemy type, a 30 Hz async tick, and display-side frame timing."
+  }
+  </script>
+</head>
+<body>
+  <header>
+    <div class="narrow nav">
+      <a href="../../index.html" class="brand">MLADEN STOJANOVIĆ</a>
+      <nav>
+        <a href="../">Way Too Many</a>
+        <a href="../#devlog">Devlog</a>
+        <a href="../../index.html#games">All games</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="narrow post">
+    <div class="post-meta">
+      <span class="tag">Devlog #01 · Way Too Many</span>
+      <span class="post-date">November 5, 2026</span>
+    </div>
+
+    <h1>10,000 ENEMIES AT 60 FPS ON A 2021 PHONE</h1>
+    <p class="post-sub">The first gate of a new game: before any menus, levels or art, prove that a mid-range phone can push a crowd that big around without dropping a frame.</p>
+
+    <picture>
+      <source srcset="../assets/banner.webp" type="image/webp" />
+      <img class="hero-image" width="1728" height="910" src="../assets/banner.jpg" alt="Way Too Many banner: an endless horde of goofy trash cans under an orange sky" loading="eager" />
+    </picture>
+
+    <article>
+      <p class="lede">Way Too Many is a portrait, one-thumb horde game: one silly weapon against 10,000 cartoon enemies, in runs of two or three minutes. The whole idea lives or dies on the number in the name, so the project starts with a hard rule. Nothing else gets built until 10,000 enemies hold a steady 60 fps on the target phone.</p>
+
+      <p>The target is a Xiaomi 11T Pro (Snapdragon 888, Adreno 660), a 2021 phone that is now firmly mid-range. The gate passed on November 4. This post is how.</p>
+
+      <figure>
+        <video class="post-video" autoplay muted loop playsinline preload="metadata" poster="../assets/loop-poster.webp" width="540" height="960" aria-label="Gameplay clip: the leaf blower scattering thousands of trash cans">
+          <source src="../assets/loop.mp4" type="video/mp4" />
+        </video>
+        <figcaption>Recorded on the phone. Blockout art, one weapon (a leaf blower), 10,000 trash cans.</figcaption>
+      </figure>
+
+      <h2>NO NODE PER ENEMY</h2>
+
+      <p>The engine is Godot 4, but the horde does not live in Godot's scene tree. 10,000 nodes, or 10,000 physics bodies, would spend the whole frame on bookkeeping. Instead, one C++ GDExtension node called <code>CrowdSim</code> owns every enemy as plain arrays: one array for x positions, one for z, one for velocities, one for HP, and so on. Updating the crowd is a tight loop over memory that sits next to itself, which is the kind of work a phone CPU is actually good at.</p>
+
+      <p>GDScript only does glue: the camera, the joystick, the HUD. Anything that runs per enemy stays in C++, with no allocations per frame.</p>
+
+      <h2>FINDING NEIGHBOURS FAST</h2>
+
+      <p>A crowd only looks like a crowd if enemies push each other apart. Checking every enemy against every other one is 50 million pairs, so the simulation uses a uniform grid. Every tick it does a counting sort of all enemies into cells sized to one enemy's diameter, and copies their positions and velocities into that sorted order. After that, each enemy only looks at a 2×2 block of cells, and those cells are already next to each other in memory. The same grid answers the weapon's question: who is inside the blower's cone right now?</p>
+
+      <h2>A MAP THAT POINTS AT THE PLAYER</h2>
+
+      <p>10,000 enemies cannot each run their own pathfinding. A few times per second, a flow field is rebuilt on a coarser grid: one pass outward from the player's cell, and every cell stores a direction toward the player. Each enemy just reads the arrow under its feet.</p>
+
+      <p>The first version used a grid Dijkstra with diagonal moves, and it had a visible flaw: enemies lined up into straight lanes along the diagonals and axes, because that is the shape grid distances make. Switching to Fast Marching, which solves for real Euclidean distance on the grid, removed the lanes. The field is double-buffered and rebuilt in its own task, so the main simulation never waits for it.</p>
+
+      <h2>30 HZ SIMULATION, 60 HZ SCREEN</h2>
+
+      <p>The simulation runs at a fixed 30 ticks per second, split across Godot's <code>WorkerThreadPool</code>. Rendering runs at 60 and interpolates between the last two ticks, so motion stays smooth even though the crowd only updates every other frame.</p>
+
+      <p>The important trick is that the tick runs <em>asynchronously</em>. It is launched at the end of one frame and collected at the start of the next, so a tick that takes about 4 ms of work across cores barely touches the main thread. Input for the next tick is queued, and the renderer reads a snapshot, so nothing in GDScript ever races the worker threads. A fixed tick with a seeded random generator also keeps the simulation deterministic, which a daily challenge will need later.</p>
+
+      <h2>ONE UPLOAD PER ENEMY TYPE</h2>
+
+      <p>Every enemy type is one <code>MultiMesh</code>. Each frame, all 10,000 transforms plus a bit of custom data are written into one buffer and handed to the GPU with a single <code>multimesh_set_buffer</code> call. No per-instance calls, no per-enemy draw calls.</p>
+
+      <p>The animation is in the shader. The custom data per enemy carries a phase, a hit flash, a knockback amount and a walk speed, and the vertex shader turns those into bobbing, squash and stretch, and a wobble. Knocked-back cans lean away from the blast. Dead ones get X_X eyes.</p>
+
+      <figure>
+        <div class="duo">
+          <picture>
+            <source srcset="../assets/frame-30-480w.webp" type="image/webp" />
+            <img src="../assets/frame-30.png" width="480" height="853" alt="The leaf blower carving a path through a dense crowd of trash cans" loading="lazy" />
+          </picture>
+          <picture>
+            <source srcset="../assets/frame-60-480w.webp" type="image/webp" />
+            <img src="../assets/frame-60.png" width="480" height="853" alt="Knocked-back cans flying away from the player while the horde closes in" loading="lazy" />
+          </picture>
+        </div>
+        <figcaption>Frames from the phone recording. The number at the top is the kill counter.</figcaption>
+      </figure>
+
+      <h2>DEATHS HAVE TO LOOK GOOD</h2>
+
+      <p>A game built to be clipped needs deaths worth watching. A defeated can is handed to a separate effects system: a pooled corpse with simple verlet physics that gets launched up and away, spins, bounces, then sinks and leaves a splat on the ground. A few pieces of debris fly off with it. Everything is pooled up front, so a wave of a hundred deaths in one frame costs nothing extra in allocations.</p>
+
+      <h2>MEASURING THE RIGHT THING</h2>
+
+      <p>This is the part that took the longest, and it is the lesson I would pass on.</p>
+
+      <p>My first benchmark measured frame times inside the game, and it said 41% of frames were late. Most of that was not real. Godot's frame delta is smoothed, which hides hitches, so I switched to raw timestamps. Then those raw timestamps jittered because Android's frame pacing (Swappy) pipelines frames: the CPU can finish a frame late and the display still shows it on time. After the real fixes (the async tick, and catch-up ticks that no longer pile up) the in-game number dropped to about 1%, but it still was not the truth.</p>
+
+      <p>The truth is what the display actually presented. Android's SurfaceFlinger keeps the present timestamps of every frame for each window, so the benchmark script reads those over adb during a 60-second run at 10,000 enemies and counts every interval longer than 20.8 ms (one and a quarter frames at 60 Hz).</p>
+
+      <table>
+        <thead><tr><th>Measured on the Xiaomi 11T Pro, 10,000 enemies</th><th>Result</th></tr></thead>
+        <tbody>
+          <tr><td>Frames presented late over a 60 s run (two runs)</td><td class="num">0 / 3,576 and 3 / 3,575</td></tr>
+          <tr><td>Simulation work per 30 Hz tick, async on worker threads</td><td class="num">~4.0 ms</td></tr>
+          <tr><td>GPU time per frame</td><td class="num">~8.8 ms</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <p><strong>The rule I'm keeping:</strong> profile on the real device, and trust the display's timestamps over the game's own. A frame the player never sees late is not a dropped frame.</p>
+      </div>
+
+      <h2>WHAT IS NEXT</h2>
+
+      <p>Gate 1 was only about the tech. The game still has blockout art, one weapon and no sound. Gate 2 is about feel: hit feedback, juice and audio, one level and no meta at all, until the ten-second moment of a crowd breaking apart is fun on its own. There is also one known visual bug to chase: a dark patch that sometimes forms in the horde for about a second, far from the player, and then dissolves.</p>
+
+      <p>If you want to watch it grow, short clips go up on <a href="https://www.tiktok.com/@waytoomanygame" target="_blank" rel="noreferrer">TikTok</a> and <a href="https://www.youtube.com/@waytoomanygame" target="_blank" rel="noreferrer">YouTube</a>, and the longer story lands here.</p>
+    </article>
+
+    <div class="post-nav">
+      <a href="../#devlog">← All Way Too Many posts</a>
+      <a href="../">Way Too Many</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="narrow">© <span id="year"></span> Mladen Stojanović. <a href="../../index.html">mladenstojanovic.art</a></div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
