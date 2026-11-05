@@ -20,6 +20,22 @@ App pages: `[app-name]-[type].html` (types: `landing`, `support`, `privacy-polic
 - OG image is `assets/images/og-image.jpg` (~210KB). Do NOT reintroduce `og-image.png` (was 1.3MB).
 - Homepage cards use unified `.project-cover` (240px, `object-position: center 30%`) — image + text in ONE card, no separate media-grid layer.
 
+## Game Sections (folder per game)
+A game that gets its own devlog lives in a folder, not in `[app-name]-[type].html` files.
+- **`way-too-many/`** (added 2026-11-05, commit `49578ab`):
+  - `index.html`: game page with VideoGame schema;
+  - `style.css`: shared by the game page and its posts;
+  - `assets/`: logo, banner, frames, `loop.mp4` (about 1.6 MB, 540×960);
+  - `devlog/YYYY-MM-DD-slug.html`.
+- Its devlog is numbered separately from #01. Do not add these posts to the shared `devlog/` or give them shared numbers.
+- For each new post:
+  - add a `.post-card` in `way-too-many/index.html#devlog`;
+  - add an entry to `sitemap.xml`;
+  - link it from the "Way Too Many" card on the homepage.
+- Framing: the game is a prototype in development. No release date and no store links until there is a build.
+- Socials: TikTok and YouTube are both `@waytoomanygame`. Umami tracks clicks as `social-click` with a `network` field.
+- Local preview: `python -m http.server` from the repo root. The desktop app's file preview does not load the relative assets.
+
 ## Site Status (2026-09-07, commit `1ae6e68`)
 - `sitemap.xml` + footer links synced; `/` lastmod 2026-09-07. Checklist applies to every new page.
 - New: `suguru-tectonic-landing.html` (MobileApplication + FAQPage schema), `404.html`, PWA icons `assets/icons/icon-192/512.png`.
