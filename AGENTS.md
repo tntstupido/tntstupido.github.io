@@ -33,7 +33,8 @@ A game that gets its own devlog lives in a folder, not in `[app-name]-[type].htm
   - add an entry to `sitemap.xml`;
   - link it from the "Way Too Many" card on the homepage.
 - Framing: the game is a prototype in development. No release date and no store links until there is a build.
-- Socials: TikTok and YouTube are both `@waytoomanygame`. Umami tracks clicks as `social-click` with a `network` field.
+- Socials: TikTok and YouTube are both `@waytoomanygame`; Bluesky is Mladen's `mladenstojanovic.bsky.social` (linked from devlog #02). Umami tracks clicks as `social-click` with a `network` field (`tiktok`, `youtube`, `bluesky`).
+- Posts so far: #01 (2026-11-05, Gate 1 crowd tech), #02 (2026-11-07, waves; `assets/waves-*`). A post card image is landscape 480×253; portrait frames go inside posts.
 - Local preview: `python -m http.server` from the repo root. The desktop app's file preview does not load the relative assets.
 
 ## Site Status (2026-09-07, commit `1ae6e68`)

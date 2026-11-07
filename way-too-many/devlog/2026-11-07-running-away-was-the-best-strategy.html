@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Devlog #02 — Running away was the best strategy — Way Too Many</title>
+  <meta name="description" content="Way Too Many's first level was won by running away with 5 kills. How measuring three play styles led from a growing blob to waves with attack patterns, and the two small bugs found on the way." />
+  <link rel="canonical" href="https://mladenstojanovic.art/way-too-many/devlog/2026-11-07-running-away-was-the-best-strategy.html" />
+  <meta name="theme-color" content="#15131c" />
+  <link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="02038801-c8f0-4317-845e-b72e03f331e0"></script>
+  <meta property="og:title" content="Devlog #02 — Running away was the best strategy" />
+  <meta property="og:description" content="My first level was won by running away with 5 kills. What fixed it: waves with attack patterns." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://mladenstojanovic.art/way-too-many/devlog/2026-11-07-running-away-was-the-best-strategy.html" />
+  <meta property="og:image" content="https://mladenstojanovic.art/way-too-many/assets/banner.jpg" />
+  <meta property="og:image:width" content="1728" />
+  <meta property="og:image:height" content="910" />
+  <meta property="og:site_name" content="Mladen Stojanović" />
+  <meta property="article:published_time" content="2026-11-07" />
+  <meta property="article:author" content="Mladen Stojanović" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Devlog #02 — Running away was the best strategy" />
+  <meta name="twitter:description" content="My first level was won by running away with 5 kills. What fixed it: waves with attack patterns." />
+  <meta name="twitter:image" content="https://mladenstojanovic.art/way-too-many/assets/banner.jpg" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Devlog #02 — Running away was the best strategy",
+    "datePublished": "2026-11-07",
+    "author": { "@type": "Person", "name": "Mladen Stojanović" },
+    "image": "https://mladenstojanovic.art/way-too-many/assets/banner.jpg",
+    "url": "https://mladenstojanovic.art/way-too-many/devlog/2026-11-07-running-away-was-the-best-strategy.html",
+    "description": "Way Too Many's first level was won by running away. Measuring play styles led from a growing blob to waves with attack patterns."
+  }
+  </script>
+</head>
+<body>
+  <header>
+    <div class="narrow nav">
+      <a href="../../index.html" class="brand">MLADEN STOJANOVIĆ</a>
+      <nav>
+        <a href="../">Way Too Many</a>
+        <a href="../#devlog">Devlog</a>
+        <a href="../../index.html#games">All games</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="narrow post">
+    <div class="post-meta">
+      <span class="tag">Devlog #02 · Way Too Many</span>
+      <span class="post-date">November 7, 2026</span>
+    </div>
+
+    <h1>RUNNING AWAY WAS THE BEST STRATEGY</h1>
+    <p class="post-sub">The game got its first real level this week. The first version of it was won by a player who killed almost nothing and simply ran. Here is how I found out, and what replaced it.</p>
+
+    <figure>
+      <video class="post-video" autoplay muted loop playsinline preload="metadata" poster="../assets/waves-loop-poster.webp" width="540" height="960" aria-label="Gameplay clip: a ring of trash cans closes in, the leaf blower's big move throws them back, and the camera pulls back to show thousands more">
+        <source src="../assets/waves-loop.mp4" type="video/mp4" />
+      </video>
+      <figcaption>The end of Level 0: the mega-wave closes in, and the big move clears a path.</figcaption>
+    </figure>
+
+    <article>
+      <p class="lede">After <a href="./2026-11-05-10000-enemies-on-a-phone.html">devlog #01</a> the crowd tech worked, so the next goal was the game itself: one level of about two minutes, with no menus and no meta, that is fun on its own. The plan followed the design doc. The level would ramp up the enemy count along a curve, with a breather in the middle and a 10,000-strong mega-wave at the end.</p>
+
+      <h2>A LEVEL THAT RAMPS UP</h2>
+
+      <p>The first version was a horde director that read a curve of target enemy counts over time and kept topping the crowd up from the edges of the screen. Fifty trash cans walk in, the horde passes 2,000 at 0:45, thins out for a breather, climbs again, and hits 10,000 at 1:30. A timer said <em>Survive</em>, and a result screen counted what you smashed. On paper it was exactly the curve from the design doc.</p>
+
+      <p>Then I played it. Twice. The first run I lost at 1:34. The second run I won, with 2,915 kills. When I looked at why, the answer was embarrassing: I had been running away the whole time.</p>
+
+      <h2>MEASURING THREE PLAY STYLES</h2>
+
+      <p>One playtest is an anecdote, so I added automatic drivers to the game: one that stands still and lets the horde come, one that circles, and one that just runs screen-down with a little weave. Same level, same seed, same damage.</p>
+
+      <table>
+        <thead><tr><th>Level 0, first version</th><th>Result</th></tr></thead>
+        <tbody>
+          <tr><td>Running away</td><td class="num">won, 100 HP, 5 kills</td></tr>
+          <tr><td>Standing and fighting</td><td class="num">dead at 0:19, 188 kills</td></tr>
+        </tbody>
+      </table>
+
+      <p>Running away was a perfect strategy. The player moves at 5.5 m/s and the cans at 3.4, and nothing spawned behind the player, so you can outrun the entire horde forever. Standing still was suicide: the leaf blower is a cone of ±30°, and the cans came from three sides at once. The play style the game is actually about, fighting at the edge of the horde, had no reward at all. A goal called <em>Survive</em> made it worse: it rewarded not playing.</p>
+
+      <h2>TWO THINGS THAT DIDN'T WORK</h2>
+
+      <p><strong>Making running harder.</strong> I sped the cans up and made some of them spawn ahead of the player. Running stopped working, but so did everything else: every driver died, and so did I. The level was now impossible instead of boring.</p>
+
+      <p><strong>Making the blower deadlier.</strong> I tried letting knocked-back cans damage whatever they slam into, so blowing cans into the horde would cause chain kills. It changed nothing, not in any driver's numbers. It turned out that in a packed crowd the blower kills cans in place, because the crowd behind them stops them from flying, so fast collisions almost never happen.</p>
+
+      <p>Both tries treated the symptom. The problem was the growing blob itself. A crowd that keeps getting bigger and comes from everywhere at once leaves a cone weapon only one answer: run.</p>
+
+      <h2>WAVES WITH ATTACK PATTERNS</h2>
+
+      <p>So the horde now comes in waves. Each wave enters from one side in a formation, marches for a while so its shape stays readable, and only then starts hunting the player. A red-orange arrow at the edge of the screen warns about a second before it enters. Each pattern asks for a different answer:</p>
+
+      <table>
+        <thead><tr><th>Pattern</th><th>What the player does</th></tr></thead>
+        <tbody>
+          <tr><td>Column: a narrow river from one side</td><td>Turn and blow down the column</td></tr>
+          <tr><td>Wall: a wide line marching in</td><td>Find a gap or punch through the middle</td></tr>
+          <tr><td>Pincer: two columns from opposite sides</td><td>Pick a side and keep moving</td></tr>
+          <tr><td>Swarm: a dense cluster that hunts at once</td><td>Knock it back before it arrives</td></tr>
+          <tr><td>Ring: a circle closing in from every side</td><td>Break out through the thin part, or use the big move</td></tr>
+        </tbody>
+      </table>
+
+      <p>A level is now a list of 18 waves on a timeline. The intensity curve comes from wave sizes and the gaps between them, and the gaps are real breathers. Random sides come from the level seed, so a run is the same for everyone, which a daily challenge will need later. The goal changed from <em>Survive</em> to <em>Smash 4,000</em>: a player who runs away survives, but misses the target.</p>
+
+      <figure>
+        <div class="duo">
+          <picture>
+            <source srcset="../assets/waves-ring-480w.webp" type="image/webp" />
+            <img src="../assets/waves-ring.jpg" width="480" height="853" alt="Red-orange arrows on every edge of the screen warn that a ring of trash cans is about to close in" loading="lazy" />
+          </picture>
+          <picture>
+            <source srcset="../assets/waves-reveal-480w.webp" type="image/webp" />
+            <img src="../assets/waves-reveal.jpg" width="480" height="853" alt="The camera pulled back: walls of thousands of trash cans close in on the tiny player" loading="lazy" />
+          </picture>
+        </div>
+        <figcaption>Left: the mega-wave's warning, arrows on every edge. Right: a few seconds later, with the camera pulled back.</figcaption>
+      </figure>
+
+      <p>Measuring again showed the cone was still the bottleneck. With the blower covering ±45° and 9 m instead of ±30° and 8 m, the standing driver lasted 1:27 instead of 0:39, and the circling one reached the kill target. For the finale, the mega-wave hands the player a full big move, and recharges it every five seconds while the wave lasts.</p>
+
+      <p>Then I played it. I lost my first run at 1:04. The second survived but missed the target with 3,203 kills. The third won with 5,032. Every run was better than the last, which none of the earlier versions could say. On the phone, after a tuning pass, I won twice, with 8,827 and 7,554 kills, at a steady 60 fps with more than 8,000 cans on screen in the finale.</p>
+
+      <h2>TWO SMALL BUGS WORTH TELLING</h2>
+
+      <p><strong>The big move charged three times slower than designed.</strong> The rule was simple: kills charge it, but never faster than once per 20 seconds. In practice it took about a minute. The cap was applied per simulation tick, but the leaf blower kills in 10 Hz pulses while the simulation ticks at 30 Hz, so two ticks out of three had no kills and charged nothing. Now kills are banked and drained at the capped rate, and 20 seconds means 20 seconds.</p>
+
+      <p><strong>A 92 ms frame that wasn't the crowd.</strong> On the phone, two frames stood out: 89 ms and 92 ms. I added a log for every frame over 33 ms with a breakdown of where the time went. The simulation took 1–6 ms and the GPU 4–7 ms; the rest was somewhere else. The 89 ms frame came exactly when the kill counter first passed 1,000, and the 92 ms frame when the result screen first opened. It was the font. The first time a glyph appears at a new size, Godot rasterizes it, and on a phone that is slow: the comma in "1,000" at 96 pixels cost a frame and a half. The HUD now draws every character it will need once at startup, nearly transparent, and both hitches are gone.</p>
+
+      <div class="callout">
+        <p><strong>The rule I'm keeping:</strong> when a level feels wrong, measure how each way of playing it actually does before tuning numbers. My first fix made the level impossible; the real fix changed the shape of the threat.</p>
+      </div>
+
+      <h2>WHAT IS NEXT</h2>
+
+      <p>The cans also got voices this week. Every few seconds one of them yells something universal, like "Wheee!" when it's flung, and a big wipe-out gets a group "Nooo!". Next is music that follows the director's intensity, then measuring audio latency on the phone. The first build is also ready for internal testing on Google Play. It's still a prototype in development, with no release date and nothing to download yet.</p>
+
+      <p>Short clips go up on <a href="https://www.tiktok.com/@waytoomanygame" target="_blank" rel="noreferrer" data-umami-event="social-click" data-umami-event-network="tiktok">TikTok</a>, <a href="https://www.youtube.com/@waytoomanygame" target="_blank" rel="noreferrer" data-umami-event="social-click" data-umami-event-network="youtube">YouTube</a> and <a href="https://bsky.app/profile/mladenstojanovic.bsky.social" target="_blank" rel="noreferrer" data-umami-event="social-click" data-umami-event-network="bluesky">Bluesky</a>, and the longer story lands here.</p>
+    </article>
+
+    <div class="post-nav">
+      <a href="./2026-11-05-10000-enemies-on-a-phone.html">← Devlog #01</a>
+      <a href="../#devlog">All Way Too Many posts</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="narrow">© <span id="year"></span> Mladen Stojanović. <a href="../../index.html">mladenstojanovic.art</a></div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
